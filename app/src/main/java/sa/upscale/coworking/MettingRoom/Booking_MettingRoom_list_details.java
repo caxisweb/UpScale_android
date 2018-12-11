@@ -217,7 +217,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
 
             snackbar.show();
@@ -452,8 +452,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         View view = getSupportActionBar().getCustomView();
 
-        TextView imageButton = (TextView) view.findViewById(R.id.img_back);
-        TextView tv_title = (TextView) view.findViewById(R.id.action_bar_title);
+        TextView imageButton = view.findViewById(R.id.img_back);
+        TextView tv_title = view.findViewById(R.id.action_bar_title);
         String strName = getString(R.string.booking);
         tv_title.setText(strName);
 
@@ -464,7 +464,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             }
         });
 
-        img_likeUnlike = (ImageView) view.findViewById(R.id.action_bar_filter);
+        img_likeUnlike = view.findViewById(R.id.action_bar_filter);
         img_likeUnlike.setVisibility(View.VISIBLE);
         img_likeUnlike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -491,7 +491,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         });
 
 
-        img_mapdirection = (ImageView) view.findViewById(R.id.action_bar_map);
+        img_mapdirection = view.findViewById(R.id.action_bar_map);
         img_mapdirection.setVisibility(View.VISIBLE);
         img_mapdirection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -959,7 +959,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -1237,7 +1237,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -1392,6 +1392,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     str_pack_enddate = job_details.getString("package_end_date");
                     str_pack_id = job_details.getString("package_id");
                     str_pack_name = job_details.getString("package_name");
+                    vat_per = Integer.parseInt(job_details.getString("vat_per"));
 
                     if (job_details.getString("images").equals("null")) {
 
@@ -1647,8 +1648,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 book_date_count = book_date_count + 1;
                 final View layout2 = LayoutInflater.from(Booking_MettingRoom_list_details.this).inflate(R.layout.custome_sdate_view, lv_bookdate, false);
 
-                TextView tv_sdate = (TextView) layout2.findViewById(R.id.tv_sdate);
-                ImageView img_date = (ImageView) layout2.findViewById(R.id.img_remove);
+                TextView tv_sdate = layout2.findViewById(R.id.tv_sdate);
+                ImageView img_date = layout2.findViewById(R.id.img_remove);
                 tv_sdate.setText(tv_date.getText().toString() + " " + tv_from.getText().toString() + " To " + tv_to.getText().toString());
 
 
@@ -1852,6 +1853,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
             try {
 
+                data_bookNow.put("tax_amount", tex_amount);
+
                 Postdata postdata = new Postdata();
                 Log.i("request", data_bookNow.toString());
                 String str_responce = postdata.post(Url_info.main_url + "insert_booking.php", data_bookNow.toString());
@@ -1960,7 +1963,11 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 if (code_type.equals("percent")) {
 
                     discount_amount = String.valueOf(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no) * Float.parseFloat(code_amount)) / 100);
-                    total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount);
+
+                    tex_amount = ((Integer.parseInt(str_price) * total_hour * Integer.parseInt(str_repet_no) - Float.parseFloat(discount_amount)) * vat_per) / 100;
+
+                    total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount) + tex_amount;
+
                     btn_bookroom.setText(String.valueOf(total_price) + " SAR " + getResources().getString(R.string.paynow));
                     tv_dis_amount.setText("You get " + discount_amount + " SAR " + getResources().getString(R.string.discount_amount));
                     btn_code_apply.setVisibility(View.GONE);
