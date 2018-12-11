@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/margin5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_cust_wishlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin5"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_bookingList_hotel_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textColor="@color/text_bookingList"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/location_list" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_bookingList_hotel_location"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:singleLine="true"
+                    android:text="hello0 gdfgdfgdfgdfgdfgdf"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="10dp" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_bookingList_hotel_location_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="@dimen/margin5"
+                    android:gravity="center|left"
+                    android:singleLine="true"
+                    android:text="28.5km"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_img_favroite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin5"
+            android:layout_marginRight="@dimen/margin5">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:background="#ef0c0c"
+                android:gravity="center"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/img_bookingList_like_dislike"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/like"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin5">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/user_green" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_bookingList_hotel_person_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="-3dp"
+                android:textColor="@color/textcolor_input"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/rating_bookingList_rating"
+            style="@style/CustomRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="3"
+            android:stepSize="1.0"
+            android:text="Rating star" />
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv__bookingList_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin5"
+            android:textSize="8dp" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin10">
+
+        <LinearLayout
+            android:id="@+id/ll_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin10"
+            android:layout_toLeftOf="@+id/btn_book"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_bookingList_hotel_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAR /hour"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+        <sa.upscale.coworking.CustomFont.Mybutton
+            android:id="@+id/btn_book"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin5"
+            android:background="@color/button_color"
+            android:padding="@dimen/margin5"
+            android:text="@string/book_now"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+    </RelativeLayout>
+</LinearLayout>
+

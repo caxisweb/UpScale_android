@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "47558154421",
+    "firebase_url": "https://upscale-9d96a.firebaseio.com",
+    "project_id": "upscale-9d96a",
+    "storage_bucket": "upscale-9d96a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47558154421:android:bf0a2be30ac5d4e5",
+        "android_client_info": {
+          "package_name": "com.inforaam.upscale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47558154421-7n2mefo4cr6sf3msqnrc3seaotvf5ucs.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "47558154421-8kjuame50t2m818rb82ibsncmsn10cen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inforaam.upscale",
+            "certificate_hash": "6791a72b4f105d918545778ad3b7e0f06155cf5b"
+          }
+        },
+        {
+          "client_id": "47558154421-q5ms09r29i7o09hh76jviqitah04119i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzHFiimPybWFcQaE7PF3uPcKsQrroks9o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47558154421-7n2mefo4cr6sf3msqnrc3seaotvf5ucs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "47558154421-jelrv231d5f6lk3vqbb7hrut9ml34gbq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.inforaam.Upscale"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47558154421:android:a03968beb0a91ddf",
+        "android_client_info": {
+          "package_name": "sa.upscale.coworking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47558154421-93i8hgqn0hk3rfqbhnij7a4dncu5c84q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sa.upscale.coworking",
+            "certificate_hash": "6791a72b4f105d918545778ad3b7e0f06155cf5b"
+          }
+        },
+        {
+          "client_id": "47558154421-7n2mefo4cr6sf3msqnrc3seaotvf5ucs.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "47558154421-q5ms09r29i7o09hh76jviqitah04119i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzHFiimPybWFcQaE7PF3uPcKsQrroks9o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47558154421-7n2mefo4cr6sf3msqnrc3seaotvf5ucs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "47558154421-jelrv231d5f6lk3vqbb7hrut9ml34gbq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.inforaam.Upscale"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

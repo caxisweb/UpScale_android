@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sa.upscale.coworking.Notifications.Notification">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <include layout="@layout/cust_notification" />
+
+    <LinearLayout
+        android:background="@color/textColor_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <include
+
+        layout="@layout/cust_notification" />
+
+</LinearLayout>

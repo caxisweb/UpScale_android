@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lv_footer"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/light_gray">
+
+                <RelativeLayout
+                    android:id="@+id/nav_logOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/margin10"
+                    android:layout_marginTop="@dimen/margin10">
+
+                    <ImageView
+                        android:id="@+id/nav_img_logout"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/logout" />
+
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/nav_img_logout"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="@string/logout"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/img_profile"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:visibility="gone"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="1dp" />
+
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="140dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:src="@drawable/logo1"
+                    android:visibility="gone" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_profile"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Actor/Director"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="10dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/nav_home"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_home"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_home" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/nav_img_home"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/home"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_profile"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_user"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_profile" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/nav_img_user"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/my_profile"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_wishlist"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_wishlist"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_wish" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_wishlist"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/wish_list"
+                    android:textColor="@color/textcolor_input" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/layoutshape_green"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="11"
+                    android:textColor="#FFF"
+                    android:textSize="14dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_history"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_history"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_history" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_history"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/my_history"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_list_space"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_user6"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_addspace" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user6"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/list_your_space"
+                    android:textColor="@color/textcolor_input" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/nav_notification"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/nav_img_user1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/nav_noti" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user1"
+                    android:gravity="center_vertical"
+                    android:text="@string/notifications"
+                    android:textColor="@color/white" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_package"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_user2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_package" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user2"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/packages"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_aboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_user3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_about" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user3"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/about_us"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_ourLocation"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/nav_img_user4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/nav_location" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user4"
+                    android:gravity="center_vertical"
+                    android:text="@string/our_location"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_chat"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/nav_img_user5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/nav_chat" />
+
+                <LinearLayout
+                    android:id="@+id/nav_line5"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/nav_img_user5"
+                    android:background="@color/navigation_line"
+                    android:orientation="horizontal" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_line5"
+                    android:gravity="center_vertical"
+                    android:text="@string/chat_with_us"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/nav_arrow" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_language_change"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/nav_item_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/nav_img_user7"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/nav_user" />
+
+                <LinearLayout
+                    android:id="@+id/nav_line7"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/nav_img_user7"
+                    android:background="@color/navigation_line"
+                    android:orientation="horizontal" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_line7"
+                    android:gravity="center_vertical"
+                    android:text="@string/change_language"
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/nav_arrow" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nav_feedBack"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_user8"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_feedbck" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_user8"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/feedback"
+                    android:textColor="@color/textcolor_input" />
+
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/nav_list_login"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_login"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_login" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_login"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/login"
+                    android:textColor="@color/textcolor_input" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/nav_list_signup"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/navigation_shape"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/nav_img_signup"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_nav_signup" />
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/nav_img_signup"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/textcolor_input" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin20"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/language_swborder"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_sw_english"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="English"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/sw_color_selected" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_sw_arabic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Arabic"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin10"
+        android:layout_marginTop="@dimen/margin10"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/btn_share_fb"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fb_tq" />
+
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_login_linkedIn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:src="@drawable/linkedin_con" />
+
+       <!-- <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"></LinearLayout>
+-->
+
+        <ImageView
+            android:id="@+id/btn_google_share"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/google_tq" />
+
+
+        <ImageView
+            android:id="@+id/btn_share_twitter1"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/twiter_icon" />
+    </LinearLayout>
+
+
+    <!--<ImageView
+        android:id="@+id/lv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/drawer_footer" />
+-->
+</RelativeLayout>

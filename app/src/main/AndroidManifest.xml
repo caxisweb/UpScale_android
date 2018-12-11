@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="sa.upscale.coworking">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo1"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@drawable/logo1"
+        android:supportsRtl="false"
+        tools:replace="android:supportsRtl,android:allowBackup"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Login"
+            android:label="Login"
+            android:windowSoftInputMode="adjustResize|adjustPan" />
+        <activity
+            android:name=".Sign_Up"
+            android:label="Sign Up"
+            android:parentActivityName=".NavigationActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".List_ur_Space"
+            android:label="List Your Space"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden|stateHidden"
+            android:parentActivityName=".NavigationActivity" />
+
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".NavigationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden|stateHidden">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MettingRoom.Booking_MettingRoom_List"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MettingRoom.Booking_MettingRoom_list_details"
+            android:screenOrientation="portrait"
+            android:supportsRtl="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".MettingRoom.Summary"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MettingRoom.Summary_payment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MettingRoom.Visa_payment_url"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MettingRoom.ThankYou"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MettingRoom.Profile"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MettingRoom.Meeting_Room_activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MettingRoom.Booking_mettingRoom_list_details_moreReview"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="a5f28661cf2a65401f1108158bb3f3dfc9fbb471" />
+
+        <activity
+            android:name=".Terms_Condition"
+            android:windowSoftInputMode="adjustResize" >
+
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                &lt;!&ndash; Accepts URIs "com.example.myapp://" &ndash;&gt;
+                <data android:scheme="sa.upscale.coworking" />
+            </intent-filter>-->
+
+
+            </activity>
+        <activity
+            android:name=".MettingRoom.Invitation"
+            android:parentActivityName=".NavigationActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden|stateHidden" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1898403290373788"
+            android:exported="true" />
+
+        <activity
+            android:name=".Thank_U_listUrSpace"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden|stateHidden" />
+        <activity
+            android:name=".list_ur_spce_location_map"
+            android:label="@string/title_activity_list_ur_spce_location_map"></activity>
+    </application>
+
+</manifest>

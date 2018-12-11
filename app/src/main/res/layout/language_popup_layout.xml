@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/rg_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/rb_english"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingLeft="20dp"
+            android:text="English"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/rb_persian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:text="Arabic"
+            android:textSize="20dp" />
+
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_marginRight="@dimen/margin10"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginBottom="@dimen/margin20"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:visibility="gone"
+            android:textSize="18dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:layout_width="80dp"
+            android:layout_marginRight="@dimen/margin10"
+            android:layout_height="40dp" />
+
+        <Button
+            android:id="@+id/btn_langOK"
+            android:textSize="18dp"
+            android:textAllCaps="false"
+            android:background="@color/spaceItem"
+            android:textColor="@color/white"
+            android:text="OK"
+            android:layout_width="60dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>

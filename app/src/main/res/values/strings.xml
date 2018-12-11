@@ -1,0 +1,270 @@
+<resources tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools">
+    <!--<string name="app_name">Hive</string>-->
+    <string name="app_name">Hive هايڤ</string>
+    <string name="forgotPwd">FORGET PASSWORD ?</string>
+    <string name="logo">logo</string>
+    <string name="twitterlogin">TwitterLogin</string>
+    <string name="linedin">linedIn</string>
+    <string name="or">or</string>
+    <string name="email">Email</string>
+    <string name="emailicon">emailIcon</string>
+    <string name="password">Password</string>
+
+    <string name="view_more"><u>More</u></string>
+
+
+    <string name="facebook_app_id">1898403290373788</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="list">List</string>
+    <string name="map">Map</string>
+    <string name="for_4_people">For 4 People</string>
+    <string name="reviews">(0 reviews)</string>
+    <string name="reviews_1"> reviews</string>
+    <string name="summary">Summary</string>
+    <string name="full_profile">Full Profile</string>
+    <string name="open_hours">Open hours</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <string name="sun">SUN</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="amenities">Amenities</string>
+    <string name="projectors_s">Projectors(s)</string>
+    <string name="air_conditioner">Air Conditioner</string>
+    <string name="mail_service">Mail service</string>
+    <string name="scanner_printer">Scanner/Printer</string>
+    <string name="lookers">Lookers</string>
+    <string name="wifi_internet">Wifi/internet</string>
+    <string name="parking_space">Parking Space</string>
+    <string name="phone">Phone</string>
+    <string name="cofee_tea">Cofee/Tea</string>
+    <string name="_0_reviews">0 Reviews</string>
+    <string name="write_a_review">Write a review</string>
+    <string name="rating_star">Rating star</string>
+
+
+
+    <string name="space_name">SPACE NAME</string>
+    <string name="meeting_room">MEETING ROOM</string>
+    <string name="desk">DESK</string>
+    <string name="discussion_room">DISCUSSION ROOM</string>
+    <string name="private_room">PRIVATE ROOM</string>
+    <string name="conference_room">CONFERENCE ROOM</string>
+    <string name="capacity">CAPACITY</string>
+    <string name="availability">COUNT</string>
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="projector_s">Projector(s)</string>
+    <string name="wi_fi_internet">Wi-fi/Internet</string>
+    <string name="lockers">Lockers</string>
+    <string name="work_24_h">Work 24/h</string>
+    <string name="location">Location</string>
+    <string name="photos_from_your_space">Photos from Your Space</string>
+    <string name="submit">Submit</string>
+
+
+    <string name="login">Login</string>
+    <string name="login_using">Login Using</string>
+    <string name="keep_me_logged_in">Keep me logged in</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="not_registered_yet_sign_up_here">Not registered yet? Sign up here</string>
+    <string name="list_your_space">List Your space</string>
+
+
+    <string name="date">Date</string>
+
+    <string name="next">Next</string>
+
+
+    <string name="active_booking">Active Booking</string>
+    <string name="inactive_booking">Inactive Booking</string>
+
+
+    <string name="sign_up">Sign up</string>
+    <string name="terms_and_conditions">TERMS AND CONDITIONS</string>
+
+
+    <string name="cash_on_arrival">CASH ON ARRIVAL</string>
+    <string name="visa">VISA</string>
+    <string name="card_name">Card Name</string>
+    <string name="card_num">Card Num</string>
+    <string name="card_date_n_mm_yy">Card Date  (mm/yy)</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="confirm">Confirm</string>
+
+
+    <string name="change_password">Change Password</string>
+    <string name="reset">RESET</string>
+
+
+    <string name="upscale">UPSCALE</string>
+    <string name="how_was_your_experience">How was your experience ?</string>
+    <string name="please_give_rating">Please Give Rating</string>
+    <string name="select_1_5_stars_to_rate_the_space">Select 1-5 stars to rate the space</string>
+    <string name="leave_review">Leave Review</string>
+    <string name="space_type">Space Type</string>
+    <string name="show_spaces">Show Spaces</string>
+
+
+    <string name="are_you_sure">Are You Sure</string>
+    <string name="you_want_to_delete_the_booking">You want to delete the booking ?</string>
+    <string name="cancle">Cancle</string>
+    <string name="update">Update</string>
+    <string name="my_profile">My Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="share_the_app">Share The App</string>
+    <string name="about_us">About Us</string>
+    <string name="our_location">Our Location</string>
+    <string name="chat_with_us">Chat with us</string>
+    <string name="logout">Logout</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="send">Send</string>
+    <string name="contact_us">Contact Us</string>
+
+    <string name="rating_and_reviews_on_venues_help_the_community_so_please_share_your_thoughts">Rating and reviews on venues help the community ,so please share your thoughts.</string>
+    <string name="price">COST (HOURLY)</string>
+
+    <string name="apply">Apply</string>
+
+
+    <string name="thank_you">Thank You</string>
+    <string name="for_booking_with_us">FOR BOOKING THROUGH HIVE APPLICATION
+        <!--FOR BOOKING WITH US-->,</string>
+    <string name="if_you_want_to_contact_us_please_reach_us">IF YOU WANT TO CONTACT US PLEASE REACH US</string>
+    <string name="on">ON</string>
+    <string name="booking_upscale_com_sa">booking@hive.sa </string>
+    <string name="booking_ref_number">BOOKING REF NUMBER</string>
+
+    <string name="home">Home</string>
+    <string name="my_history">My History</string>
+    <string name="cost_200_per_hour">cost 200 per hour</string>
+
+    <string name="select_language">Select Language</string>
+    <string name="cancel">Cancel</string>
+    <!-- <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="jaunuary">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="octomer">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>-->
+    <string name="change_language">Change Language</string>
+    <string name="booking">Booking</string>
+    <string name="userProfile">USER PROFILE</string>
+    <string name="overView">OVERVIEW</string>
+    <string name="space">SPACES</string>
+    <string name="reviews1">REVIEWS</string>
+    <string name="name">Name</string>
+    <string name="termsCondition_text1">By downloading or using the app, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the app. We are offering you this app to use for your own personal use without cost, but you should be aware that you cannot send it on to anyone else, and you’re not allowed to copy, or modify the app, any part of the app, or our trademarks in any way. You’re not allowed to attempt to extract the source code of the app, and you also shouldn’t try to translate the app into other languages, or make derivative versions. The app itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Hive.</string>
+    <string name="termsCondition_text2"><![CDATA[At the bottom of these terms and conditions you will be able to find links to our website where we set out our Privacy Policy, Acceptable Use of the app, and the general Terms and Conditions for Guest & Visitors, which will be relevant if you use the app to book visits with Hive in the future.]]></string>
+    <string name="termsCondition_text3">Hive is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you’re paying for</string>
+    <string name="aboutus_text1">HiVe is a global network of work-spaces where companies and people grow together. We transform buildings into dynamic environments for creativity, focus, and connection.</string>
+    <string name="aboutus_text2">Hive is the Hub for Business Centers, Coworking spaces, meeting rooms, shared Offices and that Connects, Enables and Advises SMEs, Freelancers and Entrepreneurs by Connecting them with the experts and resources in each field.</string>
+    <string name="aboutus_text3"><![CDATA[Hive is a coworking space that connects SMEs, entrepreneurs, freelancers, Startups & professionals together as a business hub. Hive is a platform that lists Spaces, desks, business centers & meeting rooms around you.]]></string>
+    <string name="aboutus_text4"><![CDATA[Hive allows you to book, compare, and access the space without any human interaction. Hive even allows you to list your space and join the movement which increases you occupancy rate by attracting more visitors & members.]]></string>
+    <string name="aboutus_text5">On-demand workspace, when you need it. Book a coworking space, business center, or shared office space nearby.</string>
+    <string name="aboutus_text6">Discover spaces to use by the hour, day, or even monthly membership.</string>
+    <string name="booking_now">Booking Now</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="wish_list">Wish List</string>
+    <string name="my_space">My Space</string>
+    <string name="save">Save</string>
+    <string name="mob">Mob.</string>
+    <string name="city">City</string>
+    <string name="new_password">New-Password</string>
+    <string name="rep_password">Rep. password</string>
+    <string name="area_of_expertise">Area of Expertise</string>
+    <string name="riyadh_suadi_arabia">Riyadh,Suadi Arabia</string>
+    <string name="price_range">Price Range</string>
+    <string name="riyadh">Riyadh</string>
+    <string name="end_date">End Date</string>
+    <string name="booking_repeat">Repeat Booking</string>
+    <string name="add_more_space">Add More Space</string>
+    <string name="info_hive_sa">Booking@hive.sa</string>
+    <string name="thank_you_for_listing_your_space_nif_you_want_to_contact_us_please_reach_us">THANK YOU FOR LISTING YOUR SPACE , IF YOU WANT TO CONTACT US PLEASE REACH US</string>
+    <string name="thank_you_btn">Thank You</string>
+    <string name="gender">Gender</string>
+    <string name="title_activity_list_ur_spce_location_map">Map</string>
+    <string name="getyourlocation">Get Your Location</string>
+    <string name="hour">hour</string>
+    <string name="manual_location">Manually Select Location</string>
+    <string name="sharing_with_social_media">SHARING WITH SOCIAL MEDIA</string>
+    <string name="price1">Price</string>
+    <string name="e_mail">E-mail</string>
+    <string name="add_more_invitation">ADD MORE</string>
+    <string name="find_your_workspace">Find your workspace</string>
+    <string name="where_do_you_want_to_work">Where do you want to work ?</string>
+    <string name="feedbackHint">please write here your querries or complaints , we will get back to you soon . Thank you</string>
+    <string name="feedback">Feedback</string>
+    <string name="enter_your_e_mail">Enter Your E-mail</string>
+    <string name="fatching_Information">Fetching Information</string>
+    <string name="o_t_p">O t p</string>
+    <string name="re_type_new_password">Re-type new password</string>
+    <string name="others">Others</string>
+    <string name="locationProblem">Problem in fatching your location.please wait for two Minutes.</string>
+    <string name="man">Male</string>
+    <string name="female">Female</string>
+    <string name="coffee">Coffee/Tea</string>
+    <string name="discount_amount">Discount Amount</string>
+    <string name="remove_code">Remove</string>
+    <string name="password_again">Password Again</string>
+    <string name="packages">Packages</string>
+    <string name="signup_here">Signup Here</string>
+    <string name="login_here">Login Here</string>
+    <string name="address">Address</string>
+    <string name="change">Change</string>
+    <string name="select_space_type">Select Space Type</string>
+    <string name="save_your_space_now">Save Your Space Now</string>
+    <string name="invitation">Invitation</string>
+    <string name="advance_search">Advance Search</string>
+    <string name="package_detail">Package Detail</string>
+    <string name="customer_1000">With over 1000 members, access networking, advice, and opportunities in your ‘hood or across the planet.</string>
+    <string name="premium_20">You focus on your to-do’s, we take care of the rest. Enjoy included front-desk service, utilities, refreshments, and more.</string>
+    <string name="h25_support_detail">We’ve become experts in what you need to get work done happily—from brainstorming rooms to phone booths and terraces. Provided by 24/H Live chat support through website.</string>
+    <string name="h24_support">H24 Support</string>
+    <string name="_20_premium_work_spaces">+20 Premium work spaces</string>
+    <string name="_1000_customre">+1000 Customer</string>
+    <string name="bank">Bank</string>
+    <string name="number_of_room">Number of Room</string>
+    <string name="number_of_people">Number of People</string>
+    <string name="visa_payment_will_be_available_soon_in_hive">VISA Payment will be available soon in HIVE</string>
+    <string name="login_message">You must log in</string>
+    <string name="duplicate_date">Cannot duplicate Date and time</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+
+    <string name="search">Search</string>
+    <string name="promo_code">Promo Code</string>
+    <string name="space_detail">SPACE DETAIL</string>
+    <string name="payment_method">PAYMENT METHOD</string>
+    <string name="back">Back</string>
+    <string name="book_now">Book Now</string>
+    <string name="select_city">Select City</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="use_the_form_below_to_send_us_your_comment">Use the form below to send us your comment :</string>
+    <string name="paynow">Pay Now</string>
+    <string name="facility">Facility</string>
+    <string name="invite_attendees">Invite Attendees</string>
+
+    <string name="bank_name">Bank Name</string>
+    <string name="ibn_no">Iban No</string>
+    <string name="acc_no">Account No</string>
+
+    <string name="for_booking_through_hive_application">For Booking through HIVE application</string>
+    <string name="press_button_to_add_booking_date">Press + Button to add Booking date</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="subscribed_msg">You Are Subscriber of Package :</string>
+    <string name="google_banner_add">ca-app-pub-1573732121110201/8028684980</string>
+    <string name="google_admobo_app_id">ca-app-pub-1573732121110201~7962641347</string>
+</resources>

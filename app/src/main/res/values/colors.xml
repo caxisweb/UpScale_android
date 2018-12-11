@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F7941D</color>
+    <color name="colorPrimaryDark">#F7941D</color>
+    <color name="textColor_lbl">#cbcbcb</color>
+    <color name="textcolor_input">#7c7c7e</color>
+    <color name="white">#ffffff</color>
+    <color name="spaceItem">#F7941D</color>
+    <color name="forgotColor">#F7B386</color>
+    <color name="black">#f2000000</color>
+    <color name="black_light">#f2262525</color>
+    <color name="trance">#15000000</color>
+    <color name="forgotButton">#1AB188</color>
+    <color name="bookingBox">#E5E5E5</color>
+    <color name="text_bookingList">#F7941D</color>
+    <color name="link">#7d98d2</color>
+    <color name="bookindetails_1">#e4e2e2</color>
+    <color name="bookindetails_2">#ece7e7</color>
+    <color name="red">#ef0c0c</color>
+    <color name="profile_contact">#6d6d71</color>
+    <color name="tab_profile">#989898</color>
+    <color name="tab_selected_profile">#F7941D</color>
+
+    <color name="navigation_color">#FFFFFF</color>
+    <color name="navigation_line">#979797</color>
+    <color name="historydlg">#ececec</color>
+    <color name="sw_color">#F2F2F2</color>
+    <color name="sw_lang_drawer">#979797</color>
+    <color name="sw_color_selected">#979797</color>
+    <color name="historydlg_delete">#8c2828</color>
+
+
+    <color name="myprofile_wishList">#d75556</color>
+    <color name="myprofile_editProfile">#F7941D</color>
+    <color name="myprofile_myspace">#6dacbe</color>
+    <color name="myprofile_myhistory">#6d6d71</color>
+    <color name="notification">#7dbbaa</color>
+    <color name="slideText">#e6a831</color>
+
+    <!--New Colors-->
+    <color name="button_color">#F7941D</color>
+    <color name="light_gray">#F2F2F2</color>
+</resources>

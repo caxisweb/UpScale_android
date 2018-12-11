@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">20dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin5">5dp</dimen>
+    <dimen name="margin20">20dp</dimen>
+    <dimen name="padding20">15dp</dimen>
+    <dimen name="margin3">3dp</dimen>
+    <dimen name="recyclerview_space">2dp</dimen>
+</resources>

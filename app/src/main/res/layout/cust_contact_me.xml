@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin10"
+    android:elevation="@dimen/margin10"
+    android:background="@color/historydlg"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin20">
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:src="@drawable/cross"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin3"
+                        android:text="@string/email"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_history_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_contactUs_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/img_vertical"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="upscale@gmail.com"
+                            android:paddingLeft="@dimen/padding20" />
+
+                        <ImageView
+                            android:id="@+id/img_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/calender"
+                            android:src="@drawable/vertical_line" />
+
+                        <ImageView
+                            android:id="@+id/calender"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin10"
+                            android:src="@drawable/email" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin3"
+                        android:text="@string/mobile_number"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_history_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_contactUs_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/img_vertical1"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="978458965"
+                            android:paddingLeft="@dimen/padding20" />
+
+                        <ImageView
+                            android:id="@+id/img_vertical1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/calender1"
+                            android:src="@drawable/vertical_line" />
+
+                        <ImageView
+                            android:id="@+id/calender1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin10"
+                            android:src="@drawable/call" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

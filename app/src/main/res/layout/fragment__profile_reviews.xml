@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:layout_marginTop="@dimen/margin20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"></LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/rating_and_reviews_on_venues_help_the_community_so_please_share_your_thoughts" />
+
+            <RatingBar
+                android:id="@+id/rating_profile_review_rate"
+                style="@style/RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin10" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_ratingError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/please_give_rating"
+                android:textColor="@color/red"
+                android:visibility="gone" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/select_1_5_stars_to_rate_the_space" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/bookindetails_2"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin5"
+                android:orientation="vertical">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/review"
+                    android:padding="@dimen/margin10"
+                    android:text="@string/leave_review"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/ed_profile_review_write"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:background="@drawable/border_lite"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/margin3"
+                    android:scrollHorizontally="false" />
+
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:id="@+id/btn_profile_review_sumit"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin20"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:background="@drawable/btn_submitbg"
+                    android:elevation="5dp"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bookindetails_2"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin20"
+                android:layout_marginTop="@dimen/margin10"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/starg2" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_review_reviewno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin10"
+                            android:text="@string/_0_reviews"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_bookingList_detail_review_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.mikhaellopez.circularimageview.CircularImageView
+                                android:id="@+id/img_bookingList_detail_review_profilepic"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/avtar"
+                                app:civ_border_color="#EEEEEE"
+                                app:civ_border_width="1dp" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:orientation="vertical">
+
+                                <sa.upscale.coworking.CustomFont.MytextView
+                                    android:id="@+id/tv_bookingList_detail_review_nameUser"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin5">
+
+                                    <sa.upscale.coworking.CustomFont.MytextView
+                                        android:id="@+id/tv_bookingList_detail_review_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="" />
+
+
+                                    <RatingBar
+                                        android:id="@+id/rating_bookingList_detail_review_rating"
+                                        style="@style/CustomRatingBar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="11dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginRight="@dimen/margin10"
+                                        android:focusable="false"
+                                        android:focusableInTouchMode="false"
+                                        android:isIndicator="true"
+                                        android:text="Rating star" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:background="@color/textColor_lbl"></LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_review_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_bookingList_detail_review_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin20"
+                        android:layout_marginTop="@dimen/margin20"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.mikhaellopez.circularimageview.CircularImageView
+                                android:id="@+id/img_bookingList_detail_review_profilepic1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/avtar"
+                                app:civ_border_color="#EEEEEE"
+                                app:civ_border_width="1dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:orientation="vertical">
+
+                                <sa.upscale.coworking.CustomFont.MytextView
+                                    android:id="@+id/tv_bookingList_detail_review_nameUser1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin5">
+
+                                    <sa.upscale.coworking.CustomFont.MytextView
+                                        android:id="@+id/tv_bookingList_detail_review_time1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="" />
+
+
+                                    <RatingBar
+                                        android:id="@+id/rating_bookingList_detail_review_rating1"
+                                        style="@style/CustomRatingBar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="11dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginRight="@dimen/margin10"
+                                        android:focusable="false"
+                                        android:focusableInTouchMode="false"
+                                        android:isIndicator="true"
+                                        android:text="" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="@dimen/margin5"
+                                    android:background="@color/textColor_lbl"></LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_review_details1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:text="r" />
+                    </LinearLayout>
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+
+                        android:id="@+id/tv_bookingList_detail_review_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="@dimen/margin10"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:text="@string/view_more"
+                        android:visibility="gone"
+                        android:textColor="@color/link"
+                        android:textSize="15dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_bookingList_detais_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:src="@drawable/cross" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_hotelLogo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo1" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_bookingList_detais_review_spaceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:text="@string/upscale"
+                        android:textColor="@color/spaceItem"
+                        android:textSize="18dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin20">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/location_list" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detais_review_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="Riyadh,saudi Arebia"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin20"
+                android:background="@color/textColor_lbl"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin20"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_bookingList_detais_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mahmud,\t"
+                        android:textColor="@color/spaceItem"
+                        android:textSize="18dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/how_was_your_experience"
+                        android:textColor="@color/black"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+
+                <RatingBar
+                    style="@style/RatingBar"
+                    android:id="@+id/rating_bookingList_detais"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin10" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_ratingError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/please_give_rating"
+                    android:textColor="@color/red"
+                    android:visibility="gone" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/select_1_5_stars_to_rate_the_space" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin20"
+                android:background="@color/textColor_lbl"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:gravity="left|center_vertical"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/leave_review"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/ed_writeReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:background="@drawable/border_lite"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/margin3"
+                    android:scrollHorizontally="false" />
+
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:id="@+id/btn_submitReview"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin20"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:background="@drawable/btn_submitbg"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

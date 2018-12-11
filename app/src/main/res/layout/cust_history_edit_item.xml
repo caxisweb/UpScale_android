@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin20"
+    android:background="@color/historydlg"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin20">
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin20"
+                android:src="@drawable/cross" />
+
+            <LinearLayout
+                android:id="@+id/ll_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin3"
+                        android:text="@string/date"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_history_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_history_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/img_vertical"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="February 13,2017"
+                            android:paddingLeft="@dimen/padding20" />
+
+                        <ImageView
+                            android:id="@+id/img_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/calender"
+                            android:src="@drawable/vertical_line" />
+
+                        <ImageView
+                            android:id="@+id/calender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin10"
+                            android:src="@drawable/calendar" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin3"
+                        android:text="@string/from"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_history_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_history_from"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/img_vertical1"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="7:00 PM"
+                            android:paddingLeft="@dimen/padding20" />
+
+                        <ImageView
+                            android:id="@+id/img_vertical1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/calender1"
+                            android:src="@drawable/vertical_line" />
+
+                        <ImageView
+                            android:id="@+id/calender1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin10"
+                            android:src="@drawable/clock" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin3"
+                        android:text="@string/to"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_history_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/border">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_history_to"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/img_vertical2"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="10:00 PM"
+                            android:paddingLeft="@dimen/padding20" />
+
+                        <ImageView
+                            android:id="@+id/img_vertical2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:layout_toLeftOf="@+id/calender2"
+                            android:src="@drawable/vertical_line" />
+
+                        <ImageView
+                            android:id="@+id/calender2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin10"
+                            android:src="@drawable/clock" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MycheckBox
+                        android:id="@+id/chk_history_repeat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/booking_repeat" />
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/rl_history_repeatView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/margin3"
+                                android:text="@string/booking_repeat"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16dp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/border">
+
+                                <Spinner
+                                    android:id="@+id/tv_history_repeatBook"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="@dimen/margin5"
+                                    android:gravity="center_vertical"
+                                    android:hint="10:00 PM"
+                                    android:paddingLeft="@dimen/padding20" />
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_history_endDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/margin10"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_history_endDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/margin5"
+                                android:gravity="center"
+                                android:hint="@string/end_date"
+                                android:textSize="18dp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="@dimen/margin10"
+                                android:layout_marginLeft="@dimen/margin5"
+                                android:layout_marginRight="@dimen/margin5"
+                                android:layout_marginTop="@dimen/margin10">
+
+                                <LinearLayout
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/textColor_lbl"></LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/margin5"
+                                    android:src="@drawable/calander" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/ll_edit"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/margin10"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:id="@+id/btn_hiostory_edit_cancle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:layout_weight="1"
+                    android:background="@color/profile_contact"
+                    android:paddingLeft="@dimen/margin5"
+                    android:paddingRight="@dimen/margin5"
+                    android:text="@string/cancle"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:id="@+id/btn_hiostory_edit_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:layout_weight="1"
+                    android:background="@color/historydlg_delete"
+                    android:paddingLeft="@dimen/margin5"
+                    android:paddingRight="@dimen/margin5"
+                    android:text="@string/update"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/bookindetails_2"
+    tools:context="sa.upscale.coworking.MettingRoom.Booking_mettingRoom_list_details_moreReview">
+
+    <ListView
+        android:background="@color/white"
+        android:elevation="@dimen/margin10"
+        android:id="@+id/lst_moreReview"
+        android:layout_width="match_parent"
+        android:dividerHeight="2dp"
+        android:layout_height="wrap_content"></ListView>
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@color/button_color"
+                android:gravity="center">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/forgot_password"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/btn_fprgotPwd_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_margin="@dimen/margin10"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/close" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin20"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/border_cornor">
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/edt_fprgotPwd_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edittextshape"
+                    android:hint="@string/enter_your_e_mail"
+                    android:inputType="textEmailAddress"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor_input" />
+            </LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.Mybutton
+                android:id="@+id/btn_fprgotPwd_send"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/button_color"
+                android:gravity="center"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

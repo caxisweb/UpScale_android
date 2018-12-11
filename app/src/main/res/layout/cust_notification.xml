@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/margin10"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin10">
+
+        <ImageView
+            android:id="@+id/cross"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
+            android:src="@drawable/cross" />
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/cust_notification_spaceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_toLeftOf="@+id/cross"
+            android:paddingBottom="@dimen/margin5"
+            android:singleLine="true"
+            android:text="Meetin Room"
+            android:textColor="@color/spaceItem"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cust_notification_spaceName"
+            android:layout_marginTop="2dp">
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/location_list" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_bookingList_hotel_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:paddingRight="@dimen/margin20"
+                android:singleLine="true"
+                android:text="Location"
+                android:layout_marginTop="-3dp"
+                android:textColor="@color/textcolor_input"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_location">
+
+            <LinearLayout
+                android:id="@+id/ll_count"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:src="@drawable/summary_tags" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_marginTop="-5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/margin10"
+                    android:text="122" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_roomcount"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_toLeftOf="@+id/ll_count"
+                android:background="@drawable/summary_circle">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:src="@drawable/summary_user" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="-2dp"
+                    android:textSize="@dimen/margin10"
+                    android:layout_marginTop="8dp"
+                    android:text="5" />
+            </LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/ll_roomcount"
+                android:gravity="center_vertical"
+                android:text="February 13,2017 , from 7 pm to 9 pm"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_text">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/checked" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin10"
+                android:text="Successfully activating your booking"
+                android:textColor="@color/notification" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

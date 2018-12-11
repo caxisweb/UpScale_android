@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_snackbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="@dimen/margin10"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/logo1" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/login_using"
+                    android:textSize="@dimen/margin20" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/login_button_fb"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/fb_tq" />
+
+                    <LinearLayout
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"></LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btn_login_linkedIn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/linkedin_con" />
+
+                    <LinearLayout
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"></LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/btn_sign_in"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/google_tq" />
+
+                    <LinearLayout
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"></LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/btn_login_twitter1"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/twiter_icon" />
+                </LinearLayout>
+
+                <com.twitter.sdk.android.core.identity.TwitterLoginButton
+                    android:id="@+id/btn_login_twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="@dimen/margin5"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_weight="1" />
+
+
+                    <com.google.android.gms.common.SignInButton
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/margin5"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/linedin"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/in" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_marginStart="@dimen/margin5"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/twitterlogin"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/t" />
+
+                    <!--
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_marginStart="@dimen/margin5"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/googleloginin"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/g" />-->
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/textColor_lbl" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="@string/or"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="15dp" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/textColor_lbl" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_signup_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittextshape"
+                        android:hint="@string/name"
+                        android:inputType="text|textAutoComplete|textCapWords"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:paddingStart="@dimen/margin10"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_signup_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittextshape"
+                        android:hint="05xxxxxxxx"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:paddingStart="@dimen/margin10"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_signup_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittextshape"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:paddingStart="@dimen/margin10"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_signup_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittextshape"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:paddingStart="@dimen/margin10"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_signup_cpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittextshape"
+                        android:hint="@string/password_again"
+                        android:inputType="textPassword"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:paddingStart="@dimen/margin10"
+                        android:textColor="@color/textcolor_input" />
+
+                </LinearLayout>
+
+
+                <sa.upscale.coworking.CustomFont.MycheckBox
+                    android:id="@+id/chk_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/terms_and_conditions"
+                    android:textColor="@color/textcolor_input" />
+
+
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:id="@+id/btn_signup_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:layout_marginBottom="30dp"
+                    android:background="@color/button_color"
+                    android:text="@string/sign_up"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

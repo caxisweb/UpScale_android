@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_gray"
+    tools:context="sa.upscale.coworking.MettingRoom.Invitation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="@dimen/margin5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+                <ImageView
+                    android:id="@+id/img_space"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Meeting Room"
+                            android:textColor="@color/text_bookingList"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/margin5">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="300"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16dp" />
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin3"
+                                android:text="SAR/Hr"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignRight="@+id/ll_rating"
+                        android:layout_marginRight="90dp">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:src="@drawable/location_list" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detais_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="@dimen/margin10"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin3">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/user_black" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_person"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-2dp"
+                            android:layout_marginTop="-3dp"
+                            android:text="5"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="7dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin10">
+
+                    <TableRow>
+
+                        <FrameLayout
+                            android:layout_width="20dp"
+                            android:layout_height="25dp" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="14dp"
+                            android:text="@string/e_mail" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="14dp"
+                            android:text="@string/mob" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_marginTop="@dimen/margin5">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="2"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="@dimen/margin5">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="3"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_4_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="4"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_5_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="5"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_6_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="6"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_7_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="7"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_8_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="8"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tbl_rw_9_input"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:visibility="gone">
+
+                        <FrameLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/invitation_circle_1">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="9"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_email_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:inputType="textEmailAddress"
+                            android:paddingLeft="@dimen/margin10"
+                            android:singleLine="true" />
+
+                        <Space android:layout_width="@dimen/margin10" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_invitation_mobile_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_lite"
+                            android:hint="05xxxxxxxx"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/margin10"
+
+                            android:singleLine="true" />
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin10" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_invitation_addmore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_margin="@dimen/margin10"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/add" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/margin10"
+                            android:text="@string/add_more_invitation"
+                            android:textColor="@color/link" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_invitation_backUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity=""
+                        android:layout_margin="@dimen/margin10"
+                        android:gravity="center_vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/back" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--<LinearLayout
+                    android:id="@+id/btn_invitation_Send"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/sign_in"
+                    android:gravity="center">
+
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:src="@drawable/mail_white" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/send"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>-->
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/textcolor_input"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <sa.upscale.coworking.CustomFont.Mybutton
+            android:id="@+id/btn_invitation_Send"
+            android:layout_width="200dp"
+            android:layout_height="35dp"
+            android:background="@color/button_color"
+            android:text="Send Invitation"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+</RelativeLayout>

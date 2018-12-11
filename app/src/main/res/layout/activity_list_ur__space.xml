@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/colorPrimary">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/img_back_listurSpace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/left_arrow"
+                android:gravity="center_vertical"
+                android:text="@string/back"
+                android:textColor="@color/white" />
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_nav_action_titile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/list_your_space"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin10"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:padding="2dp">
+
+                <Spinner
+                    android:id="@+id/sp_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/margin5" />
+                <!-- <Spinner
+                     android:id="@+id/sp_sp_type"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:padding="2dp">
+
+                    <Spinner
+                        android:id="@+id/sp_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingRight="@dimen/margin5" />
+                   <!-- <Spinner
+                        android:id="@+id/sp_sp_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />-->
+
+                </LinearLayout>
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/edt_space_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="1.3"
+                    android:background="@drawable/border"
+                    android:hint="@string/price"
+                    android:inputType="number"
+                    android:padding="@dimen/margin5"
+                    android:textColor="@color/textcolor_input"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.MyeditText
+                android:id="@+id/edt_space_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin10"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:hint="@string/space_name"
+                android:inputType="text|textCapWords|textAutoComplete"
+                android:paddingLeft="@dimen/margin10"
+                android:paddingRight="@dimen/margin10"
+                android:textColor="@color/textcolor_input"
+                android:textSize="14dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/sp_space_capacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:hint="@string/number_of_people"
+                    android:inputType="number"
+                    android:padding="@dimen/margin5"
+                    android:textSize="14dp" />
+
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/sp_space_avalibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:hint="@string/number_of_room"
+                    android:inputType="number"
+                    android:padding="@dimen/margin5"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin5"
+                android:visibility="gone"
+                android:drawableLeft="@drawable/ic_plush"
+                android:gravity="center_vertical"
+                android:text="Add Another Space"
+                android:textColor="@color/textcolor_input"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_space_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:layout_toRightOf="@+id/spaceemailIcon"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="14dp" />
+
+
+                    <sa.upscale.coworking.CustomFont.MyeditText
+                        android:id="@+id/edt_space_mobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:hint="@string/mobile_number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingLeft="@dimen/margin10"
+                        android:paddingRight="@dimen/margin10"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/gender" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <RadioGroup
+                                android:id="@+id/rg_listurSpace_gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/margin10"
+                                android:paddingRight="@dimen/margin10">
+
+                                <RadioButton
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Male" />
+
+
+                                <RadioButton
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Female" />
+
+
+                                <RadioButton
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Both" />
+
+
+                            </RadioGroup>
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin20"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/amenities"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/textColor_lbl" />
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10">
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_projector"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/projector_s"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_air_condi"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/air_conditioner"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_mailservice"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/mail_service"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_scanner"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/scanner_printer"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_locker"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/lockers"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_internet"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/wi_fi_internet"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_parking"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/parking_space"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_phone"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/phone"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_work"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/work_24_h"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_Man"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/man"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_female"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/female"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_coffee"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="@string/coffee"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/address"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/textColor_lbl" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_listUrSpace_CurrentLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="14dp" />
+
+                    <sa.upscale.coworking.CustomFont.Mybutton
+                        android:id="@+id/btn_space_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="7dp"
+                        android:background="@color/button_color"
+                        android:text="@string/change"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin20"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/photos_from_your_space"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/textColor_lbl" />
+
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <FrameLayout
+                            android:layout_width="130dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="#dcdcdc"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/img_space_1"
+                                android:layout_width="130dp"
+                                android:layout_height="100dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/photo_bg_white" />
+
+                            <ImageView
+                                android:id="@+id/img_space_add1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/pic" />
+
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="130dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="#dcdcdc"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/img_space_2"
+                                android:layout_width="130dp"
+                                android:layout_height="100dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/photo_bg_white" />
+
+                            <ImageView
+                                android:id="@+id/img_space_add2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/pic" />
+
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="130dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="#dcdcdc"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/img_space_3"
+                                android:layout_width="130dp"
+                                android:layout_height="100dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/photo_bg_white" />
+
+                            <ImageView
+                                android:id="@+id/img_space_add3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/pic" />
+
+
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+
+            <sa.upscale.coworking.CustomFont.Mybutton
+                android:id="@+id/btn_space_submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="@dimen/margin20"
+                android:layout_marginTop="@dimen/margin20"
+                android:background="@color/button_color"
+                android:text="@string/save_your_space_now"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

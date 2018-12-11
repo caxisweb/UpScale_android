@@ -1,0 +1,428 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="sa.upscale.coworking.MettingRoom.Summary">
+
+    <!--   <include layout="@layout/toolbar_layout" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/lv_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="@dimen/margin10"
+                android:orientation="vertical"
+                android:padding="@dimen/margin10">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- <ImageView
+                         android:layout_width="20dp"
+                         android:layout_height="20dp"
+                         android:layout_alignParentRight="true"
+                         android:src="@drawable/close" />
+ -->
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_summary_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin10"
+                        android:text="Meeting Room"
+                        android:textColor="@color/spaceItem"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_summary_title"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/location_list" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_summary_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="70dp"
+                            android:singleLine="true"
+                            android:text="Riyadh,Saudi Arebia dgdfgdffdfgdfgdfgdfgdfg" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/summary_circle">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/margin10"
+                            android:src="@drawable/summary_user" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_summary_capacity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="15"
+                            android:textSize="@dimen/margin10" />
+                    </LinearLayout>
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_summary_timing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_location"
+                        android:layout_marginTop="5dp"
+                        android:text="February 13,2017, from 7pm to 9 pm" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:background="@color/trance"></LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin10"
+                    android:layout_marginTop="@dimen/margin10">
+
+                    <LinearLayout
+                        android:id="@+id/ll_time"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/summary_circle1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:src="@drawable/clock" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_summary_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 h" />
+                    </LinearLayout>
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_summary_sprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_toLeftOf="@+id/ll_c_line"
+                        android:layout_toRightOf="@+id/ll_time"
+                        android:singleLine="true"
+                        android:text="cost 200 per hour"
+                        android:textSize="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_c_line"
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:layout_toLeftOf="@+id/ll_price"
+                        android:background="@color/trance"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_toRightOf="@+id/ll_c_line"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="@dimen/margin5"
+                            android:src="@drawable/summary_tags" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="23541" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_price"
+                        android:layout_width="70dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin20"
+                        android:background="@drawable/summary_price"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/price1"
+                            android:textSize="15dp" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_summary_rprice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="400 SAR"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lv_promocoe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lv_first"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:id="@+id/et_promo_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/border_lite"
+                    android:hint="@string/promo_code"
+                    android:padding="@dimen/margin5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/lv_code_apply"
+                        android:layout_width="100dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/summary_btn">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:gravity="center"
+                            android:text="@string/apply"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lv_code_cancel"
+                        android:layout_width="110dp"
+                        android:layout_height="45dp"
+                        android:visibility="gone"
+                        android:background="@drawable/summary_btn">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/margin5"
+                            android:gravity="center"
+                            android:text="@string/remove_code"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                    <Switch
+                        android:id="@+id/sw_summary_terms"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:checked="false" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/sw_summary_terms"
+                        android:checked="false"
+                        android:text="@string/terms_and_conditions"
+                        android:textSize="12dp" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <RelativeLayout
+                    android:id="@+id/lv_dis_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin20"
+                    android:layout_marginRight="@dimen/margin20">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:checked="false"
+                        android:text="@string/discount_amount"
+                        android:textSize="14dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_dis_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="#FFBC47"
+                        android:checked="false"
+                        android:padding="@dimen/margin5"
+                        android:text="200 SAR"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/lv_final_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin20">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:checked="false"
+                        android:text="Final Price"
+                        android:textSize="14dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_finalprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="#FFBC47"
+                        android:checked="false"
+                        android:padding="@dimen/margin5"
+                        android:text="200 SAR"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin20">
+
+        <LinearLayout
+            android:id="@+id/ll_summary_back"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="@dimen/margin3"
+            android:layout_weight="1"
+            android:background="@drawable/back_img"
+            android:gravity="center">
+
+            <ImageView
+
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin3"
+                android:layout_marginRight="@dimen/margin3"
+                android:src="@drawable/left_arrow" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin3"
+                android:layout_marginRight="@dimen/margin3"
+                android:gravity="center"
+                android:text="@string/back"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_summary_confirm"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="@dimen/margin3"
+            android:layout_weight="1"
+            android:background="@drawable/next_bg_img"
+            android:gravity="center">
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin3"
+                android:layout_marginRight="@dimen/margin3"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

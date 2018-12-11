@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="#EFEFED"
+                android:gravity="center">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/change_password"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <ImageView
+
+                    android:id="@+id/btn_fprgotPwd_close"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"
+                    android:layout_margin="@dimen/margin10"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/close" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin20"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/border_cornor">
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:inputType="number"
+                    android:id="@+id/edt_changePwd_otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/o_t_p"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor_input" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin20"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_marginTop="@dimen/margin10"
+                android:background="@drawable/border_cornor">
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:inputType="textPassword"
+                    android:id="@+id/edt_changePwd_newPwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/new_password"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor_input" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin20"
+                android:layout_marginRight="@dimen/margin20"
+                android:layout_marginTop="@dimen/margin10"
+                android:background="@drawable/border_cornor">
+
+                <sa.upscale.coworking.CustomFont.MyeditText
+                    android:inputType="textPassword"
+                    android:id="@+id/edt_changePwd_re_typenewPwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/re_type_new_password"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/textcolor_input" />
+            </LinearLayout>
+
+            <sa.upscale.coworking.CustomFont.Mybutton
+                android:id="@+id/btn_chngPwd_resetpwd"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/forgotButton"
+                android:gravity="center"
+                android:text="@string/reset"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

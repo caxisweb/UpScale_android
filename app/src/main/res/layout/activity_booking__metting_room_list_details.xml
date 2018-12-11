@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_snackbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context="sa.upscale.coworking.MettingRoom.Booking_MettingRoom_list_details">
+
+    <ScrollView
+        android:id="@+id/lv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lv_footer"
+        android:layout_alignParentTop="true"
+        android:layoutDirection="ltr"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/imgslider_bookingDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    app:fillColor="#FFFFFFFF"
+                    app:pageColor="#00000000"
+                    app:radius="6dp"
+                    app:slideInterval="3000"
+                    app:strokeColor="#FF777777"
+                    app:strokeWidth="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Meeting Room"
+                            android:textColor="@color/text_bookingList"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/margin5">
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="300"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16dp" />
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin3"
+                                android:text="SAR/Hr"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin3"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignRight="@+id/ll_rating"
+                            android:layout_marginRight="90dp">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:src="@drawable/location_list" />
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_bookingList_detais_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="@dimen/margin10"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/margin3">
+
+                            <RatingBar
+                                android:id="@+id/rating_bookingList_detail_hote_rating"
+                                style="@style/CustomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="11dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="@dimen/margin10"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:isIndicator="true"
+                                android:numStars="5"
+                                android:rating="1"
+                                android:stepSize="1.0"
+                                android:text="Rating star" />
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_bookingList_detail_hote_ratingreview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/reviews"
+                                android:textColor="@color/white"
+                                android:textSize="8dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin3">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/user_black" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_bookingList_detail_person"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-2dp"
+                            android:layout_marginTop="-3dp"
+                            android:text="5"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/date_and_time"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin3"
+                        android:layout_weight="1"
+                        android:background="@color/gray_very_light" />
+
+                    <!--  <ImageView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:padding="@dimen/margin5"
+                          android:src="@drawable/ic_add" />-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="horizontal">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_bookingList_detail_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:drawableLeft="@drawable/ic_calender"
+                        android:gravity="left|center_vertical"
+                        android:padding="@dimen/margin5"
+                        android:textSize="10dp" />
+
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_bookingList_detail_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_weight="1.1"
+                        android:background="@drawable/border"
+                        android:drawableLeft="@drawable/ic_time"
+                        android:gravity="left|center_vertical"
+                        android:padding="@dimen/margin5"
+                        android:textSize="10dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_bookingList_detail_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:layout_weight="1.1"
+                        android:background="@drawable/border"
+                        android:drawableLeft="@drawable/ic_time"
+                        android:gravity="left|center_vertical"
+                        android:padding="@dimen/margin5"
+                        android:textSize="10dp" />
+
+
+                    <ImageView
+                        android:id="@+id/img_add_date"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:src="@drawable/ic_add" />
+                </LinearLayout>
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin3"
+                    android:text="@string/press_button_to_add_booking_date"
+                    android:textColor="@color/textColor_lbl"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:id="@+id/lv_bookdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:background="@color/light_gray"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_white"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/expand_button_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray_very_light"
+                        android:drawableRight="@drawable/down_arrow"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin10"
+                        android:text="@string/space_detail"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <net.cachapa.expandablelayout.ExpandableLayout
+                        android:id="@+id/expandable_layout_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin10"
+                        app:el_duration="500"
+                        app:el_expanded="false">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:id="@+id/tv_summarydetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:text=""
+                            android:textColor="@color/textColor_lbl" />
+
+
+                    </net.cachapa.expandablelayout.ExpandableLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/expand_button_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray_very_light"
+                        android:drawableRight="@drawable/down_arrow"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin10"
+                        android:text="REPEATING BOOKING "
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <net.cachapa.expandablelayout.ExpandableLayout
+                        android:id="@+id/expandable_layout_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin10"
+                        app:el_duration="500"
+                        app:el_expanded="false">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:padding="@dimen/margin5">
+
+                                <Spinner
+                                    android:id="@+id/sp_repet_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:spinnerMode="dropdown"
+                                    android:textColor="@color/textcolor_input" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin20"
+                                android:layout_weight="1.1"
+                                android:background="@drawable/border"
+                                android:padding="@dimen/margin5">
+
+                                <Spinner
+                                    android:id="@+id/sp_repet_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:spinnerMode="dropdown"
+                                    android:textColor="@color/textcolor_input" />
+
+                            </LinearLayout>
+
+                            <sa.upscale.coworking.CustomFont.MycheckBox
+                                android:id="@+id/ch_repet_avail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:layout_weight="1"
+                                android:text="Available"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="10dp"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+                    </net.cachapa.expandablelayout.ExpandableLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_white"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/expand_button_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray_very_light"
+                        android:drawableRight="@drawable/down_arrow"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin10"
+                        android:text="@string/promo_code"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <net.cachapa.expandablelayout.ExpandableLayout
+                        android:id="@+id/expandable_layout_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin10"
+                        app:el_duration="500"
+                        app:el_expanded="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <sa.upscale.coworking.CustomFont.MyeditText
+                                    android:id="@+id/et_promo_code"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="38dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/border"
+                                    android:gravity="center_vertical"
+                                    android:hint="@string/promo_code"
+                                    android:padding="@dimen/margin5"
+                                    android:textSize="12dp" />
+
+                                <sa.upscale.coworking.CustomFont.Mybutton
+                                    android:id="@+id/btn_code_apply"
+                                    android:layout_width="100dp"
+                                    android:layout_height="38dp"
+                                    android:layout_marginLeft="@dimen/margin10"
+                                    android:background="@color/button_color"
+                                    android:text="@string/apply"
+                                    android:textColor="@color/white"
+                                    android:textSize="12dp" />
+
+                                <sa.upscale.coworking.CustomFont.Mybutton
+                                    android:id="@+id/btn_code_remove"
+                                    android:layout_width="100dp"
+                                    android:layout_height="38dp"
+                                    android:layout_marginLeft="@dimen/margin10"
+                                    android:background="@color/button_color"
+                                    android:text="Remove"
+                                    android:textColor="@color/white"
+                                    android:textSize="12dp"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_dis_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin5"
+                                android:text=""
+                                android:textColor="#1AB188"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </net.cachapa.expandablelayout.ExpandableLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border_white"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/expand_button_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray_very_light"
+                        android:drawableRight="@drawable/down_arrow"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin10"
+                        android:text="@string/payment_method"
+                        android:textColor="@color/textcolor_input" />
+
+
+                    <net.cachapa.expandablelayout.ExpandableLayout
+                        android:id="@+id/expandable_layout_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin10"
+                        app:el_duration="500"
+                        app:el_expanded="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/rg_paymentmethod"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <sa.upscale.coworking.CustomFont.MyRadiobutton
+                                    android:id="@+id/rd_cod"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:text="@string/cash_on_arrival"
+                                    android:textColor="@color/textcolor_input"
+                                    android:textIsSelectable="true"
+                                    android:textSize="14dp" />
+
+                                <sa.upscale.coworking.CustomFont.MyRadiobutton
+                                    android:id="@+id/rd_visa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="@string/visa"
+                                    android:textColor="@color/textColor_lbl"
+                                    android:textSize="14dp" />
+
+                                <sa.upscale.coworking.CustomFont.MyRadiobutton
+                                    android:id="@+id/rd_bank"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="@string/bank"
+                                    android:textColor="@color/textcolor_input"
+                                    android:textSize="14dp" />
+
+                            </RadioGroup>
+
+                            <sa.upscale.coworking.CustomFont.MytextView
+                                android:id="@+id/tv_visa_note"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:text="@string/visa_payment_will_be_available_soon_in_hive"
+                                android:textColor="@color/red"
+                                android:textSize="12dp"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:id="@+id/lv_bank_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin10"
+                                android:layout_marginRight="@dimen/margin10"
+                                android:layout_marginTop="@dimen/margin10"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <sa.upscale.coworking.CustomFont.MytextView
+                                    android:id="@+id/tv_bank_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/textcolor_input"
+                                    android:textSize="14dp" />
+
+                                <sa.upscale.coworking.CustomFont.MytextView
+                                    android:id="@+id/tv_ibn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin3"
+                                    android:textColor="@color/textcolor_input"
+                                    android:textSize="14dp" />
+
+                                <sa.upscale.coworking.CustomFont.MytextView
+                                    android:id="@+id/tv_account_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin3"
+                                    android:textColor="@color/textcolor_input"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </net.cachapa.expandablelayout.ExpandableLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/lv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv_subscriber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginBottom="@dimen/margin10"
+            android:text="@string/subscribed_msg"
+            android:textColor="@color/forgotButton"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/textcolor_input"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <sa.upscale.coworking.CustomFont.Mybutton
+                android:id="@+id/btn_book_room"
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:background="@color/button_color"
+                android:text="300 SAR Pay Now"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

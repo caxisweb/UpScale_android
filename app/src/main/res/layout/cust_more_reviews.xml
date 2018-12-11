@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_bookingList_detail_review_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/img_custreview_user_pic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/avtar"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="1dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin10"
+                android:orientation="vertical">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:id="@+id/tv_custreview_user_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin5">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:id="@+id/tv_custreview_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+
+
+                    <RatingBar
+                        android:id="@+id/rating_custreview_rate"
+                        style="@style/CustomRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="11dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin10"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:isIndicator="true"
+                        android:text="Rating star" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margin5"
+                    android:background="@color/textColor_lbl"></LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:layout_marginBottom="@dimen/margin10"
+            android:id="@+id/tv_custreview_reviewDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="@dimen/margin5"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>

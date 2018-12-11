@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/historydlg"
+    android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/margin20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:gravity="center"
+                android:id="@+id/tv_text1"
+                android:text="@string/are_you_sure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_below="@+id/tv_text1"
+                android:gravity="center"
+                android:id="@+id/tv_text"
+                android:text="@string/you_want_to_delete_the_booking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin20"
+                android:layout_below="@+id/tv_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin10"
+                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:id="@+id/btn_hiostory_delete_cancle"
+                    android:background="@color/profile_contact"
+                    android:layout_width="match_parent"
+                    android:text="@string/cancle"
+                    android:textSize="16dp"
+                    android:textAllCaps="false"
+                    android:paddingLeft="@dimen/margin10"
+                    android:paddingRight="@dimen/margin5"
+                    android:textColor="@color/white"
+                    android:layout_height="40dp" />
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <sa.upscale.coworking.CustomFont.Mybutton
+                    android:layout_weight="1"
+                    android:id="@+id/btn_hiostory_delete_delete"
+                    android:textAllCaps="false"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:background="@color/historydlg_delete"
+                    android:layout_width="match_parent"
+                    android:text="@string/delete"
+                    android:textSize="16dp"
+                    android:paddingLeft="@dimen/margin5"
+                    android:paddingRight="@dimen/margin5"
+                    android:textColor="@color/white"
+                    android:layout_height="40dp" />
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+               <!-- <LinearLayout
+                    android:id="@+id/ll_hiostory_delete_cancle"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:background="@drawable/back_img"
+                    android:gravity="center">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin3"
+                        android:layout_marginRight="@dimen/margin3"
+                        android:gravity="center"
+                        android:text="Cancle"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+                </LinearLayout>
+-->
+              <!--  <LinearLayout
+                    android:id="@+id/ll_hiostory_delete_submit"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:background="@drawable/next_bg_img"
+                    android:gravity="center">
+
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Delete"
+                        android:layout_marginRight="@dimen/margin3"
+                        android:layout_marginLeft="@dimen/margin3"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+                </LinearLayout>-->
+            </LinearLayout>
+
+        </RelativeLayout>
+
+</RelativeLayout>

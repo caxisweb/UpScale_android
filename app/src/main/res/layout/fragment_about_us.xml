@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10"
+            android:orientation="vertical">
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolor_input"
+                android:textSize="12dp" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:id="@+id/tv_aboutUs_p_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin10"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_about1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_1000_customre"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_1000"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_about2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_20_premium_work_spaces"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/premium_20"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin20"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_about3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/h24_support"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17dp" />
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/h25_support_detail"
+                        android:textColor="@color/textcolor_input"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin20"
+                android:src="@drawable/hive_about" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

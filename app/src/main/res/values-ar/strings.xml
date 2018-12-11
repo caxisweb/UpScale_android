@@ -1,0 +1,281 @@
+<resources tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Hive هايڤ</string>
+    <string name="forgotPwd">استرجاع كلمة المرور</string>
+    <string name="logo">logo</string>
+    <string name="twitterlogin">TwitterLogin</string>
+    <string name="linedin">linedIn</string>
+    <string name="or">أو</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="emailicon">emailIcon</string>
+    <string name="password">الرمز السري</string>
+
+    <string name="view_more"><u>المزيد</u></string>
+
+
+    <string name="facebook_app_id">1898403290373788</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="list">قائمة</string>
+    <string name="map">الخارطة</string>
+    <string name="for_4_people">لمدة 4 أشخاص</string>
+    <string name="reviews">(استعراض 0)</string>
+    <string name="reviews_1">استعراض </string>
+    <string name="summary">الملخص</string>
+    <string name="full_profile">تفاصيل اكثر</string>
+    <string name="open_hours">ساعات العمل</string>
+    <string name="mon">الإثْنَين</string>
+    <string name="tue">الثَلاثاء</string>
+    <string name="wed">الأربَعاء</string>
+    <string name="thu">الخَميس</string>
+    <string name="fri">الجُمُعة</string>
+    <string name="sat">السَبْت</string>
+    <string name="sun">الأحَد</string>
+    <string name="from">من</string>
+    <string name="to">حتى</string>
+    <string name="amenities">المرافق</string>
+    <string name="projectors_s">بروجكتر</string>
+    <string name="air_conditioner">تكييف</string>
+    <string name="mail_service">البريد</string>
+    <string name="scanner_printer">الماسح الضوئي / الطابعة</string>
+    <string name="lookers">وحدة ادراج</string>
+    <string name="wifi_internet">الانترنت اللاسلكي</string>
+    <string name="parking_space">مكان للسيارة</string>
+    <string name="phone">الهاتف</string>
+    <string name="cofee_tea">شاي / قهوة</string>
+    <string name="_0_reviews">التعليقات 0</string>
+    <string name="write_a_review">تقييم واضافة تعليق</string>
+    <string name="rating_star">تصنيف النجوم</string>
+    <string name="book_now">الحجز</string>
+
+
+    <string name="space_name">اسم المكان</string>
+    <string name="meeting_room">غرفة للاجتماعات</string>
+    <string name="desk">وحدة عمل</string>
+    <string name="discussion_room">مساحه نقاش</string>
+    <string name="private_room">مساحة خاصة</string>
+    <string name="conference_room">مساحة محاضرات</string>
+    <string name="capacity">الاستيعاب</string>
+    <string name="availability">العدد المتاح</string>
+    <string name="mobile_number">رقم الجوال</string>
+    <string name="projector_s">بروجكتر</string>
+    <string name="wi_fi_internet">الانترنت اللاسلكي</string>
+    <string name="lockers">وحدة ادراج</string>
+    <string name="work_24_h">العمل على مدار الساعة</string>
+    <string name="location">المكان</string>
+    <string name="photos_from_your_space">صور فعلية للمساحة</string>
+    <string name="submit">ادراج</string>
+
+
+    <string name="login">الدخول</string>
+    <string name="login_using">تسجيل الدخول باستخدام</string>
+    <string name="keep_me_logged_in">البقاء مسجلاً</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="not_registered_yet_sign_up_here">غير مسجل، التسجيل هنا</string>
+    <string name="list_your_space">اضافة مساحة عمل</string>
+
+
+    <string name="date">التاريخ</string>
+    <string name="back">العودة</string>
+    <string name="next">التالي</string>
+
+
+    <string name="active_booking">الحجوزات المفعلة</string>
+    <string name="inactive_booking">الحجوزات الغير مفعلة</string>
+
+
+    <string name="sign_up">التسجيل</string>
+    <string name="terms_and_conditions">الشروط والضوابط والاحكام</string>
+
+
+    <string name="cash_on_arrival">الدفع عن الوصول</string>
+    <string name="visa">الفيزا</string>
+    <string name="card_name">اسم البطاقة</string>
+    <string name="card_num">رقم البطاقة</string>
+    <string name="card_date_n_mm_yy">تاريخ البطاقة (الشهر/السنة)</string>
+    <string name="verification_code">رمز التحقق</string>
+    <string name="confirm">التأكيد</string>
+
+
+    <string name="change_password">تغيير الرمز السري</string>
+    <string name="reset">استعادة الضبط</string>
+
+
+    <string name="upscale">ابسكيل</string>
+    <string name="how_was_your_experience">كيف كانت تجربتك</string>
+    <string name="please_give_rating">نأمل ان تشاركنا التقييم</string>
+    <string name="select_1_5_stars_to_rate_the_space">اختر من 1 الى 5 نجمات لتقييم المكان</string>
+    <string name="leave_review">اضف تعليق</string>
+    <string name="space_type">نوع مساحة العمل</string>
+    <string name="show_spaces">عرض المساحات</string>
+
+
+    <string name="are_you_sure">هل انت متأكد</string>
+    <string name="you_want_to_delete_the_booking">تود ان يتم الغاء الحجز</string>
+    <string name="cancle">الالغاء</string>
+    <string name="delete">مسح</string>
+    <string name="update">تحديث</string>
+    <string name="my_profile">الملف الشخصي</string>
+    <string name="notifications">التنبيهات</string>
+    <string name="share_the_app">مشاركة التطبيق</string>
+    <string name="about_us">من نحن</string>
+    <string name="our_location">اماكن تواجدنا</string>
+    <string name="chat_with_us">اتصل بنا</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="send">إرسال</string>
+    <string name="contact_us">التواصل معنا</string>
+
+    <string name="rating_and_reviews_on_venues_help_the_community_so_please_share_your_thoughts">تقييم ومشاركة تجاربك تثري الآخرين وتساهم في بناء السمعة وتساهم في تطوير البيئة، لذلك نأمل منك المشاركة</string>
+    <string name="price">سعر الساعة</string>
+    <string name="promo_code">رمز الخصم</string>
+    <string name="apply">تفعيل</string>
+
+
+    <string name="thank_you">شكرا</string>
+    <string name="for_booking_with_us">, لثقتك في هايف  يمكنك التواصل معنا</string>
+    <string name="if_you_want_to_contact_us_please_reach_us">يمكنك التواصل معنا</string>
+    <string name="on"> من خلال</string>
+    <string name="booking_upscale_com_sa">booking@upscale.com.sa</string>
+    <string name="booking_ref_number">رقم مرجع الحجز</string>
+
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="my_history">التجارب السابقة</string>
+    <string name="cost_200_per_hour">القيمة 200 ريال لكل ساعة</string>
+
+    <string name="select_language">اختار اللغة</string>
+
+    <string name="cancel">إلغاء</string>
+    <!-- <string name="am">صباحا</string>
+     <string name="pm">مساء</string>-->
+    <!-- <string name="jaunuary">كانون الثاني</string>
+     <string name="february">شهر فبراير</string>
+     <string name="march">مارس</string>
+     <string name="april">أبريل</string>
+     <string name="may">قد</string>
+     <string name="june">يونيو</string>
+     <string name="july">يوليو</string>
+     <string name="august">أغسطس</string>
+     <string name="september">سبتمبر</string>
+     <string name="octomer">شهر اكتوبر</string>
+     <string name="november">شهر نوفمبر</string>
+     <string name="december">ديسمبر</string>-->
+    <string name="change_language">غير اللغة</string>
+    <string name="booking">الحجز</string>
+    <string name="userProfile">نبذة تعريفية<!--ملف تعريفي للمستخدم--></string>
+    <string name="overView">نظرة عامة</string>
+    <string name="space">مساحات العمل</string>
+    <string name="reviews1">التقييم</string>
+    <string name="name">اسم</string>
+
+    <string name="termsCondition_text1">شكرا لإختيارك تطبيق  هايڤ و الذي سيعرف في هذا النموذج بإسم " التطبيق" , إن تطبيق هايڤ مملوك لشركة  آبسكيل و المسجلة في المملكه العربيه السعوديه لذا نرجو منك قراءة شروط إستخدام و تحميل تطبيق  هايڤ قبل ان تضغط على زر " موافق" او تحميل التطبيق لتكون على معرفة  كاملة قبل استخدام خدمات تطبيقاتنا و عليه نحن مستعدون لتفعيل خدمة هذا التطبيق الذي نقدمه لكم فقط على شرط ان تقبل شروط إستخدام تطبيق  هايڤ  بالضغط على زر أوافق، تشير إلى أنك قد فهمت  شروط الاستخدام و تم قبول</string>
+    <string name="termsCondition_text2">إن سياسة الخصوصية المتاحة في تطبيق  هايڤ  تمنحنا الإمكانية بعرض الصور التى تحملها عبر التطبيق على كافة مستخدمي التطبيق و نضمن لك سرية  معلوماتك المسجلة على حسابك و عدم بيعها / إستخدامها من قبلنا لأي سبب تجاري إضافة الى موافقتك على إستقبال إيميلات و تنبيهات عبر التطبيق.</string>
+    <string name="termsCondition_text3">من أجل استخدام التطبيق و ميزات معينة من الخدمة، يجب تسجيل وفتح حساب معنا. أنت مسؤول عن الحفاظ على سرية ورصد كل نشاط تحت حسابك، وتتحمل المسؤولية الكاملة عن جميع النشاطات التي تحدث تحت حسابك، نحن تحتفظ لنفسها بالحق في تعليق أو إنهاء حسابك في أي وقت، وأن تتحمل أية مسؤولية عن مثل هذا التعليق أو الإنهاء. </string>
+
+    <string name="aboutus_text1">هايف هي شبكة من مساحات العمل المختلفة حيث تجتمع فيها العقول لتنتج ، نحن في هايف نحوّل المباني إلى بيئة نشطة فاعلة بالابتكار والتركيز والتواصل مع مختلف العقول.</string>
+    <string name="aboutus_text2">هايڤ هي منصة الكترونية للبحث عن مساحات عمل مشتركة واماكن للعمل والاجتماعات تناسب المهنيين ورواد الأعمال والاشخاص المستقلين بحيث يمكنهم ذلك من متابعة اعمالهم في بيئة مناسبة ومميزة.</string>
+    <string name="aboutus_text3">في هايڤ نعرض لك المساحات المختلفة ووحدات العمل ونتيح لك الاطلاع ومقارنة الاسعار والخدمات والمميزات لكل مقدم خدمة، ويمكن الاختيار والحجز من ما يناسبك، والسداد والتواجد والدخول بكل يسر وسهولة، وبشكل آلي.</string>
+    <string name="aboutus_text4">كما يمكنك في هايڤ تقييم مزود الخدمة ونقل ومشاركة تجربتك مع الاخرين.
+هايڤ، مكان عملك، عندما تحتاج..</string>
+    <string name="aboutus_text5">احجز مكان عملك بالساعة، او بالاسبوع، او حتى بالاشتراك الشهري من اي من المساحات المدرجة لدينا.</string>
+    <string name="aboutus_text6">كما يمكنك اضافة مساحات عمل للقائمة لدينا وتحقيق ايراد اضافي من الزوار من خلال المنصة..</string>
+
+
+    <string name="update_linkedin_app_title">تحديث التطبيق ينكدين</string>
+    <string name="update_linkedin_app_message">للتواصل مع لينكيدين تحتاج إلى تحديث التطبيق ينكدين. هل تريد أن تفعل ذلك؟</string>
+    <string name="update_linkedin_app_download">تحميل</string>
+    <string name="update_linkedin_app_cancel">إلغاء</string>
+
+    <string name="booking_now">الحجز الآن</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="wish_list">المفضلة</string>
+    <string name="my_space">الفضاء الخاص بي</string>
+    <string name="save">حفظ</string>
+    <string name="mob">رقم الجوال</string>
+    <string name="city">مدينة</string>
+    <string name="new_password">كلمة السر الجديدة</string>
+    <string name="rep_password">كلمة المرور</string>
+    <string name="area_of_expertise">مجال الخبرة</string>
+    <string name="riyadh_suadi_arabia">الرياض، المملكة العربية SUADI</string>
+    <string name="price_range">نطاق السعر</string>
+    <string name="riyadh">الرياض</string>
+
+    <string name="end_date">تاريخ الانتهاء</string>
+    <string name="booking_repeat">تكرار الحجز</string>
+    <string name="add_more_space"> المزيد</string>
+    <string name="info_hive_sa">info@hive.sa</string>
+    <string name="thank_you_for_listing_your_space_nif_you_want_to_contact_us_please_reach_us">تم استلام طلبكم ، للتواصل معنا يمكنكم ارسال بريد الكتروني على</string>
+    <string name="thank_you_btn">لا شكر</string>
+    <string name="gender">جنس</string>
+    <string name="getyourlocation">الحصول على موقعك</string>
+    <string name="title_activity_list_ur_spce_location_map">خريطة</string>
+    <string name="hour">ساعة</string>
+    <string name="manual_location">تحديد يدوي (اختياري)</string>
+    <string name="sharing_with_social_media">شارك مع من تحب</string>
+    <string name="price1">السعر</string>
+    <string name="e_mail">E-mail</string>
+    <string name="add_more_invitation">اضافة المزيد</string>
+    <string name="find_your_workspace">اكتشف المساحات المتاحة من حولك</string>
+    <string name="where_do_you_want_to_work">اختر مكان عملك</string>
+    <string name="feedbackHint">في حال كان لديكم استفسارات او ملاحظات يرجى كتابتها هنا</string>
+    <string name="feedback">الاستفسارات والمقترحات</string>
+    <string name="enter_your_e_mail">دخل بريدك  الإلكتروني</string>
+    <string name="fatching_Information">Fatching Infromation</string>
+    <string name="o_t_p">أو ر ع</string>
+    <string name="re_type_new_password">أعد كتابة كلمة السر الجديدة</string>
+    <string name="others">خيارات اخرى</string>
+    <string name="locationProblem">مشكلة في إطعام الموقع الخاص بك.يرجى الانتظار لمدة دقيقتين</string>
+    <string name="man">الذكر</string>
+    <string name="female">نساء</string>
+    <string name="coffee">شاى قهوة</string>
+    <string name="discount_amount">قيمة التخفيض</string>
+    <string name="remove_code">حذف</string>
+    <string name="visa_payment_will_be_available_soon_in_hive">قريبا، سيتم توفير طريقة الدفع بالفيزا في تطبيق هايف</string>
+    <string name="login_message">يجب تسجيل الدخول</string>
+    <string name="duplicate_date">لايمكن تكرار نفس التاريخ والوقت </string>
+
+    <string name="_1000_customre"> أكثر من 1000 عميل</string>
+    <string name="customer_1000">مع أكثر من ألف مشترك لديك الفرصة للوصول إلى شبكة اجتماعية متعددة المواهب والتخصصات</string>
+
+    <string name="_20_premium_work_spaces">+ 50 مساحة عمل مميزة</string>
+    <string name="premium_20">قم بالتركيز على ما تريد فعله ، واترك لنا الاهتمام بالباقي ، استمتع بخدمات مركز الأعمال والأجواء المنعشة للعمل وأكثر من ذلك</string>
+
+    <string name="h24_support">دعم متواصل على مدار الساعة</string>
+    <string name="h25_support_detail">نحن خبراء بما يحتاجه عملك لإنهاؤه – نقدم لك دعم مباشر خلال اليوم عن طريق المحادثة الفورية</string>
+
+    <string name="search">البحث</string>
+    <string name="select_city">اختر المدينة</string>
+    <string name="space_detail">تفاصيل المكان</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="update_profile">تحديث البروفايل</string>
+
+    <string name="number_of_room">عدد الغرف</string>
+    <string name="number_of_people">عدد الاشخاص</string>
+    <string name="address">العنوان</string>
+    <string name="change">تغيير</string>
+
+    <string name="save_your_space_now">حفظ </string>
+    <string name="use_the_form_below_to_send_us_your_comment">شارك معنا ملاحظاتك وتعليقاتك</string>
+    <string name="bank">تحويل بنكي</string>
+    <string name="paynow">السداد الآن</string>
+    <string name="select_space_type">اختر نوع المساحة</string>
+    <string name="login_here">تسجيل الدخول</string>
+    <string name="signup_here">التسجيل</string>
+    <string name="password_again">أدخل كلمة المرور مرة أخرى</string>
+    <string name="invite_attendees">مشاركة دعوة</string>
+
+    <string name="bank_name"> اسم البنك</string>
+    <string name="ibn_no">الآيبان</string>
+    <string name="acc_no"> رقم الحساب</string>
+
+    <string name="for_booking_through_hive_application">للحجز من خلال تطبيق هايڤ HiVe</string>
+
+    <string name="packages">عروض</string>
+    <string name="invitation">دعوات</string>
+    <string name="advance_search">بحث متقدم</string>
+    <string name="package_detail">Package Detail</string>
+    <string name="facility">المرافق</string>
+    <string name="share">مشاركة</string>
+
+    <string name="press_button_to_add_booking_date">اضغط على أيقونة + ثم اختر تاريخ الحجز</string>
+    <string name="date_and_time">التاريخ &amp; الوقت</string>
+</resources>

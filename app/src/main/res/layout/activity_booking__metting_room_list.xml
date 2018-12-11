@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/lv_header"
+        layout="@layout/toolbar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#80000000"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_arrow_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/left_arrow" />
+
+                <HorizontalScrollView
+                    android:id="@+id/lh_scroll"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:fillViewport="true"
+                    android:scrollbars="none">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:id="@+id/img_arrow_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/right_arrow" />
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/tab_content"
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </TabHost>
+
+    <LinearLayout
+        android:id="@+id/ll_snackbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lv_footer"
+        android:layout_below="@android:id/tabhost"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lv_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal"
+            android:padding="7dp">
+
+            <sa.upscale.coworking.CustomFont.MytextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin10"
+                android:text="@string/select_city"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="2dp">
+
+                <Spinner
+                    android:id="@+id/ed_locationNAme"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/margin5" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_list_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ListView
+                android:id="@+id/lst_tab_bookingList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                android:divider="@color/light_gray"
+                android:dividerHeight="5dp"
+                android:elevation="10dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_map_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/map1"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lv_footer"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/margin20"
+        android:layout_marginRight="@dimen/margin10"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_map"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/ic_map_icon" />
+
+        <ImageView
+            android:id="@+id/img_filter"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_above="@+id/lv_footer"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/margin5"
+            android:src="@drawable/filter_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#80000000"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin5">
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv_meetingRoom_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#80FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="Date"
+            android:paddingLeft="@dimen/margin5" />
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv_meetingRoom_from"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_weight="1.1"
+            android:background="#80FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="From"
+            android:paddingLeft="@dimen/margin5" />
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv_meetingRoom_to"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_weight="1.1"
+            android:background="#80FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="To"
+            android:paddingLeft="@dimen/margin5" />
+
+        <sa.upscale.coworking.CustomFont.MytextView
+            android:id="@+id/tv_search1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin5"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

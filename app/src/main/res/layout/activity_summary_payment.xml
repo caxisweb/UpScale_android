@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:id="@+id/ll_snackbar"
+    tools:context="sa.upscale.coworking.MettingRoom.Summary_payment">
+
+
+    <!--<include layout="@layout/toolbar_layout" />-->
+    <RelativeLayout
+        android:layout_marginBottom="@dimen/margin10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin20"
+            android:layout_marginRight="@dimen/margin20"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/ll_summaryPayment_cashOndelivery"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_cornor"
+                android:gravity="center">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin10"
+                    android:paddingRight="@dimen/margin10"
+                    android:text="@string/cash_on_arrival" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_summaryPayment_Visa"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_cornor"
+                android:gravity="center">
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:textColor="@drawable/summary_payment_btn_textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin10"
+                    android:paddingRight="@dimen/margin10"
+                    android:text="@string/visa" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_summaryPayment_Visa_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/card_name"
+                            android:textSize="13dp" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_summaryPayment_cardName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_lite" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/card_num"
+                            android:textSize="13dp" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_summaryPayment_cardNumber"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_lite" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/card_date_n_mm_yy"
+                            android:textSize="13dp" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_summaryPayment_cardDmonth"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_lite" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_summaryPayment_cardDyear"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/margin10"
+                            android:background="@drawable/border_lite" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/verification_code"
+                            android:textSize="13dp" />
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/ed_summaryPayment_verificationCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_lite" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mohamed Eman" />
+
+                        <sa.upscale.coworking.CustomFont.MytextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="98777 4343 12131 993 34" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="2dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_toRightOf="@+id/name"
+                        android:background="@color/trance"></LinearLayout>
+
+                    <sa.upscale.coworking.CustomFont.MytextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="@dimen/margin5"
+                        android:layout_toRightOf="@+id/name"
+                        android:text="21 /10" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin20"
+            android:layout_marginTop="50dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/ll_summaryPayment_back"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/margin3"
+                android:layout_marginRight="@dimen/margin3"
+                android:background="@drawable/back_img"
+                android:gravity="center">
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:src="@drawable/left_arrow" />
+
+                <sa.upscale.coworking.CustomFont.MytextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:gravity="center"
+                    android:text="@string/back"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_summaryPayment_Pay"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/margin3"
+                android:layout_marginRight="@dimen/margin3"
+                android:background="@drawable/next_bg_img"
+                android:gravity="center">
+
+
+                <sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin3"
+                    android:layout_marginRight="@dimen/margin3"
+                    android:gravity="center"
+                    android:text="@string/confirm"
+                    android:textColor="@color/white"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+   </RelativeLayout>
+</LinearLayout>
