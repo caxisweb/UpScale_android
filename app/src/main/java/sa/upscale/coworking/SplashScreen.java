@@ -16,12 +16,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -258,7 +256,6 @@ public class SplashScreen extends AppCompatActivity {
 
                     //int flag = session.checskip();
 
-
                     lang = sessionManager.getlanguageCode();
                     str_language_Code = lang.get(SessionManager.user_languageCode);
 
@@ -279,6 +276,7 @@ public class SplashScreen extends AppCompatActivity {
                             Intent refresh = new Intent(SplashScreen.this, NavigationActivity.class);
                             startActivity(refresh);
                             finish();
+
                         } else if (str_language_Code.equals("1"))  //english
                         {
                             myLocale = new Locale("en");
@@ -381,10 +379,10 @@ public class SplashScreen extends AppCompatActivity {
 
         LayoutInflater li = LayoutInflater.from(SplashScreen.this);
         final View promptsView = li.inflate(R.layout.language_popup_layout, null);
-        final RadioGroup radioGroup = (RadioGroup) promptsView.findViewById(R.id.rg_language);
-        final RadioButton rb_english = (RadioButton) promptsView.findViewById(R.id.rb_english);
-        final RadioButton rb_arbi = (RadioButton) promptsView.findViewById(R.id.rb_persian);
-        Button btn_ok = (Button) promptsView.findViewById(R.id.btn_langOK);
+        final RadioGroup radioGroup = promptsView.findViewById(R.id.rg_language);
+        final RadioButton rb_english = promptsView.findViewById(R.id.rb_english);
+        final RadioButton rb_arbi = promptsView.findViewById(R.id.rb_persian);
+        Button btn_ok = promptsView.findViewById(R.id.btn_langOK);
 
 
         AlertDialog.Builder alert = new AlertDialog.Builder(SplashScreen.this);
@@ -400,7 +398,7 @@ public class SplashScreen extends AppCompatActivity {
                 if (radioGroup.getCheckedRadioButtonId() != -1) {
 
                     int selectlanguage = radioGroup.getCheckedRadioButtonId();
-                    RadioButton button = (RadioButton) promptsView.findViewById(selectlanguage);
+                    RadioButton button = promptsView.findViewById(selectlanguage);
                     String selectedlanguage = button.getText().toString();
                     // Toast.makeText(SplashScreen.this, "" + selectedlanguage, Toast.LENGTH_SHORT).show();
 

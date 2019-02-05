@@ -645,12 +645,12 @@
 
             <sa.upscale.coworking.CustomFont.Mybutton
                 android:id="@+id/btn_book_room"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="35dp"
                 android:background="@color/button_color"
                 android:text="300 SAR Pay Now"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
     </LinearLayout>

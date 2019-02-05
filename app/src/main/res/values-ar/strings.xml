@@ -256,7 +256,7 @@
     <string name="save_your_space_now">حفظ </string>
     <string name="use_the_form_below_to_send_us_your_comment">شارك معنا ملاحظاتك وتعليقاتك</string>
     <string name="bank">تحويل بنكي</string>
-    <string name="paynow">السداد الآن</string>
+    <string name="paynow">% ضريبة السداد الآن</string>
     <string name="select_space_type">اختر نوع المساحة</string>
     <string name="login_here">تسجيل الدخول</string>
     <string name="signup_here">التسجيل</string>

@@ -253,7 +253,7 @@
     <string name="select_city">Select City</string>
     <string name="update_profile">Update Profile</string>
     <string name="use_the_form_below_to_send_us_your_comment">Use the form below to send us your comment :</string>
-    <string name="paynow">Pay Now</string>
+    <string name="paynow">% Vat Included Pay Now</string>
     <string name="facility">Facility</string>
     <string name="invite_attendees">Invite Attendees</string>
 

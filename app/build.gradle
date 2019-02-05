@@ -30,8 +30,8 @@ android {
         applicationId "sa.upscale.coworking"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 55
-        versionName "5.0.6"
+        versionCode 56
+        versionName "5.0.7"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -43,6 +43,10 @@ android {
         }
         debug {
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
     configurations.all {
@@ -79,7 +83,7 @@ dependencies {
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile project(':linkedin-sdk')
     compile('com.twitter.sdk.android:twitter:2.3.2@aar') {
-        transitive = true;
+        transitive = true
     }
 
     compile project(':rangeseekbar')

@@ -6,11 +6,11 @@ package sa.upscale.coworking;
 public class Url_info {
 
 
-    //public static String main_url="http://hive.sa/admin/new_api/";
-    //public static String main_img="http://hive.sa/admin/upload/";
+    public static String main_url = "https://hive.sa/admin/new_api/";
+    public static String main_img = "https://hive.sa/admin/upload/";
 
-    public static String main_url="http://test.hive.sa/admin/API/";
-    public static String main_img="http://test.hive.sa/admin/upload/";
+    //public static String main_url="http://test.hive.sa/admin/API/";
+    //public static String main_img="http://test.hive.sa/admin/upload/";
 
 
     public static String esaal_main_url="https://esal-sa.com/api/";

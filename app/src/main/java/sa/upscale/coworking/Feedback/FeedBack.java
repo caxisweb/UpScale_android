@@ -60,9 +60,8 @@ public class FeedBack extends Fragment {
         NavigationActivity.backFlag = 1;
         sessionManager = new SessionManager(getActivity());
 
-
-        ed_feedBack = (EditText) view.findViewById(R.id.edt_feedBack_msg);
-        btn_submit = (Button) view.findViewById(R.id.btn_feedBack_Submit);
+        ed_feedBack = view.findViewById(R.id.edt_feedBack_msg);
+        btn_submit = view.findViewById(R.id.btn_feedBack_Submit);
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,8 +103,8 @@ public class FeedBack extends Fragment {
 
     private void navImageIcon() {
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.navIcon);
-        TextView tv_title = (TextView) view.findViewById(R.id.tv_nav_action_titile);
+        ImageView imageView = view.findViewById(R.id.navIcon);
+        TextView tv_title = view.findViewById(R.id.tv_nav_action_titile);
         tv_title.setText(getResources().getString(R.string.feedback));
         final NavigationActivity navigationActivity = (NavigationActivity) getActivity();
         imageView.setOnClickListener(new View.OnClickListener() {
