@@ -30,8 +30,8 @@ android {
         applicationId "sa.upscale.coworking"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 56
-        versionName "5.0.7"
+        versionCode 57
+        versionName "5.0.8"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -107,8 +107,6 @@ dependencies {
     compile 'us.belka:androidtoggleswitch:1.2.2'
     compile 'com.google.firebase:firebase-crash:10.2.0'
     compile 'net.cachapa.expandablelayout:expandablelayout:[2.9.2]'
-
-
 
     testCompile 'junit:junit:4.12'
 }

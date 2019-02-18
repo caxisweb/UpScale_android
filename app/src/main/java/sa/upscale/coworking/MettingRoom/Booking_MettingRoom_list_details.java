@@ -1012,14 +1012,14 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                                                             job_book.put("to_time", book_totime.get(p));
                                                             job_book.put("base_amount", str_price);
                                                             job_book.put("hours", book_hour.get(p));
-                                                            String dis_am = String.valueOf(((Integer.parseInt(book_price.get(p)) * Integer.parseInt(str_repet_no) * Float.parseFloat(code_amount)) / 100));
+                                                            String dis_am = String.valueOf(((Float.parseFloat(book_price.get(p)) * Float.parseFloat(str_repet_no) * Float.parseFloat(code_amount)) / 100));
 
                                                             float tax_amount_i = ((Float.parseFloat(book_price.get(p)) - Float.parseFloat(dis_am)) * vat_per) / 100;
                                                             job_book.put("tax_amount", String.valueOf(tax_amount_i));
 
-                                                            job_book.put("amount", String.valueOf(Double.parseDouble(book_price.get(p)) - Double.parseDouble(dis_am)));
+                                                            job_book.put("amount", String.valueOf(Double.parseDouble(book_price.get(p)) - Double.parseDouble(dis_am) + tax_amount_i));
                                                             job_book.put("discount_price", String.valueOf(Double.parseDouble(dis_am)));
-                                                            job_book.put("actual_amount", book_price.get(p));
+                                                            job_book.put("actual_amount", String.valueOf(book_price.get(p)));
 
                                                             booking.put(job_book);
                                                         }
@@ -1108,14 +1108,14 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                                                             job_book.put("to_time", book_totime.get(p));
                                                             job_book.put("base_amount", str_price);
                                                             job_book.put("hours", book_hour.get(p));
-                                                            String dis_am = String.valueOf(((Integer.parseInt(book_price.get(p)) * Integer.parseInt(str_repet_no) * Float.parseFloat(code_amount)) / 100));
+                                                            String dis_am = String.valueOf(((Float.parseFloat(book_price.get(p)) * Float.parseFloat(str_repet_no) * Float.parseFloat(code_amount)) / 100));
 
                                                             float tax_amount_i = ((Float.parseFloat(book_price.get(p)) - Float.parseFloat(dis_am)) * vat_per) / 100;
                                                             job_book.put("tax_amount", String.valueOf(tax_amount_i));
 
-                                                            job_book.put("amount", String.valueOf(Double.parseDouble(book_price.get(p)) - Double.parseDouble(dis_am)));
+                                                            job_book.put("amount", String.valueOf(Double.parseDouble(book_price.get(p)) - Double.parseDouble(dis_am) + tax_amount_i));
                                                             job_book.put("discount_price", String.valueOf(Double.parseDouble(dis_am)));
-                                                            job_book.put("actual_amount", book_price.get(p));
+                                                            job_book.put("actual_amount", String.valueOf(book_price.get(p)));
                                                             booking.put(job_book);
                                                         }
 
@@ -1681,15 +1681,15 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     book_fromtime.add(tv_from.getText().toString().trim());
                     book_totime.add(tv_to.getText().toString().trim());
                     book_hour.add(String.valueOf(hours));
-                    book_price.add(String.valueOf(Integer.parseInt(str_price) * hours));
+                    book_price.add(String.valueOf(Float.parseFloat(str_price) * hours));
                     ch_book_date.add(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim());
 
                     total_hour = total_hour + hours;
-                    tex_amount=((Integer.parseInt(str_price) * total_hour * Integer.parseInt(str_repet_no))*vat_per)/100;
+                    tex_amount = ((Float.parseFloat(str_price) * total_hour * Float.parseFloat(str_repet_no)) * vat_per) / 100;
 
                     Log.i("text_total",tex_amount+"");
 
-                    total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))+tex_amount;
+                    total_price = ((Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no)) + tex_amount;
 
                     if (str_is_subscriber.equals("0")) {
                         btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
@@ -1711,7 +1711,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         tv_dis_amount.setVisibility(View.GONE);
                         et_promo_code.setText("");
 
-                        total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no));
+                        total_price = ((Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no));
                         btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                         book_date_count = book_date_count - 1;
@@ -1724,8 +1724,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         book_price.remove(book_date_count);
                         ch_book_date.remove(book_date_count);
 
-                        tex_amount=((Integer.parseInt(str_price) * total_hour * Integer.parseInt(str_repet_no))*vat_per)/100;
-                        total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)+tex_amount;
+                        tex_amount = ((Float.parseFloat(str_price) * total_hour * Float.parseFloat(str_repet_no)) * vat_per) / 100;
+                        total_price = (Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no) + tex_amount;
 
                         if (str_is_subscriber.equals("0")) {
                             if (total_price == 0) {
