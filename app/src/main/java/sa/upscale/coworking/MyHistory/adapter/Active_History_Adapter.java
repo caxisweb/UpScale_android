@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -192,33 +191,6 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
         return arraylist.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView txt_title, txt_location, txt_datetime, txt_Amount,txt_capacity;
-        LinearLayout ll_main, ll_detail, btn_delete, btn_edit, btn_share;
-        Button btn_book;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            txt_title = (TextView) itemView.findViewById(R.id.tv_history_title);
-            txt_location = (TextView) itemView.findViewById(R.id.tv_history_location);
-            txt_datetime = (TextView) itemView.findViewById(R.id.tv_history_date_time);
-            txt_Amount = (TextView) itemView.findViewById(R.id.tv_history_summary_rprice);
-            txt_capacity = (TextView) itemView.findViewById(R.id.tv_bookingList_hotel_person_capacity);
-            //txt_BaseAmount = (TextView) itemView.findViewById(R.id.tv_history_summary_sprice);
-            //txt_hour = (TextView) itemView.findViewById(R.id.tv_history_summary_time);
-
-            btn_book=(Button)itemView.findViewById(R.id.btn_book);
-            ll_main = (LinearLayout) itemView.findViewById(R.id.ll_main);
-            ll_detail = (LinearLayout) itemView.findViewById(R.id.ll_detail);
-            btn_delete = (LinearLayout) itemView.findViewById(R.id.ll_history_delete);
-            btn_edit = (LinearLayout) itemView.findViewById(R.id.ll_history_edit);
-            btn_share = (LinearLayout) itemView.findViewById(R.id.ll_history_share);
-        }
-    }
-
-
     private void deleteHistory_dlg(final int position) {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(mContext);
@@ -236,8 +208,8 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
         dialog.setContentView(R.layout.cust_history_delete_item);
         dialog.setCancelable(false);
 
-        Button btn_cancle = (Button) dialog.findViewById(R.id.btn_hiostory_delete_cancle);
-        Button btn_delete = (Button) dialog.findViewById(R.id.btn_hiostory_delete_delete);
+        Button btn_cancle = dialog.findViewById(R.id.btn_hiostory_delete_cancle);
+        Button btn_delete = dialog.findViewById(R.id.btn_hiostory_delete_delete);
 
         dialog.show();
 
@@ -282,25 +254,25 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
         dialog.setCancelable(false);
 
 
-        RelativeLayout rl_date = (RelativeLayout) dialog.findViewById(R.id.rl_history_date);
-        RelativeLayout rl_from = (RelativeLayout) dialog.findViewById(R.id.rl_history_from);
-        RelativeLayout rl_to = (RelativeLayout) dialog.findViewById(R.id.rl_history_to);
-        RelativeLayout rl_endDate = (RelativeLayout) dialog.findViewById(R.id.rl_history_endDate);
+        RelativeLayout rl_date = dialog.findViewById(R.id.rl_history_date);
+        RelativeLayout rl_from = dialog.findViewById(R.id.rl_history_from);
+        RelativeLayout rl_to = dialog.findViewById(R.id.rl_history_to);
+        RelativeLayout rl_endDate = dialog.findViewById(R.id.rl_history_endDate);
 
-        final LinearLayout ll_repeatView = (LinearLayout) dialog.findViewById(R.id.rl_history_repeatView);
-        final CheckBox chk_repeat = (CheckBox) dialog.findViewById(R.id.chk_history_repeat);
+        final LinearLayout ll_repeatView = dialog.findViewById(R.id.rl_history_repeatView);
+        final CheckBox chk_repeat = dialog.findViewById(R.id.chk_history_repeat);
 
-        final Spinner sp_repeat = (Spinner) dialog.findViewById(R.id.tv_history_repeatBook);
+        final Spinner sp_repeat = dialog.findViewById(R.id.tv_history_repeatBook);
 
-        tv_date = (TextView) dialog.findViewById(R.id.tv_history_date);
-        tv_from = (TextView) dialog.findViewById(R.id.tv_history_from);
-        tv_to = (TextView) dialog.findViewById(R.id.tv_history_to);
-        tv_endDate = (TextView) dialog.findViewById(R.id.tv_history_endDate);
+        tv_date = dialog.findViewById(R.id.tv_history_date);
+        tv_from = dialog.findViewById(R.id.tv_history_from);
+        tv_to = dialog.findViewById(R.id.tv_history_to);
+        tv_endDate = dialog.findViewById(R.id.tv_history_endDate);
 
 
-        ImageView btn_close = (ImageView) dialog.findViewById(R.id.img_close);
-        Button btn_cancle = (Button) dialog.findViewById(R.id.btn_hiostory_edit_cancle);
-        Button btn_update = (Button) dialog.findViewById(R.id.btn_hiostory_edit_update);
+        ImageView btn_close = dialog.findViewById(R.id.img_close);
+        Button btn_cancle = dialog.findViewById(R.id.btn_hiostory_edit_cancle);
+        Button btn_update = dialog.findViewById(R.id.btn_hiostory_edit_update);
         dialog.show();
 
         tv_date.setText(arraylist.get(position).getDate());
@@ -416,6 +388,7 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
                         //Log.d("Data",data_updateHistory.toString());
                         Task_history_edit task_history_edit = new Task_history_edit();
                         task_history_edit.execute();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -461,6 +434,32 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
         });
 
 
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView txt_title, txt_location, txt_datetime, txt_Amount, txt_capacity;
+        LinearLayout ll_main, ll_detail, btn_delete, btn_edit, btn_share;
+        Button btn_book;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            txt_title = itemView.findViewById(R.id.tv_history_title);
+            txt_location = itemView.findViewById(R.id.tv_history_location);
+            txt_datetime = itemView.findViewById(R.id.tv_history_date_time);
+            txt_Amount = itemView.findViewById(R.id.tv_history_summary_rprice);
+            txt_capacity = itemView.findViewById(R.id.tv_bookingList_hotel_person_capacity);
+            //txt_BaseAmount = (TextView) itemView.findViewById(R.id.tv_history_summary_sprice);
+            //txt_hour = (TextView) itemView.findViewById(R.id.tv_history_summary_time);
+
+            btn_book = itemView.findViewById(R.id.btn_book);
+            ll_main = itemView.findViewById(R.id.ll_main);
+            ll_detail = itemView.findViewById(R.id.ll_detail);
+            btn_delete = itemView.findViewById(R.id.ll_history_delete);
+            btn_edit = itemView.findViewById(R.id.ll_history_edit);
+            btn_share = itemView.findViewById(R.id.ll_history_share);
+        }
     }
 
 
@@ -791,7 +790,6 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
 
     }
 
-
     public class Task_history_delete extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
 
@@ -812,7 +810,7 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
 
                 status1 = job_delete.getString(status);
                 if (status1.equals("1")) {
-                    Log.d("remove", "deleted");
+                    Log.d("remove", job_delete.toString());
                     dialog.dismiss();
 
                     //  ((Activity)mContext).recreate();

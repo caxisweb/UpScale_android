@@ -126,7 +126,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     long total_hour = 0;
     float total_price = 0;
     int privious_hour=0;
-    int vat_per=10;
+    int vat_per = 0;
     float tex_amount=0;
 
     static String str_location, str_logo, str_description, str_esaal_product_id, str_spacId, str_spaceuserId, strName, str_capacity, str_price, mstr_book_time_diff, mstr_book_price, str_space_img, str_repet_no = "1";
@@ -1406,6 +1406,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     str_pack_id = job_details.getString("package_id");
                     str_pack_name = job_details.getString("package_name");
                     vat_per = Integer.parseInt(job_details.getString("vat_per"));
+
+                    Log.i("vat_per", vat_per + "");
 
                     if (job_details.getString("images").equals("null")) {
 
