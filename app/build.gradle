@@ -30,8 +30,8 @@ android {
         applicationId "sa.upscale.coworking"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 57
-        versionName "5.0.8"
+        versionCode 58
+        versionName "5.0.9"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -96,7 +96,7 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.android.support:support-v4:25.3.0'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
-    compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.maps.android:android-maps-utils:0.4.+'
     compile 'com.android.support:multidex:1.0.1'
     compile 'io.apptik.widget:multislider:1.3'

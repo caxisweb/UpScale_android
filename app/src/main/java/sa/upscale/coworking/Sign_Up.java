@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,7 +23,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +68,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
@@ -245,7 +240,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
                         // Changing action button text color
                         View sbView = snackbar.getView();
-                        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                         textView.setTextColor(Color.YELLOW);
 
                         snackbar.show();
@@ -261,54 +256,99 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                System.out.println("Facebook Login Successful!");
+                /*System.out.println("Facebook Login Successful!");
                 System.out.println("Logged in user Details : ");
                 System.out.println("--------------------------");
                 System.out.println("User ID  : " + loginResult.getAccessToken().getUserId());
 
-                System.out.println("Authentication Token : " + loginResult.getAccessToken().getToken());
+                System.out.println("Authentication Token : " + loginResult.getAccessToken().getToken());*/
                 //Toast.makeText(Login.this, "Login Successful!", Toast.LENGTH_LONG).show();
 
-                fb_id = loginResult.getAccessToken().getUserId();
+                //fb_id = loginResult.getAccessToken().getUserId();
 
-                GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
+                if (accessToken == null) {
 
-                                Log.i("LoginActivity", graphResponse.toString());
-                                // Get facebook data from login
-                                Bundle bFacebookData = getFacebookData(jsonObject);
+                    GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
 
-                                fb_name = bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name");
-                                fb_email = bFacebookData.getString("email");
-                                String fb_id = bFacebookData.getString("idFacebook");
-                                fb_img = bFacebookData.getString("profile_pic");
+                                    Log.i("LoginActivity", graphResponse.toString());
+                                    // Get facebook data from login
+                                    Bundle bFacebookData = getFacebookData(jsonObject);
 
-                                Log.d("FaceBook", fb_name + "\n" + fb_email + "\n" + fb_id + "\n" + fb_img);
+                                    fb_name = bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name");
+                                    fb_email = bFacebookData.getString("email");
+                                    String fb_id = bFacebookData.getString("idFacebook");
+                                    fb_img = bFacebookData.getString("profile_pic");
 
-                                try {
-                                    social_user_data.put("name", fb_name);
-                                    social_user_data.put("email", fb_email);
-                                    social_user_data.put("type", "facebook");
-                                    social_user_data.put("type_id", fb_id);
-                                    social_user_data.put("image", fb_img);
-                                    social_user_data.put("gcm_id", 1);
+                                    Log.d("FaceBook", fb_name + "\n" + fb_email + "\n" + fb_id + "\n" + fb_img);
 
+                                    try {
 
-                                    FB_Login fbLogin = new FB_Login();
-                                    fbLogin.execute();
+                                        social_user_data.put("name", fb_name);
+                                        social_user_data.put("email", fb_email);
+                                        social_user_data.put("type", "facebook");
+                                        social_user_data.put("type_id", fb_id);
+                                        social_user_data.put("image", fb_img);
+                                        social_user_data.put("gcm_id", 1);
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                        FB_Login fbLogin = new FB_Login();
+                                        fbLogin.execute();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender, birthday,picture");
-                request.setParameters(parameters);
-                request.executeAsync();
+                            });
+
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id, first_name, last_name, email");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                } else {
+
+                    GraphRequest request = GraphRequest.newMeRequest(accessToken,
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+
+                                    Log.i("LoginActivity", graphResponse.toString());
+                                    // Get facebook data from login
+                                    Bundle bFacebookData = getFacebookData(jsonObject);
+
+                                    fb_name = bFacebookData.getString("first_name") + " " + bFacebookData.getString("last_name");
+                                    fb_email = bFacebookData.getString("email");
+                                    String fb_id = bFacebookData.getString("idFacebook");
+                                    fb_img = bFacebookData.getString("profile_pic");
+
+                                    Log.d("FaceBook", fb_name + "\n" + fb_email + "\n" + fb_id + "\n" + fb_img);
+
+                                    try {
+
+                                        social_user_data.put("name", fb_name);
+                                        social_user_data.put("email", fb_email);
+                                        social_user_data.put("type", "facebook");
+                                        social_user_data.put("type_id", fb_id);
+                                        social_user_data.put("image", fb_img);
+                                        social_user_data.put("gcm_id", 1);
+
+                                        FB_Login fbLogin = new FB_Login();
+                                        fbLogin.execute();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id, first_name, last_name, email");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                }
             }
 
             @Override
@@ -322,6 +362,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             public void onError(FacebookException e) {
                 Toast.makeText(Sign_Up.this, "Login unsuccessful!", Toast.LENGTH_LONG).show();
                 System.out.println("Facebook Login failed!!");
+                Log.i("fb login error", e.getMessage());
             }
         });
 
@@ -336,7 +377,11 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         fbLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(Sign_Up.this, Arrays.asList("public_profile", "user_friends"));
+                //LoginManager.getInstance().setLoginBehavior("SUPPRESS_SSO");
+                LoginManager.getInstance().logInWithReadPermissions(Sign_Up.this, Arrays.asList("public_profile", "email"));
+                //setLoginBehavior(SessionLoginBehavior.SUPPRESS_SSO);
+
+
             }
         });
 
@@ -380,7 +425,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                             }
 
                         });
-                        ;
 
 
                     }
@@ -572,7 +616,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
                                             // Changing action button text color
                                             View sbView = snackbar.getView();
-                                            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                                             textView.setTextColor(Color.YELLOW);
 
                                             snackbar.show();
@@ -597,6 +641,8 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                         }, true);
             }
         });
+
+
     }
 
 
@@ -677,13 +723,9 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 bundle.putString("last_name", object.getString("last_name"));
             if (object.has("email"))
                 bundle.putString("email", object.getString("email"));
-            if (object.has("gender"))
-                bundle.putString("gender", object.getString("gender"));
-            if (object.has("birthday"))
-                bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("location"))
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
 
+            if (object.has("picture"))
+                bundle.putString("picture", object.getString("picture"));
             return bundle;
         } catch (JSONException e) {
             Log.d("Facebook", "Error parsing JSON");
@@ -730,6 +772,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent i) {
+
         callbackManager.onActivityResult(reqCode, resCode, i);
 
         LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, reqCode, resCode, i);
@@ -796,7 +839,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
                 // Changing action button text color
                 View sbView = snackbar.getView();
-                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setTextColor(Color.YELLOW);
 
                 snackbar.show();

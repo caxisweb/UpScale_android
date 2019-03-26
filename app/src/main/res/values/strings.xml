@@ -13,8 +13,6 @@
     <string name="view_more"><u>More</u></string>
 
 
-    <string name="facebook_app_id">1898403290373788</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="list">List</string>
     <string name="map">Map</string>
@@ -264,7 +262,12 @@
     <string name="for_booking_through_hive_application">For Booking through HIVE application</string>
     <string name="press_button_to_add_booking_date">Press + Button to add Booking date</string>
     <string name="date_and_time">Date and Time</string>
-    <string name="subscribed_msg">You Are Subscriber of Package :</string>
-    <string name="google_banner_add">ca-app-pub-1573732121110201/8028684980</string>
-    <string name="google_admobo_app_id">ca-app-pub-1573732121110201~7962641347</string>
+
+    <string name="subscribed_msg" translatable="false">You Are Subscriber of Package :</string>
+    <string name="google_banner_add" translatable="false">ca-app-pub-1573732121110201/8028684980</string>
+    <string name="google_admobo_app_id" translatable="false">ca-app-pub-1573732121110201~7962641347</string>
+
+    <string name="facebook_app_id">570960453396064</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb570960453396064</string>
+
 </resources>

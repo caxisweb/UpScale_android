@@ -197,6 +197,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+        //Log.d("AppLog", "key:" + FacebookSdk.getApplicationSignature(this));
+        generateHashkey("sa.upscale.coworking");
+
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
 
@@ -270,7 +273,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                         // Changing action button text color
                         View sbView = snackbar.getView();
-                        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                         textView.setTextColor(Color.YELLOW);
 
                         snackbar.show();
@@ -365,7 +368,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                 });
                         Bundle parameters = new Bundle();
                         //parameters.putString("fields", "id,name,email,gender, birthday,picture");
-                        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                        //parameters.putString("public_profile", "id,name,email");
+                        parameters.putString("fields", "id, first_name, last_name, email");
                         request.setParameters(parameters);
                         request.executeAsync();
                     }
@@ -394,9 +398,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 final View dialogView = inflater.inflate(R.layout.forgot_pwd, null);
                 dialogBuilder.setView(dialogView);
 
-                final EditText edt_email = (EditText) dialogView.findViewById(R.id.edt_fprgotPwd_email);
-                ImageView btn_close = (ImageView) dialogView.findViewById(R.id.btn_fprgotPwd_close);
-                Button btn_send = (Button) dialogView.findViewById(R.id.btn_fprgotPwd_send);
+                final EditText edt_email = dialogView.findViewById(R.id.edt_fprgotPwd_email);
+                ImageView btn_close = dialogView.findViewById(R.id.btn_fprgotPwd_close);
+                Button btn_send = dialogView.findViewById(R.id.btn_fprgotPwd_send);
 
 
                 dialogBuilder.setCancelable(false);
@@ -440,7 +444,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                                 // Changing action button text color
                                 View sbView = snackbar.getView();
-                                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                                TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                                 textView.setTextColor(Color.YELLOW);
 
                                 snackbar.show();
@@ -483,7 +487,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         fbLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("public_profile", "user_friends"));
+                LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("public_profile", "email"));
             }
         });
 
@@ -607,7 +611,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         twitter_email = result.data;
                         /*Log.i(TAG,"RESULT:" + result.data);
                          */
-                        Log.i("Twitter Email :", result.data.toString());
+                        Log.i("Twitter Email :", result.data);
                         //seesf;
 
                         if (twitter_email.length() != 0) {
@@ -717,7 +721,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                                             // Changing action button text color
                                             View sbView = snackbar.getView();
-                                            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                                             textView.setTextColor(Color.YELLOW);
 
                                             snackbar.show();
@@ -769,7 +773,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         Login.this).inflate(
                         R.layout.custome_addview, null);
 
-                ImageView img_adv= (ImageView) add_view.findViewById(R.id.img_adv);
+                ImageView img_adv = add_view.findViewById(R.id.img_adv);
 
                 Picasso.with(Login.this)
                         .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))
@@ -925,12 +929,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 bundle.putString("last_name", object.getString("last_name"));
             if (object.has("email"))
                 bundle.putString("email", object.getString("email"));
-            if (object.has("gender"))
-                bundle.putString("gender", object.getString("gender"));
-            if (object.has("birthday"))
-                bundle.putString("birthday", object.getString("birthday"));
-            if (object.has("location"))
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
 
             return bundle;
         } catch (JSONException e) {
@@ -963,6 +962,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         google_AdView = (AdView) findViewById(R.id.adView);
 
         //generateHashkey("sa.upscale.coworking");
+
     }
 
     public void generateHashkey(String PACKAGE) {
@@ -1072,7 +1072,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                 // Changing action button text color
                 View sbView = snackbar.getView();
-                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setTextColor(Color.YELLOW);
 
                 snackbar.show();
@@ -1201,11 +1201,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 final View dialogView = inflater.inflate(R.layout.change_pasword, null);
                 dialogBuilder.setView(dialogView);
 
-                final EditText ed_ch_otp = (EditText) dialogView.findViewById(R.id.edt_changePwd_otp);
-                final EditText ed_ch_newPwd = (EditText) dialogView.findViewById(R.id.edt_changePwd_newPwd);
-                final EditText ed_ch_re_newPwd = (EditText) dialogView.findViewById(R.id.edt_changePwd_re_typenewPwd);
-                ImageView btn_close = (ImageView) dialogView.findViewById(R.id.btn_fprgotPwd_close);
-                Button btn_reset = (Button) dialogView.findViewById(R.id.btn_chngPwd_resetpwd);
+                final EditText ed_ch_otp = dialogView.findViewById(R.id.edt_changePwd_otp);
+                final EditText ed_ch_newPwd = dialogView.findViewById(R.id.edt_changePwd_newPwd);
+                final EditText ed_ch_re_newPwd = dialogView.findViewById(R.id.edt_changePwd_re_typenewPwd);
+                ImageView btn_close = dialogView.findViewById(R.id.btn_fprgotPwd_close);
+                Button btn_reset = dialogView.findViewById(R.id.btn_chngPwd_resetpwd);
 
 
                 dialogBuilder.setCancelable(false);
@@ -1256,7 +1256,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                                 // Changing action button text color
                                 View sbView = snackbar.getView();
-                                TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                                TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                                 textView.setTextColor(Color.YELLOW);
 
                                 snackbar.show();
