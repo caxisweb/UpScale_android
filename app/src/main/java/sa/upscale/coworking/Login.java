@@ -199,8 +199,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Log.d("AppLog", "key:" + FacebookSdk.getApplicationSignature(this));
         generateHashkey("sa.upscale.coworking");
-
         callbackManager = CallbackManager.Factory.create();
+
+
         setContentView(R.layout.activity_login);
 
         try {
@@ -660,16 +661,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         btn_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LISessionManager.getInstance(getApplicationContext())
-                        .init(Login.this, buildScope(), new AuthListener() {
+
+
+                LISessionManager.getInstance(getApplicationContext()).init(Login.this, buildScope()//pass the build scope here
+                        , new AuthListener() {
                             @Override
                             public void onAuthSuccess() {
-
-/*                                Toast.makeText(getApplicationContext(), "success" +
-                                                LISessionManager.getInstance(getApplicationContext())
-                                                        .getSession().getAccessToken().toString(),
-                                        Toast.LENGTH_LONG).show();*/
-
+                                // Authentication was successful. You can now do
+                                // other calls with the SDK.
                                 APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
                                 apiHelper.getRequest(Login.this, url, new ApiListener() {
                                     @Override
@@ -678,6 +677,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                         if (isNetworkAvailable()) {
 
                                             try {
+
                                                 String Name = result.getResponseDataAsJson().get("formattedName").toString();
                                                 String Email = result.getResponseDataAsJson().get("emailAddress").toString();
                                                 String ID = result.getResponseDataAsJson().get("id").toString();
@@ -732,6 +732,97 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                     @Override
                                     public void onApiError(LIApiError error) {
 
+                                        Log.i("error", error.toString());
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onAuthError(LIAuthError error) {
+                                // Handle authentication errors
+                                Log.e(TAG, "Auth Error :" + error.toString());
+
+                            }
+                        }, true);//if TRUE then it will show dialog if
+                // any device has no LinkedIn app installed to download app else won't show anything
+
+                /*LISessionManager.getInstance(getApplicationContext())
+                        .init(Login.this, buildScope(), new AuthListener() {
+                            @Override
+                            public void onAuthSuccess() {
+
+                               *//* Toast.makeText(getApplicationContext(), "success" +
+                                                LISessionManager.getInstance(getApplicationContext())
+                                                        .getSession().getAccessToken().toString(),
+                                        Toast.LENGTH_LONG).show();*//*
+
+                                //LISessionManager.init(this,"r_basicprofile", onAuthSuccess(),);
+                                LISessionManager.getInstance(getApplicationContext()).getSession().getAccessToken();
+
+                                APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
+                                apiHelper.getRequest(Login.this, url, new ApiListener() {
+                                    @Override
+                                    public void onApiSuccess(ApiResponse result) {
+
+                                        if (isNetworkAvailable()) {
+
+                                            try {
+
+                                                String Name = result.getResponseDataAsJson().get("formattedName").toString();
+                                                String Email = result.getResponseDataAsJson().get("emailAddress").toString();
+                                                String ID = result.getResponseDataAsJson().get("id").toString();
+
+                                                URI uri = new URI("http://api.linkedin.com/v1/people/" + ID + "/picture-url");
+                                                String userpic = uri.toString();
+                                                Log.d("UrlPic", userpic);
+
+                                            *//*JSONObject object = new JSONObject("pictureUrl");
+
+                                            String ProfileImage = object.getString("values");*//*
+
+                                                social_user_data.put("name", Name);
+                                                social_user_data.put("email", Email);
+                                                social_user_data.put("type", "linkedin");
+                                                social_user_data.put("type_id", ID);
+                                                social_user_data.put("image", userpic);
+                                                social_user_data.put("gcm_id", 1);
+
+                                                FB_Login fbLogin = new FB_Login();
+                                                fbLogin.execute();
+
+                                                //showResult(result.getResponseDataAsJson());
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else {
+                                            Snackbar snackbar = Snackbar
+                                                    .make(linearLayout, "No internet connection!", Snackbar.LENGTH_LONG)
+                                                    .setAction("RETRY", new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            //setMobileDataEnabled(Login.this);
+
+                                                        }
+                                                    });
+
+                                            // Changing message text color
+                                            snackbar.setActionTextColor(Color.RED);
+
+                                            // Changing action button text color
+                                            View sbView = snackbar.getView();
+                                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+                                            textView.setTextColor(Color.YELLOW);
+
+                                            snackbar.show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onApiError(LIApiError error) {
+
+                                        Log.i("error",error.toString());
                                     }
                                 });
                             }
@@ -739,11 +830,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             @Override
                             public void onAuthError(LIAuthError error) {
 
+                                Log.i("linkedin_error",error.toString());
+
                                 Toast.makeText(getApplicationContext(), "failed "
                                                 + error.toString(),
                                         Toast.LENGTH_LONG).show();
                             }
-                        }, true);
+                        }, true);*/
             }
         });
 
@@ -1004,7 +1097,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
-   /* @Override
+    /*@Override
     protected void onActivityResult(int reqCode, int resCode, Intent i) {
         callbackManager.onActivityResult(reqCode, resCode, i);
 
@@ -1015,8 +1108,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             handleSignInResult(result);
         }
         btn_twitter.onActivityResult(reqCode, resCode, i);
-    }*/
-
+    }
+*/
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.

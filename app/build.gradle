@@ -30,8 +30,8 @@ android {
         applicationId "sa.upscale.coworking"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 58
-        versionName "5.0.9"
+        versionCode 59
+        versionName "6.0.1"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

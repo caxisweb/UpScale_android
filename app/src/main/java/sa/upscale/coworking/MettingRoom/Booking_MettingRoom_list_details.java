@@ -982,7 +982,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                                         public void onClick(DialogInterface dialog, int id) {
                                             // FIRE ZE MISSILES!
 
-
                                             int sel_method = rg_paymenthod.getCheckedRadioButtonId();
 
                                             if (R.id.rd_cod == sel_method) {

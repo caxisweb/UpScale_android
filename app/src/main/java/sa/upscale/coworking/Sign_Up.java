@@ -53,7 +53,6 @@ import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
@@ -81,7 +80,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     private static final String s_password = "password";
     private static final String s_name = "name";
     private static final String s_mobile = "mobile";
-    private static final String TAG = "Twitter";
+    private static final String TAG = "Twitter_error";
 
     String status1 = "0", message1 = "try Again";
 
@@ -149,6 +148,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.activity_sign__up);
 
 
@@ -255,16 +255,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             @SuppressLint("LongLogTag")
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-                /*System.out.println("Facebook Login Successful!");
-                System.out.println("Logged in user Details : ");
-                System.out.println("--------------------------");
-                System.out.println("User ID  : " + loginResult.getAccessToken().getUserId());
-
-                System.out.println("Authentication Token : " + loginResult.getAccessToken().getToken());*/
-                //Toast.makeText(Login.this, "Login Successful!", Toast.LENGTH_LONG).show();
-
-                //fb_id = loginResult.getAccessToken().getUserId();
 
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
@@ -395,8 +385,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     @Override
                     public void success(Result<TwitterSession> result) {
                         // Success
-                        session1 =
-                                Twitter.getSessionManager().getActiveSession();
+                        session1 = Twitter.getSessionManager().getActiveSession();
 
                         Call<User> userResult = Twitter.getApiClient(session1).getAccountService().verifyCredentials(true, false);
                         userResult.enqueue(new Callback<User>() {
@@ -412,6 +401,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                                 User user = userResult.data;
 
                                 try {
+
                                     twitter_profilePic = user.profileImageUrl;
                                     twitter_name = user.name;
                                     twitter_Id = String.valueOf(user.id);
@@ -443,20 +433,8 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         btn_twitter.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
-               /* TwitterSession session1 = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                // with your app's user model
-                Log.d("Twitterdata", result.data.toString());
-                String msg = "@" + session1.getUserName() + " logged in! (#" + session1.getUserId() + ")";
-                Log.d("TwitterData", session1.getUserName() + "\nuserId :->" + session1.getUserId());
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();*/
 
-                //Twitter.getApiClient(session).getAccountService().verifyCredentials()
-
-
-                TwitterSession session1 =
+                /*TwitterSession session1 =
                         Twitter.getSessionManager().getActiveSession();
                 Call<User> userResult = Twitter.getApiClient(session1).getAccountService().verifyCredentials(true, false);
                 userResult.enqueue(new Callback<User>() {
@@ -485,18 +463,14 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     }
 
                 });
-
+*/
 
                 TwitterSession session = Twitter.getSessionManager().getActiveSession();
-                TwitterAuthToken authToken = session.getAuthToken();
-                String token = authToken.token;
-                String secret = authToken.secret;
-
-               /* Log.i(TAG,"TOKEN TWITTER:" + token);
-                Log.i(TAG,"SECRET TWITTER:" + secret);*/
+                //TwitterAuthToken authToken = session.getAuthToken();
+                //String token = authToken.token;
+                //String secret = authToken.secret;
 
                 TwitterAuthClient authClient = new TwitterAuthClient();
-
 
                 authClient.requestEmail(session, new Callback<String>() {
                     @Override
@@ -504,15 +478,12 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                         // Do something with the result, which provides the email address
                         Log.i(TAG, " EMAIL EXITO!");
                         twitter_email = result.data;
-                        /*Log.i(TAG,"RESULT:" + result.data);
-                       */
-
-                        //seesf;
 
                         if (twitter_email.length() != 0) {
 
 
                             try {
+
                                 Log.d(TAG, twitter_name + "\n" + twitter_email + "\n" + twitter_Id + "\n" + twitter_profilePic);
 
                                 social_user_data.put("name", twitter_name);
@@ -537,7 +508,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     @Override
                     public void failure(TwitterException exception) {
                         // Do something on failure
-                        Log.i(TAG, "EMAIL FAILURE");
+                        Log.i(TAG, exception.getMessage());
                         Toast.makeText(Sign_Up.this, "Please Click on Allow For Email Access", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -555,15 +526,12 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         btn_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 LISessionManager.getInstance(getApplicationContext())
                         .init(Sign_Up.this, buildScope(), new AuthListener() {
                             @Override
                             public void onAuthSuccess() {
-
-/*                                Toast.makeText(getApplicationContext(), "success" +
-                                                LISessionManager.getInstance(getApplicationContext())
-                                                        .getSession().getAccessToken().toString(),
-                                        Toast.LENGTH_LONG).show();*/
 
                                 APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
                                 apiHelper.getRequest(Sign_Up.this, url, new ApiListener() {
@@ -573,6 +541,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                                         if (isNetworkAvailable()) {
 
                                             try {
+
                                                 String Name = result.getResponseDataAsJson().get("formattedName").toString();
                                                 String Email = result.getResponseDataAsJson().get("emailAddress").toString();
                                                 String ID = result.getResponseDataAsJson().get("id").toString();
@@ -601,6 +570,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                                                 e.printStackTrace();
                                             }
                                         } else {
+
                                             Snackbar snackbar = Snackbar
                                                     .make(linearLayout, "No internet connection!", Snackbar.LENGTH_LONG)
                                                     .setAction("RETRY", new View.OnClickListener() {
@@ -626,7 +596,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
                                     @Override
                                     public void onApiError(LIApiError error) {
-
+                                        Log.i("linkedin_error", error.toString());
                                     }
                                 });
                             }
@@ -656,9 +626,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 twitter_email = result.data;
                 Log.i(TAG, "RESULT:" + result.data);
 
-
-                //seesf;
-
                 if (twitter_email.length() != 0) {
 
 
@@ -668,7 +635,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                         social_user_data.put("name", twitter_name);
                         social_user_data.put("email", twitter_email);
                         social_user_data.put("type", "twitter");
-                        //social_user_data.put("type", "linkedin");
                         social_user_data.put("type_id", twitter_Id);
                         social_user_data.put("image", twitter_profilePic);
                         social_user_data.put("gcm_id", 1);
@@ -773,14 +739,15 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent i) {
 
-        callbackManager.onActivityResult(reqCode, resCode, i);
-
         LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, reqCode, resCode, i);
+
+        callbackManager.onActivityResult(reqCode, resCode, i);
 
         if (reqCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(i);
             handleSignInResult(result);
         }
+
         btn_twitter.onActivityResult(reqCode, resCode, i);
     }
 
