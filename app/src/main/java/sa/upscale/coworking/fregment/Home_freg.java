@@ -86,26 +86,44 @@ import sa.upscale.coworking.SessionManager;
 import sa.upscale.coworking.Url_info;
 import sa.upscale.coworking.model.Fav_status;
 
+import static sa.upscale.coworking.SplashScreen.location;
+
 public class Home_freg extends Fragment implements View.OnClickListener, OnMapReadyCallback, CompoundButton.OnCheckedChangeListener {
 
     private static final String status = "status";
     private static final String message = "message";
+    public static ArrayList<String> add_img = new ArrayList<>();
+    public static ArrayList<String> add_url = new ArrayList<>();
+    public static String str_userId, str_date, str_fromtime, str_totime, str_location, str_spacetype, str_lat, str_longi;
     String status1 = "0", message1 = "try Again";
-
     JSONObject data_meetingroom = new JSONObject();
     JSONObject data_Filter = new JSONObject();
-
     SessionManager sessionManager;
     HashMap<String, String> user_Details = new HashMap<>();
-
-    public static ArrayList<String> add_img=new ArrayList<>();
-    public static ArrayList<String> add_url=new ArrayList<>();
-
     LinearLayout ll_list_details, ll_mapdetails;
     ListView lst_hotelList;
-
     int i = 0;
-
+    android.support.v4.app.FragmentTransaction ft;
+    GoogleMap mMap;
+    Dialog dialog;
+    LinearLayout linearLayout;
+    RangeSeekBar rangeSeekbar;
+    TextView tv_date1, tv_from1, tv_to1, tv_search1;
+    TextView tv_date, tv_from, tv_To;
+    CheckBox chk_projector, chk_aircondi, chk_mailservice, chk_scanner, chk_locker, chk_internet,
+            chk_parking, chk_phone, chk_work, chk_male, chk_female, chk_coffee;
+    String mstr_projector, mstr_aircondi, mstr_mailservice, mstr_scanner, mstr_locker, mstr_internet,
+            mstr_parking, mstr_phone, mstr_work, mstr_male, mstr_female, mstr_coffee;
+    String str_minPrice = "0", str_maxPrice = "0", str_typeName;
+    Activity mContext;
+    HorizontalScrollView lh_scroll;
+    LinearLayout lv_city;
+    TabHost tabHost;
+    ImageView img_map, img_filter;
+    ImageView img_arrow_left, img_arrow_right;
+    Spinner ed_loation, ed_loation1;
+    SimpleDateFormat simpleDateFormat;
+    View view;
     private ArrayList<String> ar_space_id = new ArrayList<>();
     private ArrayList<String> ar_name = new ArrayList<>();
     private ArrayList<String> ar_projector = new ArrayList<>();
@@ -131,53 +149,139 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
     private ArrayList<String> ar_distance = new ArrayList<>();
     private ArrayList<String> ar_wish_status = new ArrayList<>();
     private ArrayList<Fav_status> wish_status = new ArrayList<>();
-
     private Hashtable<String, String> markers = new Hashtable<>();
     private Marker marker;
-
     private ArrayList<String> ar_location_filter = new ArrayList<>();
     private ArrayList<String> ar_locationId_filter = new ArrayList<>();
-
-    android.support.v4.app.FragmentTransaction ft;
-    GoogleMap mMap;
-
-    Dialog dialog;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
-    LinearLayout linearLayout;
-
-    public static String str_userId, str_date, str_fromtime, str_totime, str_location, str_spacetype, str_lat, str_longi;
-
-    RangeSeekBar rangeSeekbar;
-
-    TextView tv_date1, tv_from1, tv_to1, tv_search1;
-
     private int mYear, mMonth, mDay;
-    private String mstr_date, format;
+    private String format;
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-    TextView tv_date, tv_from, tv_To;
-    CheckBox chk_projector, chk_aircondi, chk_mailservice, chk_scanner, chk_locker, chk_internet,
-            chk_parking, chk_phone, chk_work, chk_male, chk_female, chk_coffee;
+            String str_minute;
 
-    String mstr_projector, mstr_aircondi, mstr_mailservice, mstr_scanner, mstr_locker, mstr_internet,
-            mstr_parking, mstr_phone, mstr_work, mstr_male, mstr_female, mstr_coffee;
-    String str_minPrice = "0", str_maxPrice = "0", str_typeName;
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
 
-    Activity mContext;
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
 
-    HorizontalScrollView lh_scroll;
-    LinearLayout lv_city;
+            tv_To.setText(hourOfDay + ":" + str_minute + " " + format);
+        }
+    };
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener1 = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-    TabHost tabHost;
-    ImageView img_map, img_filter;
-    ImageView img_arrow_left, img_arrow_right;
-    Spinner ed_loation, ed_loation1;
+            String str_minute;
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
 
-    SimpleDateFormat simpleDateFormat;
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
 
-    View view;
+            //mstr_fromTime = hourOfDay + ":" + str_minute + " " + format;
+
+            tv_from.setText(hourOfDay + ":" + str_minute + " " + format);
+        }
+    };
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener_to1 = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            String str_minute;
+
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
+
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
+
+            // mstr_toTime = hourOfDay + ":" + str_minute + " " + format;
+
+            tv_to1.setText(hourOfDay + ":" + str_minute + " " + format);
+        }
+    };
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener_from1 = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            String str_minute;
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
+
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
+
+            tv_from1.setText(hourOfDay + ":" + str_minute + " " + format);
+        }
+    };
+
 
     public Home_freg() {
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        try {
+            InputMethodManager inputMethodManager =
+                    (InputMethodManager) activity.getSystemService(
+                            Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("NewApi")
@@ -204,25 +308,25 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 .cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
 
 
-        linearLayout = (LinearLayout) view.findViewById(R.id.ll_snackbar);
+        linearLayout = view.findViewById(R.id.ll_snackbar);
 
-        ll_list_details = (LinearLayout) view.findViewById(R.id.ll_list_details);
-        ll_mapdetails = (LinearLayout) view.findViewById(R.id.ll_map_details);
-        lst_hotelList = (ListView) view.findViewById(R.id.lst_tab_bookingList);
+        ll_list_details = view.findViewById(R.id.ll_list_details);
+        ll_mapdetails = view.findViewById(R.id.ll_map_details);
+        lst_hotelList = view.findViewById(R.id.lst_tab_bookingList);
 
-        tv_date1 = (TextView) view.findViewById(R.id.tv_meetingRoom_date);
-        tv_from1 = (TextView) view.findViewById(R.id.tv_meetingRoom_from);
-        tv_to1 = (TextView) view.findViewById(R.id.tv_meetingRoom_to);
-        tv_search1 = (TextView) view.findViewById(R.id.tv_search1);
+        tv_date1 = view.findViewById(R.id.tv_meetingRoom_date);
+        tv_from1 = view.findViewById(R.id.tv_meetingRoom_from);
+        tv_to1 = view.findViewById(R.id.tv_meetingRoom_to);
+        tv_search1 = view.findViewById(R.id.tv_search1);
 
-        img_map = (ImageView) view.findViewById(R.id.img_map);
-        img_filter = (ImageView) view.findViewById(R.id.img_filter);
+        img_map = view.findViewById(R.id.img_map);
+        img_filter = view.findViewById(R.id.img_filter);
 
-        img_arrow_left = (ImageView) view.findViewById(R.id.img_arrow_left);
-        img_arrow_right = (ImageView) view.findViewById(R.id.img_arrow_right);
+        img_arrow_left = view.findViewById(R.id.img_arrow_left);
+        img_arrow_right = view.findViewById(R.id.img_arrow_right);
 
-        lh_scroll = (HorizontalScrollView) view.findViewById(R.id.lh_scroll);
-        lv_city = (LinearLayout) view.findViewById(R.id.lv_city);
+        lh_scroll = view.findViewById(R.id.lh_scroll);
+        lv_city = view.findViewById(R.id.lv_city);
 
         ll_mapdetails.setVisibility(View.GONE);
 
@@ -233,9 +337,9 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         tv_from1.setOnClickListener(this);
         tv_to1.setOnClickListener(this);
 
-        ed_loation1 = (Spinner) view.findViewById(R.id.ed_locationNAme);
+        ed_loation1 = view.findViewById(R.id.ed_locationNAme);
 
-        tabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         sessionManager = new SessionManager(mContext);
@@ -259,7 +363,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
             if (Integer.parseInt(str_spacetype) <= 1) {
                 str_spacetype = String.valueOf(Integer.parseInt(sessionManager.getTagid()) + 1);
-            }else{
+            } else {
                 str_spacetype = String.valueOf(Integer.parseInt(sessionManager.getTagid()) + 2);
             }
 
@@ -312,7 +416,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
 
             snackbar.show();
@@ -384,7 +488,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -509,7 +613,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         return view;
     }
 
-
     private void initImageLoader() {
         int memoryCacheSize;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
@@ -534,7 +637,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         ImageLoader.getInstance().init(config);
     }
 
-
     private void filterDlg() {
 
         final Spinner sp_spaceType;
@@ -558,32 +660,32 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         dialog.setContentView(R.layout.cust_filter);
         dialog.setCancelable(false);
 
-        ImageView img_close = (ImageView) dialog.findViewById(R.id.img_filter_close);
-        sp_spaceType = (Spinner) dialog.findViewById(R.id.sp_cust_filter_spaceType);
-        ed_loation = (Spinner) dialog.findViewById(R.id.at_location);
-        rangeSeekbar = (RangeSeekBar) dialog.findViewById(R.id.seekbar_price);
+        ImageView img_close = dialog.findViewById(R.id.img_filter_close);
+        sp_spaceType = dialog.findViewById(R.id.sp_cust_filter_spaceType);
+        ed_loation = dialog.findViewById(R.id.at_location);
+        rangeSeekbar = dialog.findViewById(R.id.seekbar_price);
 
-        tv_date = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_date_filter);
-        tv_from = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_from_filter);
-        tv_To = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_to_filter);
+        tv_date = dialog.findViewById(R.id.tv_bookingList_detail_date_filter);
+        tv_from = dialog.findViewById(R.id.tv_bookingList_detail_from_filter);
+        tv_To = dialog.findViewById(R.id.tv_bookingList_detail_to_filter);
 
-        chk_projector = (CheckBox) dialog.findViewById(R.id.chk_space_projector);
-        chk_aircondi = (CheckBox) dialog.findViewById(R.id.chk_space_air_condi);
-        chk_mailservice = (CheckBox) dialog.findViewById(R.id.chk_space_mailservice);
+        chk_projector = dialog.findViewById(R.id.chk_space_projector);
+        chk_aircondi = dialog.findViewById(R.id.chk_space_air_condi);
+        chk_mailservice = dialog.findViewById(R.id.chk_space_mailservice);
 
-        chk_scanner = (CheckBox) dialog.findViewById(R.id.chk_space_scanner);
-        chk_locker = (CheckBox) dialog.findViewById(R.id.chk_space_locker);
-        chk_internet = (CheckBox) dialog.findViewById(R.id.chk_space_internet);
+        chk_scanner = dialog.findViewById(R.id.chk_space_scanner);
+        chk_locker = dialog.findViewById(R.id.chk_space_locker);
+        chk_internet = dialog.findViewById(R.id.chk_space_internet);
 
-        chk_parking = (CheckBox) dialog.findViewById(R.id.chk_space_parking);
-        chk_phone = (CheckBox) dialog.findViewById(R.id.chk_space_phone);
-        chk_work = (CheckBox) dialog.findViewById(R.id.chk_space_work);
+        chk_parking = dialog.findViewById(R.id.chk_space_parking);
+        chk_phone = dialog.findViewById(R.id.chk_space_phone);
+        chk_work = dialog.findViewById(R.id.chk_space_work);
 
-        chk_male = (CheckBox) dialog.findViewById(R.id.chk_space_male);
-        chk_female = (CheckBox) dialog.findViewById(R.id.chk_space_female);
-        chk_coffee = (CheckBox) dialog.findViewById(R.id.chk_space_coffee);
+        chk_male = dialog.findViewById(R.id.chk_space_male);
+        chk_female = dialog.findViewById(R.id.chk_space_female);
+        chk_coffee = dialog.findViewById(R.id.chk_space_coffee);
 
-        Button btn_filter = (Button) dialog.findViewById(R.id.btn_bookingList_Filter);
+        Button btn_filter = dialog.findViewById(R.id.btn_bookingList_Filter);
 
 
         chk_projector.setOnCheckedChangeListener(this);
@@ -715,22 +817,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
             }
         });
 
-
-        /*tv_from.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                from_timePicker_filter();
-            }
-        });
-*/
-  /*      tv_To.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                to_timePicker_filter();
-            }
-        });
-*/
         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -744,11 +830,11 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                     String str_to = tv_To.getText().toString().trim();
                     String strdate = tv_date.getText().toString().trim();
 
-                    String str_spaceType="0";
+                    String str_spaceType = "0";
 
-                    if(sp_spaceType.getSelectedItemPosition()>=2){
+                    if (sp_spaceType.getSelectedItemPosition() >= 2) {
                         str_spaceType = String.valueOf(sp_spaceType.getSelectedItemPosition() + 2);
-                    }else {
+                    } else {
                         str_spaceType = String.valueOf(sp_spaceType.getSelectedItemPosition() + 1);
                     }
 
@@ -810,7 +896,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
 
     }
-
 
     private void filter_aminities_init() {
         boolean c_pro = chk_projector.isChecked();
@@ -953,9 +1038,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                         }
 
-                        /*mstr_date = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                        tv_date.setText(month + " " + dayOfMonth);
-*/
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -988,66 +1070,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
 
     }
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            // mstr_toTime = hourOfDay + ":" + str_minute + " " + format;
-
-            tv_To.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener1 = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            //mstr_fromTime = hourOfDay + ":" + str_minute + " " + format;
-
-            tv_from.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
-
 
     @Override
     public void onClick(View v) {
@@ -1103,7 +1125,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -1115,7 +1137,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
         }
     }
-
 
     private void clearArrayList() {
 
@@ -1236,6 +1257,257 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
+
+        mMap.clear();
+        markers.clear();
+
+        LatLng location = null;
+
+        for (i = 0; i < ar_lat.size(); i++) {
+
+            String str_lat = ar_lat.get(i);
+            String str_lng = ar_long.get(i);
+
+            if (str_lat.equals("0") && str_lng.equals("0")) {
+                Log.i("lat", "notfound");
+            } else {
+
+                Log.i("latlang", Double.parseDouble(ar_lat.get(i)) + "," + Double.parseDouble(ar_long.get(i)));
+                location = new LatLng(Double.parseDouble(ar_lat.get(i)), Double.parseDouble(ar_long.get(i)));
+
+                Gson gson = new Gson();
+                String title = ar_name.get(i);
+                String address = ar_location.get(i);
+                String price = ar_price.get(i);
+                String capacity = ar_capacity.get(i);
+                String distance = ar_distance.get(i);
+                String space_id = ar_space_id.get(i);
+
+                String spnippt = gson.toJson(new Custome_Map_Item(title, address, price, capacity, distance, space_id));
+
+                final Marker kiel = googleMap.addMarker(new MarkerOptions()
+                        .position(location)
+                        .title(ar_name.get(0))
+                        .snippet(spnippt)
+                        .icon(BitmapDescriptorFactory
+                                .fromResource(R.mipmap.map)));
+
+                markers.put(kiel.getId(), Url_info.main_img + "space/" + ar_img.get(0));
+            }
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(24.774265, 46.738586), 10));
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID) {
+
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
+        String titleString = getString(title);
+        tabSpec.setIndicator(createTabView(icon, titleString));
+        tabSpec.setContent(contentID);
+        tabHost.addTab(tabSpec);
+    }
+
+    private View createTabView(final int id, String tab_name) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.custome_tabview, null);
+        ImageView imageView = view.findViewById(R.id.img_tab_icon);
+        imageView.setImageDrawable(getResources().getDrawable(id));
+        TextView tabName = view.findViewById(R.id.tv_tab_title);
+        tabName.setText(tab_name);
+        return view;
+    }
+
+    private void datePicker() {
+
+        // Get Current Date
+        final Calendar c;
+
+        c = Calendar.getInstance();
+
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    String month;
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        int m = monthOfYear + 1;
+                        if (m == 1) {
+                            //month = getString(R.string.jaunuary);
+                            month = "January";
+                        } else if (m == 2) {
+                            //month = getString(R.string.february);
+                            month = "February";
+                        } else if (m == 3) {
+                            //month = getString(R.string.march);
+                            month = "March";
+                        } else if (m == 4) {
+                            //month = getString(R.string.april);
+                            month = "April";
+                        } else if (m == 5) {
+                            //month = getString(R.string.may);
+                            month = "May";
+                        } else if (m == 6) {
+//                            month = getString(R.string.june);
+                            month = "June";
+                        } else if (m == 7) {
+                            //month = getString(R.string.july);
+                            month = "July";
+                        } else if (m == 8) {
+                            //month = getString(R.string.august);
+                            month = "August";
+                        } else if (m == 9) {
+                            //month = getString(R.string.september);
+                            month = "September";
+                        } else if (m == 10) {
+                            //month = getString(R.string.octomer);
+                            month = "October";
+                        } else if (m == 11) {
+                            //month = getString(R.string.november);
+                            month = "November";
+                        } else if (m == 12) {
+                            //month = getString(R.string.december);
+                            month = "December";
+                        }
+
+                        try {
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+                            str_date = sdf.format(sdf.parse(month + " " + dayOfMonth + ", " + year));
+                            tv_date1.setText(str_date);
+
+                        } catch (Exception e) {
+
+                        }
+
+                        // tv_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        //tv_date1.setText(month + " " + dayOfMonth + "," + year);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+        // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+    }
+
+    private void from_timePicker() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        CustomTimePickerDialog timePickerDialog = new CustomTimePickerDialog(mContext, timeSetListener_from1, hour, minute, false);
+        timePickerDialog.show();
+
+    }
+
+    private void to_timePicker() {
+
+
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+
+        CustomTimePickerDialog timePickerDialog = new CustomTimePickerDialog(mContext, timeSetListener_to1, hour, minute, false);
+        timePickerDialog.show();
+
+    }
+
+    private void navImageIcon() {
+
+        ImageView imageView = view.findViewById(R.id.navIcon);
+        TextView tv_title = view.findViewById(R.id.tv_nav_action_titile);
+        String strName = getString(R.string.booking);
+        tv_title.setText(strName);
+        final NavigationActivity navigationActivity = (NavigationActivity) mContext;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard(mContext);
+                navigationActivity.drawerLayout.openDrawer(navigationActivity.navView, true);
+            }
+        });
+    }
+
+    public AbsListView.OnScrollListener onScrollListener() {
+        return new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+               /* if(scrollState==2){
+                    lv_city.setVisibility(View.GONE);
+                }else if(scrollState == 1){
+                    lv_city.setVisibility(View.GONE);
+                }else {
+                    lv_city.setVisibility(View.VISIBLE);
+                }*/
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                                 int totalItemCount) {
+                /*if (firstVisibleItem == 0) {
+                    // check if we reached the top or bottom of the list
+                    View v = lst_hotelList.getChildAt(0);
+                    int offset = (v == null) ? 0 : v.getTop();
+                    if (offset == 0) {
+                        // reached the top: visible header and footer
+                        //setViewStatus(footer, header, View.VISIBLE);
+                        lv_city.setVisibility(View.VISIBLE);
+                    }
+                } else if (totalItemCount - visibleItemCount == firstVisibleItem) {
+                    View v = lv_city.getChildAt(totalItemCount - 1);
+                    int offset = (v == null) ? 0 : v.getTop();
+                    if (offset == 0) {
+                        // reached the bottom: visible header and footer
+
+                        lv_city.setVisibility(View.VISIBLE);
+                    }
+                } else if (totalItemCount - visibleItemCount > firstVisibleItem){
+                    // on scrolling
+                    lv_city.setVisibility(View.GONE);
+
+                }
+*/
+            }
+        };
+    }
+
+    public void mapview() {
+
+        //if (ll_list_details.getVisibility() == View.GONE) {
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map1);
+        mapFragment.getMapAsync(this);
+
+        //ll_list_details.setVisibility(View.GONE);
+        //ll_mapdetails.setVisibility(View.VISIBLE);
+        //}
+
+    }
+
     private class Task_meetingRoomBooking extends AsyncTask<String, String, String> {
 
         ProgressDialog progressDialog;
@@ -1277,9 +1549,13 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                 data_meetingroom.put("location", str_location);
                 data_meetingroom.put("space_type", str_spacetype);
-                data_meetingroom.put("lat", String.valueOf(NavigationActivity.location.getLatitude()));
-                data_meetingroom.put("long", String.valueOf(NavigationActivity.location.getLongitude()));
-
+                if (location != null) {
+                    data_meetingroom.put("lat", String.valueOf(location.getLatitude()));
+                    data_meetingroom.put("long", String.valueOf(location.getLongitude()));
+                } else {
+                    data_meetingroom.put("lat", "0");
+                    data_meetingroom.put("long", "0");
+                }
                 Postdata p_user = new Postdata();
                 Log.d("list", data_meetingroom.toString());
 
@@ -1402,7 +1678,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 Postdata p_user = new Postdata();
                 //Log.d("list", data_Filter.toString());
                 String data_user = p_user.post(Url_info.main_url + "booking_datetime1.php", data_Filter.toString());
-                Log.i("filter_responce",data_user);
+                Log.i("filter_responce", data_user);
 
                 JSONObject jobj_login = new JSONObject(data_user);
                 status1 = jobj_login.getString(status);
@@ -1507,59 +1783,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         }
     }
 
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap = googleMap;
-        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
-
-        mMap.clear();
-        markers.clear();
-
-        LatLng location = null;
-
-        for (i = 0; i < ar_lat.size(); i++) {
-
-            String str_lat = ar_lat.get(i);
-            String str_lng = ar_long.get(i);
-
-            if (str_lat.equals("0") && str_lng.equals("0")) {
-                Log.i("lat", "notfound");
-            } else {
-
-                Log.i("latlang", Double.parseDouble(ar_lat.get(i)) + "," + Double.parseDouble(ar_long.get(i)));
-                location = new LatLng(Double.parseDouble(ar_lat.get(i)), Double.parseDouble(ar_long.get(i)));
-
-                Gson gson = new Gson();
-                String title = ar_name.get(i);
-                String address = ar_location.get(i);
-                String price = ar_price.get(i);
-                String capacity = ar_capacity.get(i);
-                String distance = ar_distance.get(i);
-                String space_id = ar_space_id.get(i);
-
-                String spnippt = gson.toJson(new Custome_Map_Item(title, address, price, capacity, distance, space_id));
-
-                final Marker kiel = googleMap.addMarker(new MarkerOptions()
-                        .position(location)
-                        .title(ar_name.get(0))
-                        .snippet(spnippt)
-                        .icon(BitmapDescriptorFactory
-                                .fromResource(R.mipmap.map)));
-
-                markers.put(kiel.getId(), Url_info.main_img + "space/" + ar_img.get(0));
-
-
-            }
-
-        }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(24.774265, 46.738586), 10));
-
-
-    }
-
     private class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         String str_address = null;
@@ -1598,7 +1821,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 }
             }
 
-            final ImageView image = ((ImageView) view.findViewById(R.id.img_bookingList_hotelPic));
+            final ImageView image = view.findViewById(R.id.img_bookingList_hotelPic);
 
             if (url != null && !url.equalsIgnoreCase("null")
                     && !url.equalsIgnoreCase("")) {
@@ -1632,14 +1855,14 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 e.printStackTrace();
             }
 
-            final TextView txt_address = ((TextView) view
-                    .findViewById(R.id.tv_bookingList_hotel_location));
-            final TextView txt_price = (TextView) view.findViewById(R.id.tv_bookingList_hotel_price);
-            final TextView txt_capacity = (TextView) view.findViewById(R.id.tv_bookingList_hotel_person_capacity);
-            final TextView txt_distance = (TextView) view.findViewById(R.id.tv_bookingList_hotel_location_1);
-            final TextView titleUi = (TextView) view.findViewById(R.id.tv_bookingList_hotel_Title);
-            final LinearLayout lv_main = (LinearLayout) view.findViewById(R.id.lv_main);
-            final Button btn_book = (Button) view.findViewById(R.id.btn_book);
+            final TextView txt_address = view
+                    .findViewById(R.id.tv_bookingList_hotel_location);
+            final TextView txt_price = view.findViewById(R.id.tv_bookingList_hotel_price);
+            final TextView txt_capacity = view.findViewById(R.id.tv_bookingList_hotel_person_capacity);
+            final TextView txt_distance = view.findViewById(R.id.tv_bookingList_hotel_location_1);
+            final TextView titleUi = view.findViewById(R.id.tv_bookingList_hotel_Title);
+            final LinearLayout lv_main = view.findViewById(R.id.lv_main);
+            final Button btn_book = view.findViewById(R.id.btn_book);
 
             if (str_address != null) {
                 txt_address.setText(str_address);
@@ -1683,240 +1906,11 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                 }
             });
-/*
-            btn_book.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-
-                }
-            });
-*/
-
 
             return view;
         }
 
     }
-
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-
-    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID) {
-
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
-        String titleString = getString(title);
-        tabSpec.setIndicator(createTabView(icon, titleString));
-        tabSpec.setContent(contentID);
-        tabHost.addTab(tabSpec);
-    }
-
-    private View createTabView(final int id, String tab_name) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.custome_tabview, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.img_tab_icon);
-        imageView.setImageDrawable(getResources().getDrawable(id));
-        TextView tabName = (TextView) view.findViewById(R.id.tv_tab_title);
-        tabName.setText(tab_name);
-        return view;
-    }
-
-    private void datePicker() {
-
-        // Get Current Date
-        final Calendar c;
-
-        c = Calendar.getInstance();
-
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(mContext,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    String month;
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        int m = monthOfYear + 1;
-                        if (m == 1) {
-                            //month = getString(R.string.jaunuary);
-                            month = "January";
-                        } else if (m == 2) {
-                            //month = getString(R.string.february);
-                            month = "February";
-                        } else if (m == 3) {
-                            //month = getString(R.string.march);
-                            month = "March";
-                        } else if (m == 4) {
-                            //month = getString(R.string.april);
-                            month = "April";
-                        } else if (m == 5) {
-                            //month = getString(R.string.may);
-                            month = "May";
-                        } else if (m == 6) {
-//                            month = getString(R.string.june);
-                            month = "June";
-                        } else if (m == 7) {
-                            //month = getString(R.string.july);
-                            month = "July";
-                        } else if (m == 8) {
-                            //month = getString(R.string.august);
-                            month = "August";
-                        } else if (m == 9) {
-                            //month = getString(R.string.september);
-                            month = "September";
-                        } else if (m == 10) {
-                            //month = getString(R.string.octomer);
-                            month = "October";
-                        } else if (m == 11) {
-                            //month = getString(R.string.november);
-                            month = "November";
-                        } else if (m == 12) {
-                            //month = getString(R.string.december);
-                            month = "December";
-                        }
-
-                        try {
-
-                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-                            str_date = sdf.format(sdf.parse(month + " " + dayOfMonth + ", " + year));
-                            tv_date1.setText(str_date);
-
-                        } catch (Exception e) {
-
-                        }
-
-                        // tv_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                        //tv_date1.setText(month + " " + dayOfMonth + "," + year);
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-        // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-    }
-
-    private void from_timePicker() {
-        // Get Current Time
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-
-        CustomTimePickerDialog timePickerDialog = new CustomTimePickerDialog(mContext, timeSetListener_from1, hour, minute, false);
-        timePickerDialog.show();
-
-    }
-
-    private void to_timePicker() {
-
-
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-
-
-        CustomTimePickerDialog timePickerDialog = new CustomTimePickerDialog(mContext, timeSetListener_to1, hour, minute, false);
-        timePickerDialog.show();
-
-    }
-
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener_to1 = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            // mstr_toTime = hourOfDay + ":" + str_minute + " " + format;
-
-            tv_to1.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener_from1 = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            //mstr_fromTime = hourOfDay + ":" + str_minute + " " + format;
-
-            tv_from1.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
-
-
-    private void navImageIcon() {
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.navIcon);
-        TextView tv_title = (TextView) view.findViewById(R.id.tv_nav_action_titile);
-        String strName = getString(R.string.booking);
-        tv_title.setText(strName);
-        final NavigationActivity navigationActivity = (NavigationActivity) mContext;
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                hideSoftKeyboard(mContext);
-                navigationActivity.drawerLayout.openDrawer(navigationActivity.navView, true);
-            }
-        });
-    }
-
-
-    public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
-    }
-
 
     private class Task_getLocation1 extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
@@ -1987,7 +1981,6 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         }
     }
 
-
     private class Task_getLocation_filter extends AsyncTask<String, String, String> {
 
         ProgressDialog progressDialog;
@@ -2055,65 +2048,5 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
             super.onPreExecute();
 
         }
-    }
-
-
-    public AbsListView.OnScrollListener onScrollListener() {
-        return new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-               /* if(scrollState==2){
-                    lv_city.setVisibility(View.GONE);
-                }else if(scrollState == 1){
-                    lv_city.setVisibility(View.GONE);
-                }else {
-                    lv_city.setVisibility(View.VISIBLE);
-                }*/
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-                                 int totalItemCount) {
-                /*if (firstVisibleItem == 0) {
-                    // check if we reached the top or bottom of the list
-                    View v = lst_hotelList.getChildAt(0);
-                    int offset = (v == null) ? 0 : v.getTop();
-                    if (offset == 0) {
-                        // reached the top: visible header and footer
-                        //setViewStatus(footer, header, View.VISIBLE);
-                        lv_city.setVisibility(View.VISIBLE);
-                    }
-                } else if (totalItemCount - visibleItemCount == firstVisibleItem) {
-                    View v = lv_city.getChildAt(totalItemCount - 1);
-                    int offset = (v == null) ? 0 : v.getTop();
-                    if (offset == 0) {
-                        // reached the bottom: visible header and footer
-
-                        lv_city.setVisibility(View.VISIBLE);
-                    }
-                } else if (totalItemCount - visibleItemCount > firstVisibleItem){
-                    // on scrolling
-                    lv_city.setVisibility(View.GONE);
-
-                }
-*/
-            }
-        };
-    }
-
-
-    public void mapview() {
-
-        //if (ll_list_details.getVisibility() == View.GONE) {
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map1);
-        mapFragment.getMapAsync(this);
-
-        //ll_list_details.setVisibility(View.GONE);
-        //ll_mapdetails.setVisibility(View.VISIBLE);
-        //}
-
     }
 }

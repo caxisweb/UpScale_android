@@ -269,5 +269,8 @@
 
     <string name="facebook_app_id">570960453396064</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb570960453396064</string>
+    <string name="_05xxxxxxxx">05xxxxxxxx</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
 </resources>

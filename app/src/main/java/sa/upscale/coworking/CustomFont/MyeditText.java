@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by DELL on 01-02-2016.

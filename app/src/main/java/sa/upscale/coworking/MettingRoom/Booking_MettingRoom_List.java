@@ -14,7 +14,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +33,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -71,8 +69,6 @@ import java.util.Hashtable;
 import sa.upscale.coworking.Getdata;
 import sa.upscale.coworking.MettingRoom.TImePicker.CustomTimePickerDialog;
 import sa.upscale.coworking.MettingRoom.adapter.Custome_Map_Item;
-import sa.upscale.coworking.MettingRoom.adapter.adapter_meeting_room_list;
-import sa.upscale.coworking.New_Booking_activity;
 import sa.upscale.coworking.Postdata;
 import sa.upscale.coworking.R;
 import sa.upscale.coworking.SessionManager;
@@ -259,8 +255,8 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         View view = getSupportActionBar().getCustomView();
 
-        ImageButton imageButton = (ImageButton) view.findViewById(R.id.action_bar_back);
-        TextView tv_title = (TextView) view.findViewById(R.id.action_bar_title);
+        ImageButton imageButton = view.findViewById(R.id.action_bar_back);
+        TextView tv_title = view.findViewById(R.id.action_bar_title);
         String strName = getString(R.string.booking);
         tv_title.setText(strName);
 
@@ -271,7 +267,7 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
             }
         });
 
-        ImageView img_filter = (ImageView) view.findViewById(R.id.action_bar_filter);
+        ImageView img_filter = view.findViewById(R.id.action_bar_filter);
         img_filter.setVisibility(View.VISIBLE);
         img_filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,36 +327,36 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
         dialog.setContentView(R.layout.cust_filter);
         dialog.setCancelable(false);
 
-        ImageView img_close = (ImageView) dialog.findViewById(R.id.img_filter_close);
-        sp_spaceType = (Spinner) dialog.findViewById(R.id.sp_cust_filter_spaceType);
-        ed_loation = (AutoCompleteTextView) dialog.findViewById(R.id.at_location);
-        rangeSeekbar = (RangeSeekBar) dialog.findViewById(R.id.seekbar_price);
+        ImageView img_close = dialog.findViewById(R.id.img_filter_close);
+        sp_spaceType = dialog.findViewById(R.id.sp_cust_filter_spaceType);
+        ed_loation = dialog.findViewById(R.id.at_location);
+        rangeSeekbar = dialog.findViewById(R.id.seekbar_price);
 
         /*RelativeLayout rl_date = (RelativeLayout) dialog.findViewById(R.id.rl_bookingList_detail_date_filter);
         RelativeLayout rl_fromTime = (RelativeLayout) dialog.findViewById(R.id.rl_bookingList_detail_from_filter);
         RelativeLayout rl_toTime = (RelativeLayout) dialog.findViewById(R.id.rl_bookingList_detail_to_filter);
 */
-        tv_date = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_date_filter);
-        tv_from = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_from_filter);
-        tv_To = (TextView) dialog.findViewById(R.id.tv_bookingList_detail_to_filter);
+        tv_date = dialog.findViewById(R.id.tv_bookingList_detail_date_filter);
+        tv_from = dialog.findViewById(R.id.tv_bookingList_detail_from_filter);
+        tv_To = dialog.findViewById(R.id.tv_bookingList_detail_to_filter);
 
-        chk_projector = (CheckBox) dialog.findViewById(R.id.chk_space_projector);
-        chk_aircondi = (CheckBox) dialog.findViewById(R.id.chk_space_air_condi);
-        chk_mailservice = (CheckBox) dialog.findViewById(R.id.chk_space_mailservice);
+        chk_projector = dialog.findViewById(R.id.chk_space_projector);
+        chk_aircondi = dialog.findViewById(R.id.chk_space_air_condi);
+        chk_mailservice = dialog.findViewById(R.id.chk_space_mailservice);
 
-        chk_scanner = (CheckBox) dialog.findViewById(R.id.chk_space_scanner);
-        chk_locker = (CheckBox) dialog.findViewById(R.id.chk_space_locker);
-        chk_internet = (CheckBox) dialog.findViewById(R.id.chk_space_internet);
+        chk_scanner = dialog.findViewById(R.id.chk_space_scanner);
+        chk_locker = dialog.findViewById(R.id.chk_space_locker);
+        chk_internet = dialog.findViewById(R.id.chk_space_internet);
 
-        chk_parking = (CheckBox) dialog.findViewById(R.id.chk_space_parking);
-        chk_phone = (CheckBox) dialog.findViewById(R.id.chk_space_phone);
-        chk_work = (CheckBox) dialog.findViewById(R.id.chk_space_work);
+        chk_parking = dialog.findViewById(R.id.chk_space_parking);
+        chk_phone = dialog.findViewById(R.id.chk_space_phone);
+        chk_work = dialog.findViewById(R.id.chk_space_work);
 
-        chk_male = (CheckBox) dialog.findViewById(R.id.chk_space_male);
-        chk_female = (CheckBox) dialog.findViewById(R.id.chk_space_female);
-        chk_coffee = (CheckBox) dialog.findViewById(R.id.chk_space_coffee);
+        chk_male = dialog.findViewById(R.id.chk_space_male);
+        chk_female = dialog.findViewById(R.id.chk_space_female);
+        chk_coffee = dialog.findViewById(R.id.chk_space_coffee);
 
-        Button btn_filter = (Button) dialog.findViewById(R.id.btn_bookingList_Filter);
+        Button btn_filter = dialog.findViewById(R.id.btn_bookingList_Filter);
 
 
         chk_projector.setOnCheckedChangeListener(Booking_MettingRoom_List.this);
@@ -795,13 +791,13 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
 
     private void findViews() {
 
-        linearLayout = (LinearLayout) findViewById(R.id.ll_snackbar);
-        ll_tab_list = (LinearLayout) findViewById(R.id.ll_tab_list);
-        ll_tab_map = (LinearLayout) findViewById(R.id.ll_tab_map);
+        linearLayout = findViewById(R.id.ll_snackbar);
+        ll_tab_list = findViewById(R.id.ll_tab_list);
+        ll_tab_map = findViewById(R.id.ll_tab_map);
 
-        ll_list_details = (LinearLayout) findViewById(R.id.ll_list_details);
-        ll_mapdetails = (LinearLayout) findViewById(R.id.ll_map_details);
-        lst_hotelList = (ListView) findViewById(R.id.lst_tab_bookingList);
+        ll_list_details = findViewById(R.id.ll_list_details);
+        ll_mapdetails = findViewById(R.id.ll_map_details);
+        lst_hotelList = findViewById(R.id.lst_tab_bookingList);
 
         /*tabLayout = (TabLayout) findViewById(R.id.tabs_cat);
 
@@ -812,7 +808,7 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
         ll_tab_map.setOnClickListener(this);
         ll_tab_list.setOnClickListener(this);
 
-        tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        tabHost = findViewById(android.R.id.tabhost);
         tabHost.setup();
 
         setNewTab(this, tabHost, getResources().getString(R.string.meeting_room), R.string.meeting_room,R.drawable.meeting_room_black, R.id.ll_snackbar);
@@ -882,7 +878,7 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -1268,6 +1264,32 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
 
     }
 
+    private View createTabView(final int id, String tab_name) {
+        View view = LayoutInflater.from(this).inflate(R.layout.custome_tabview, null);
+        ImageView imageView = view.findViewById(R.id.img_tab_icon);
+        imageView.setImageDrawable(getResources().getDrawable(id));
+        TextView tabName = view.findViewById(R.id.tv_tab_title);
+        tabName.setText(tab_name);
+        return view;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID) {
+
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
+        String titleString = getString(title);
+        tabSpec.setIndicator(createTabView(icon, titleString));
+        tabSpec.setContent(contentID);
+        tabHost.addTab(tabSpec);
+    }
+
     private class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         private View view;
@@ -1300,7 +1322,7 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
                     url = markers.get(marker.getId());
                 }
             }
-            final ImageView image = ((ImageView) view.findViewById(R.id.img_bookingList_hotelPic));
+            final ImageView image = view.findViewById(R.id.img_bookingList_hotelPic);
 
             if (url != null && !url.equalsIgnoreCase("null")
                     && !url.equalsIgnoreCase("")) {
@@ -1333,12 +1355,12 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
                 e.printStackTrace();
             }
 
-            final TextView txt_address = ((TextView) view
-                    .findViewById(R.id.tv_bookingList_hotel_location));
-            final TextView txt_price = (TextView) view.findViewById(R.id.tv_bookingList_hotel_price);
-            final TextView txt_capacity = (TextView) view.findViewById(R.id.tv_bookingList_hotel_person_capacity);
-            final TextView txt_distance = (TextView) view.findViewById(R.id.tv_bookingList_hotel_location_1);
-            final TextView titleUi = ((TextView) view.findViewById(R.id.tv_bookingList_hotel_Title));
+            final TextView txt_address = view
+                    .findViewById(R.id.tv_bookingList_hotel_location);
+            final TextView txt_price = view.findViewById(R.id.tv_bookingList_hotel_price);
+            final TextView txt_capacity = view.findViewById(R.id.tv_bookingList_hotel_person_capacity);
+            final TextView txt_distance = view.findViewById(R.id.tv_bookingList_hotel_location_1);
+            final TextView titleUi = view.findViewById(R.id.tv_bookingList_hotel_Title);
 
 
             if (str_address != null) {
@@ -1368,32 +1390,6 @@ public class Booking_MettingRoom_List extends AppCompatActivity implements View.
             }
             return view;
         }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-
-    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID ){
-
-        TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
-        String titleString = getString(title);
-        tabSpec.setIndicator(createTabView(icon, titleString));
-        tabSpec.setContent(contentID);
-        tabHost.addTab(tabSpec);
-    }
-
-    private View createTabView(final int id, String tab_name) {
-        View view = LayoutInflater.from(this).inflate(R.layout.custome_tabview, null);
-        ImageView imageView =   (ImageView) view.findViewById(R.id.img_tab_icon);
-        imageView.setImageDrawable(getResources().getDrawable(id));
-        TextView tabName = (TextView) view.findViewById(R.id.tv_tab_title);
-        tabName.setText(tab_name);
-        return view;
     }
 }
 

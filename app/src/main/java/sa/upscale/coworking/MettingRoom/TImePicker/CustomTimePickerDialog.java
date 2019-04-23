@@ -49,10 +49,10 @@ public class CustomTimePickerDialog extends TimePickerDialog {
 
             Class<?> classForid = Class.forName("com.android.internal.R$id");
             Field timePickerField = classForid.getField("timePicker");
-            this.timePicker = (TimePicker) findViewById(timePickerField.getInt(null));
+            this.timePicker = findViewById(timePickerField.getInt(null));
             Field field = classForid.getField("minute");
 
-            NumberPicker mMinuteSpinner = (NumberPicker) timePicker
+            NumberPicker mMinuteSpinner = timePicker
                     .findViewById(field.getInt(null));
             mMinuteSpinner.setMinValue(0);
             mMinuteSpinner.setMaxValue((60 / TIME_PICKER_INTERVAL) - 1);

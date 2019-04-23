@@ -24,8 +24,8 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="true"
                 android:layout_marginTop="@dimen/margin10"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/logo"
                 android:src="@drawable/logo1" />
 
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/login_using"
+                    android:text="@string/signup_here"
                     android:textSize="@dimen/margin20" />
 
                 <LinearLayout
@@ -144,8 +144,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/margin5"
                         android:layout_marginStart="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:layout_weight="1"
                         android:contentDescription="@string/twitterlogin"
                         android:scaleType="fitXY"
@@ -217,9 +217,9 @@
                         android:background="@drawable/edittextshape"
                         android:hint="@string/name"
                         android:inputType="text|textAutoComplete|textCapWords"
+                        android:paddingStart="@dimen/margin10"
                         android:paddingLeft="@dimen/margin10"
                         android:paddingRight="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
 
@@ -231,12 +231,12 @@
                         android:layout_marginTop="@dimen/margin10"
                         android:layout_weight="1"
                         android:background="@drawable/edittextshape"
-                        android:hint="05xxxxxxxx"
+                        android:hint="@string/_05xxxxxxxx"
                         android:inputType="number"
                         android:maxLength="10"
+                        android:paddingStart="@dimen/margin10"
                         android:paddingLeft="@dimen/margin10"
                         android:paddingRight="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
 
@@ -250,9 +250,9 @@
                         android:background="@drawable/edittextshape"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
+                        android:paddingStart="@dimen/margin10"
                         android:paddingLeft="@dimen/margin10"
                         android:paddingRight="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
 
@@ -266,9 +266,9 @@
                         android:background="@drawable/edittextshape"
                         android:hint="@string/password"
                         android:inputType="textPassword"
+                        android:paddingStart="@dimen/margin10"
                         android:paddingLeft="@dimen/margin10"
                         android:paddingRight="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
 
@@ -282,9 +282,9 @@
                         android:background="@drawable/edittextshape"
                         android:hint="@string/password_again"
                         android:inputType="textPassword"
+                        android:paddingStart="@dimen/margin10"
                         android:paddingLeft="@dimen/margin10"
                         android:paddingRight="@dimen/margin10"
-                        android:paddingStart="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
                 </LinearLayout>
@@ -295,7 +295,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin10"
-                    android:layout_alignParentLeft="true"
                     android:text="@string/terms_and_conditions"
                     android:textColor="@color/textcolor_input" />
 

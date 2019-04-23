@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import sa.upscale.coworking.R;
 
@@ -41,7 +40,7 @@ public class Visa_payment_url extends AppCompatActivity {
 
         custActionbar();
 
-        we_payment_url = (WebView) findViewById(R.id.web_payment_url);
+        we_payment_url = findViewById(R.id.web_payment_url);
         we_payment_url.setWebViewClient(new myWebClient());
         WebSettings webSettings = we_payment_url.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -56,8 +55,8 @@ public class Visa_payment_url extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         View view = getSupportActionBar().getCustomView();
 
-        ImageButton imageButton = (ImageButton) view.findViewById(R.id.action_bar_back);
-        TextView tv_title = (TextView) view.findViewById(R.id.action_bar_title);
+        ImageButton imageButton = view.findViewById(R.id.action_bar_back);
+        TextView tv_title = view.findViewById(R.id.action_bar_title);
         String strName = "Visa Payment";
         tv_title.setText(strName);
 
@@ -71,7 +70,7 @@ public class Visa_payment_url extends AppCompatActivity {
             }
         });
 
-        ImageView img_filter = (ImageView) view.findViewById(R.id.action_bar_filter);
+        ImageView img_filter = view.findViewById(R.id.action_bar_filter);
         img_filter.setVisibility(View.GONE);
         img_filter.setOnClickListener(new View.OnClickListener() {
             @Override

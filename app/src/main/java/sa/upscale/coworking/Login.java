@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -30,6 +31,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -59,14 +63,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.linkedin.platform.APIHelper;
-import com.linkedin.platform.LISessionManager;
-import com.linkedin.platform.errors.LIApiError;
-import com.linkedin.platform.errors.LIAuthError;
-import com.linkedin.platform.listeners.ApiListener;
-import com.linkedin.platform.listeners.ApiResponse;
-import com.linkedin.platform.listeners.AuthListener;
-import com.linkedin.platform.utils.Scope;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
@@ -79,23 +75,39 @@ import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.User;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
 import sa.upscale.coworking.fregment.Home_freg;
+
+import static sa.upscale.coworking.SplashScreen.location;
+import static sa.upscale.coworking.Utils.REDIRECT_URI;
+import static sa.upscale.coworking.Utils.RESPONSE_TYPE_VALUE;
+import static sa.upscale.coworking.Utils.STATE;
+import static sa.upscale.coworking.Utils.STATE_PARAM;
+import static sa.upscale.coworking.Utils.accessToken;
+import static sa.upscale.coworking.Utils.getAccessTokenUrl;
+import static sa.upscale.coworking.Utils.getAuthorizationUrl;
+import static sa.upscale.coworking.Utils.getProfileUrl;
 
 
 /**
@@ -111,85 +123,76 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private static final String s_password = "password";
     private static final String s_gcm_id = "gcm_id";
     private static final String TAG = "Twitter";
-
-
-    String status1 = "0", message1 = "try Again";
-    SessionManager session;
-
-    HashMap<String, String> language_code = new HashMap<>();
-
-    JSONObject data_login = new JSONObject();
-    JSONObject data_forgotPwd = new JSONObject();
-    JSONObject data_chngPwd = new JSONObject();
-
-    String mstr_email, mstr_pasword;
-    String mstr_forgot_email, mstr_uId, mstr_chng_otp, mstr_chng_newpwd, mstr_chng_reNewpwd;
-    String fb_name, fb_email, fb_id = "0";
-
-    private EditText ed_email, ed_password;
-    private Button btn_signin, btn_signup;
-    private CheckBox ch_loginkeep;
-
-    private ViewFlipper fliper_add;
-    private AdView google_AdView;
-
-    String temp_keepme = "0";
-    private LinearLayout btn_listurSpace;
-    private TextView btn_forgotPwd;
-    private CallbackManager callbackManager;
-
-    ImageView fbLoginButton, btnSignIn, btn_linkedin, btn_twitter1;
-    private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1;
-    RelativeLayout linearLayout;
-
-    JSONObject social_user_data = new JSONObject();
-
-    private static final String host = "api.linkedin.com";
-    private static final String url = "https://" + host
-            + "/v1/people/~:" +
-            "(id,email-address,formatted-name,phone-numbers,picture-urls::(original))";
-
-
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "mr4zFMgZQtUh4iVGvuiEUvd0d";
     private static final String TWITTER_SECRET = "QskHYWA1kupQN28SKe1GIbBqFFE4SuiJGvEEnfMCBPrJyhDbZl";
-
-    private TwitterLoginButton btn_twitter;
-
+    public static String mstr_locationAddress;
+    public static String mstr_locationCity;
+    String status1 = "0", message1 = "try Again";
+    SessionManager session;
+    JSONObject data_login = new JSONObject();
+    JSONObject data_forgotPwd = new JSONObject();
+    JSONObject data_chngPwd = new JSONObject();
+    String mstr_email, mstr_pasword;
+    String mstr_forgot_email, mstr_uId, mstr_chng_otp, mstr_chng_newpwd, mstr_chng_reNewpwd;
+    String fb_name, fb_email, fb_id = "0";
+    String temp_keepme = "0";
+    ImageView fbLoginButton, btnSignIn, btn_linkedin, btn_twitter1;
+    RelativeLayout linearLayout;
+    JSONObject social_user_data = new JSONObject();
     String str_u_id, str_u_name, str_u_email, str_u_mobile, str_u_profile, str_esaal_cust_id;
-
-    URL fb_url_profile;
     String fb_img = "";
-
     int login_flag = 0;
-
-    private TwitterAuthClient client;
     String str_language_Code = "";
     Locale myLocale;
-
     TwitterAuthConfig authConfig;
     String twitter_name, twitter_email, twitter_Id, twitter_profilePic;
     TwitterAuthClient mTwitterAuthClient;
-    String temp_twitter = "0";
     TwitterSession session1;
-
     Activity activity;
+    AlertDialog alertDialog;
+    private EditText ed_email, ed_password;
+    private Button btn_signin, btn_signup;
+    private CheckBox ch_loginkeep;
+    private ViewFlipper fliper_add;
+    private AdView google_AdView;
+    private LinearLayout btn_listurSpace;
+    private TextView btn_forgotPwd;
+    private CallbackManager callbackManager;
+    private GoogleApiClient mGoogleApiClient;
+    private TwitterLoginButton btn_twitter;
 
-    public static String mstr_locationAddress;
-    public static String mstr_locationCity;
+    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<android.location.Address> addresses = null;
 
-    private static Scope buildScope() {
-        return Scope.build(Scope.R_BASICPROFILE, Scope.R_EMAILADDRESS);
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+
+                String cityName = addresses.get(0).getAddressLine(0);
+                String stateName = addresses.get(0).getAddressLine(1);
+                String countryName = addresses.get(0).getAddressLine(2);
+
+                mstr_locationAddress = cityName + "," + stateName + "," + countryName;
+                mstr_locationCity = addresses.get(0).getLocality();
+                //Log.d("LocationAddress", mstr_locationAddress+"\n"+addresses.get(0).getAddressLine(0));
+                //Log.d("City", addresses.get(0).getLocality());
+                return addresses;
+            }
+            return null;
+        } catch (IOException ignored) {
+            //do something
+        }
+        return addresses;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
-        client = new TwitterAuthClient();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -198,7 +201,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Log.d("AppLog", "key:" + FacebookSdk.getApplicationSignature(this));
-        generateHashkey("sa.upscale.coworking");
         callbackManager = CallbackManager.Factory.create();
 
 
@@ -214,11 +216,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
 
         session = new SessionManager(Login.this);
-
         findViews();
-
-        language_code = session.getlanguageCode();
-        String str_lanStatus = language_code.get(SessionManager.user_languageCode);
 
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,7 +236,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     ed_password.setError("Please Enter Password");
                     ed_password.setFocusable(true);
                 } else if (temp_keepme.equals("0")) {
-                    Toast.makeText(getApplicationContext(), "Please checked Keepme Login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please checked Keep me Login", Toast.LENGTH_SHORT).show();
                 } else {
 
                     if (isNetworkAvailable()) {
@@ -297,16 +295,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View v) {
 
-                getCountryName(Login.this, NavigationActivity.location.getLatitude(), NavigationActivity.location.getLongitude());
+                getCountryName(Login.this, location.getLatitude(), location.getLongitude());
 
                 Intent intent = new Intent(Login.this, List_ur_Space.class);
                 intent.putExtra("type", "login");
                 intent.putExtra("address", mstr_locationAddress);
                 intent.putExtra("city", mstr_locationCity);
                 startActivity(intent);
-
-                // getCurrentlocation();
-                //
 
             }
         });
@@ -497,7 +492,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         btn_twitter1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 mTwitterAuthClient.authorize(Login.this, new com.twitter.sdk.android.core.Callback<TwitterSession>() {
                     @Override
                     public void success(Result<TwitterSession> result) {
@@ -534,8 +528,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                             }
 
                         });
-
-
                     }
 
                     @Override
@@ -543,15 +535,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         e.printStackTrace();
                     }
                 });
-
-
             }
         });
 
         btn_twitter.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
+                //The TwitterSession is also available through:
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                /* TwitterSession session1 = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
@@ -661,182 +651,84 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         btn_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Show a progress dialog to the user
+                final ProgressDialog pd = ProgressDialog.show(Login.this, "", "Please Wait...", true);
 
+                LayoutInflater inflater = LayoutInflater.from(Login.this);
+                final View linkedview = inflater.inflate(R.layout.linkedin_webview, null);
+                alertDialog = new AlertDialog.Builder(Login.this).create();
+                alertDialog.setView(linkedview);
+                //get the webView from the layout
+                final WebView webView = linkedview.findViewById(R.id.main_activity_web_view);
+                EditText editText = linkedview.findViewById(R.id.edt_temp);
+                editText.requestFocus();
+                //Request focus for the webview
+                view.requestFocus(View.FOCUS_DOWN);
 
-                LISessionManager.getInstance(getApplicationContext()).init(Login.this, buildScope()//pass the build scope here
-                        , new AuthListener() {
-                            @Override
-                            public void onAuthSuccess() {
-                                // Authentication was successful. You can now do
-                                // other calls with the SDK.
-                                APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
-                                apiHelper.getRequest(Login.this, url, new ApiListener() {
-                                    @Override
-                                    public void onApiSuccess(ApiResponse result) {
+                //Set a custom web view client
+                webView.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public void onPageFinished(WebView view, String url) {
+                        //This method will be executed each time a page finished loading.
+                        //The only we do is dismiss the progressDialog, in case we are showing any.
+                        if (pd != null && pd.isShowing()) {
+                            pd.dismiss();
+                        }
 
-                                        if (isNetworkAvailable()) {
+                    }
 
-                                            try {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String authorizationUrl) {
+                        //This method will be called when the Auth proccess redirect to our RedirectUri.
+                        //We will check the url looking for our RedirectUri.
 
-                                                String Name = result.getResponseDataAsJson().get("formattedName").toString();
-                                                String Email = result.getResponseDataAsJson().get("emailAddress").toString();
-                                                String ID = result.getResponseDataAsJson().get("id").toString();
+                        try {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                                                URI uri = new URI("http://api.linkedin.com/v1/people/" + ID + "/picture-url");
-                                                String userpic = uri.toString();
-                                                Log.d("UrlPic", userpic);
-
-                                            /*JSONObject object = new JSONObject("pictureUrl");
-
-                                            String ProfileImage = object.getString("values");*/
-
-                                                social_user_data.put("name", Name);
-                                                social_user_data.put("email", Email);
-                                                social_user_data.put("type", "linkedin");
-                                                social_user_data.put("type_id", ID);
-                                                social_user_data.put("image", userpic);
-                                                social_user_data.put("gcm_id", 1);
-
-                                                FB_Login fbLogin = new FB_Login();
-                                                fbLogin.execute();
-
-                                                //showResult(result.getResponseDataAsJson());
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        } else {
-                                            Snackbar snackbar = Snackbar
-                                                    .make(linearLayout, "No internet connection!", Snackbar.LENGTH_LONG)
-                                                    .setAction("RETRY", new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View view) {
-                                                            //setMobileDataEnabled(Login.this);
-
-                                                        }
-                                                    });
-
-                                            // Changing message text color
-                                            snackbar.setActionTextColor(Color.RED);
-
-                                            // Changing action button text color
-                                            View sbView = snackbar.getView();
-                                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
-                                            textView.setTextColor(Color.YELLOW);
-
-                                            snackbar.show();
-
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onApiError(LIApiError error) {
-
-                                        Log.i("error", error.toString());
-                                    }
-                                });
+                        if (authorizationUrl.startsWith(REDIRECT_URI)) {
+                            Log.i("Authorize", "");
+                            Uri uri = Uri.parse(authorizationUrl);
+                            //We take from the url the authorizationToken and the state token. We have to check that the state token returned by the Service is the same we sent.
+                            //If not, that means the request may be a result of CSRF and must be rejected.
+                            String stateToken = uri.getQueryParameter(STATE_PARAM);
+                            if (stateToken == null || !stateToken.equals(STATE)) {
+                                Log.e("Authorize", "State token doesn't match");
+                                return true;
                             }
 
-                            @Override
-                            public void onAuthError(LIAuthError error) {
-                                // Handle authentication errors
-                                Log.e(TAG, "Auth Error :" + error.toString());
-
+                            //If the user doesn't allow authorization to our application, the authorizationToken Will be null.
+                            String authorizationToken = uri.getQueryParameter(RESPONSE_TYPE_VALUE);
+                            if (authorizationToken == null) {
+                                Log.i("Authorize", "The user doesn't allow authorization.");
+                                return true;
                             }
-                        }, true);//if TRUE then it will show dialog if
-                // any device has no LinkedIn app installed to download app else won't show anything
+                            Log.i("Authorize", "Auth token received: " + authorizationToken);
 
-                /*LISessionManager.getInstance(getApplicationContext())
-                        .init(Login.this, buildScope(), new AuthListener() {
-                            @Override
-                            public void onAuthSuccess() {
+                            //Generate URL for requesting Access Token
+                            String accessTokenUrl = getAccessTokenUrl(authorizationToken);
+                            //We make the request in a AsyncTask
+                            new PostRequestAsyncTask().execute(accessTokenUrl);
 
-                               *//* Toast.makeText(getApplicationContext(), "success" +
-                                                LISessionManager.getInstance(getApplicationContext())
-                                                        .getSession().getAccessToken().toString(),
-                                        Toast.LENGTH_LONG).show();*//*
+                        } else {
+                            //Default behaviour
+                            Log.i("Authorize", "Redirecting to: " + authorizationUrl);
+                            webView.loadUrl(authorizationUrl);
+                        }
+                        return true;
+                    }
+                });
 
-                                //LISessionManager.init(this,"r_basicprofile", onAuthSuccess(),);
-                                LISessionManager.getInstance(getApplicationContext()).getSession().getAccessToken();
+                //Get the authorization Url
+                String authUrl = getAuthorizationUrl();
+                Log.i("Authorize", "Loading Auth Url: " + authUrl);
+                //Load the authorization URL into the webView
+                webView.loadUrl(authUrl);
 
-                                APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
-                                apiHelper.getRequest(Login.this, url, new ApiListener() {
-                                    @Override
-                                    public void onApiSuccess(ApiResponse result) {
-
-                                        if (isNetworkAvailable()) {
-
-                                            try {
-
-                                                String Name = result.getResponseDataAsJson().get("formattedName").toString();
-                                                String Email = result.getResponseDataAsJson().get("emailAddress").toString();
-                                                String ID = result.getResponseDataAsJson().get("id").toString();
-
-                                                URI uri = new URI("http://api.linkedin.com/v1/people/" + ID + "/picture-url");
-                                                String userpic = uri.toString();
-                                                Log.d("UrlPic", userpic);
-
-                                            *//*JSONObject object = new JSONObject("pictureUrl");
-
-                                            String ProfileImage = object.getString("values");*//*
-
-                                                social_user_data.put("name", Name);
-                                                social_user_data.put("email", Email);
-                                                social_user_data.put("type", "linkedin");
-                                                social_user_data.put("type_id", ID);
-                                                social_user_data.put("image", userpic);
-                                                social_user_data.put("gcm_id", 1);
-
-                                                FB_Login fbLogin = new FB_Login();
-                                                fbLogin.execute();
-
-                                                //showResult(result.getResponseDataAsJson());
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        } else {
-                                            Snackbar snackbar = Snackbar
-                                                    .make(linearLayout, "No internet connection!", Snackbar.LENGTH_LONG)
-                                                    .setAction("RETRY", new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View view) {
-                                                            //setMobileDataEnabled(Login.this);
-
-                                                        }
-                                                    });
-
-                                            // Changing message text color
-                                            snackbar.setActionTextColor(Color.RED);
-
-                                            // Changing action button text color
-                                            View sbView = snackbar.getView();
-                                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
-                                            textView.setTextColor(Color.YELLOW);
-
-                                            snackbar.show();
-
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onApiError(LIApiError error) {
-
-                                        Log.i("error",error.toString());
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onAuthError(LIAuthError error) {
-
-                                Log.i("linkedin_error",error.toString());
-
-                                Toast.makeText(getApplicationContext(), "failed "
-                                                + error.toString(),
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        }, true);*/
+                alertDialog.show();
             }
         });
 
@@ -873,15 +765,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         .error(R.drawable.addbaner)
                         .into(img_adv);
 
-                final int k=i;
+                final int k = i;
 
                 img_adv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        if(Home_freg.add_url.get(k).equals("")){
+                        if (Home_freg.add_url.get(k).equals("")) {
 
-                        }else {
+                        } else {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Home_freg.add_url.get(k)));
                             startActivity(browserIntent);
                         }
@@ -899,7 +791,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             fliper_add.setVisibility(View.GONE);
             google_AdView.setVisibility(View.VISIBLE);
 
-            MobileAds.initialize(Login.this,getString(R.string.google_admobo_app_id));
+            MobileAds.initialize(Login.this, getString(R.string.google_admobo_app_id));
             AdRequest adRequest = new AdRequest.Builder().build();
             google_AdView.loadAd(adRequest);
 
@@ -917,7 +809,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 Log.i(TAG, " EMAIL EXITO!");
                 twitter_email = result.data;
                 Log.i(TAG, "RESULT:" + result.data);
-
 
                 //seesf;
 
@@ -955,7 +846,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
     }
-
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -1034,51 +924,25 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     private void findViews() {
 
-        linearLayout = (RelativeLayout) findViewById(R.id.ll_snackbar);
-        ch_loginkeep = (CheckBox) findViewById(R.id.chk_loginKeepme);
-        ed_email = (EditText) findViewById(R.id.edt_login_email);
-        ed_password = (EditText) findViewById(R.id.edt_login_password);
-        btn_forgotPwd = (TextView) findViewById(R.id.tv_forgotPwd);
-        btn_signin = (Button) findViewById(R.id.btn_login_signin);
-        btn_signup = (Button) findViewById(R.id.btn_login_signup);
-        btn_listurSpace = (LinearLayout) findViewById(R.id.btn_login_listurSpace);
-        fbLoginButton = (ImageView) findViewById(R.id.login_button_fb);
+        linearLayout = findViewById(R.id.ll_snackbar);
+        ch_loginkeep = findViewById(R.id.chk_loginKeepme);
+        ed_email = findViewById(R.id.edt_login_email);
+        ed_password = findViewById(R.id.edt_login_password);
+        btn_forgotPwd = findViewById(R.id.tv_forgotPwd);
+        btn_signin = findViewById(R.id.btn_login_signin);
+        btn_signup = findViewById(R.id.btn_login_signup);
+        btn_listurSpace = findViewById(R.id.btn_login_listurSpace);
+        fbLoginButton = findViewById(R.id.login_button_fb);
 
-        btn_twitter1 = (ImageView) findViewById(R.id.btn_login_twitter1);
-        btn_twitter = (TwitterLoginButton) findViewById(R.id.btn_login_twitter);
+        btn_twitter1 = findViewById(R.id.btn_login_twitter1);
+        btn_twitter = findViewById(R.id.btn_login_twitter);
 
-        btn_linkedin = (ImageView) findViewById(R.id.btn_login_linkedIn);
+        btn_linkedin = findViewById(R.id.btn_login_linkedIn);
 
-        btnSignIn = (ImageView) findViewById(R.id.btn_sign_in);
+        btnSignIn = findViewById(R.id.btn_sign_in);
 
-        fliper_add = (ViewFlipper) findViewById(R.id.flipper_add);
-        google_AdView = (AdView) findViewById(R.id.adView);
-
-        //generateHashkey("sa.upscale.coworking");
-
-    }
-
-    public void generateHashkey(String PACKAGE) {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    PACKAGE,
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-
-                Log.d("HashKey", Base64.encodeToString(md.digest(),
-                        Base64.NO_WRAP));
-                /*((TextView) findViewById(R.id.hashKey))
-                        .setText(Base64.encodeToString(md.digest(),
-                                Base64.NO_WRAP));*/
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.d("Name not found", e.getMessage(), e);
-
-        } catch (NoSuchAlgorithmException e) {
-            Log.d("Error", e.getMessage(), e);
-        }
+        fliper_add = findViewById(R.id.flipper_add);
+        google_AdView = findViewById(R.id.adView);
     }
 
     public void getFbKeyHash(String packageName) {
@@ -1097,19 +961,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
-    /*@Override
-    protected void onActivityResult(int reqCode, int resCode, Intent i) {
-        callbackManager.onActivityResult(reqCode, resCode, i);
-
-        LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, reqCode, resCode, i);
-
-        if (reqCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(i);
-            handleSignInResult(result);
-        }
-        btn_twitter.onActivityResult(reqCode, resCode, i);
-    }
-*/
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
@@ -1174,7 +1025,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         }
     }
 
-
     @Override
     public void onBackPressed() {
 
@@ -1195,6 +1045,181 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         super.onBackPressed();
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+        btn_twitter.onActivityResult(requestCode, resultCode, data);
+
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    private class PostRequestAsyncTask extends AsyncTask<String, Void, Boolean> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            pd = ProgressDialog.show(Login.this, "", "Please Wait...", true);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            if (urls.length > 0) {
+                String url = urls[0];
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpost = new HttpPost(url);
+                try {
+                    HttpResponse response = httpClient.execute(httpost);
+                    if (response != null) {
+                        //If status is OK 200
+                        if (response.getStatusLine().getStatusCode() == 200) {
+                            String result = EntityUtils.toString(response.getEntity());
+                            //Convert the string result to a JSON Object
+                            JSONObject resultJson = new JSONObject(result);
+                            //Extract data from JSON Response
+                            int expiresIn = resultJson.has("expires_in") ? resultJson.getInt("expires_in") : 0;
+                            accessToken = resultJson.has("access_token") ? resultJson.getString("access_token") : null;
+
+                            if (expiresIn > 0 && accessToken != null) {
+                                Log.i("Authorize", "This is the access Token: " + accessToken + ". It will expires in " + expiresIn + " secs");
+
+                                //Calculate date of expiration
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.add(Calendar.SECOND, expiresIn);
+                                long expireDate = calendar.getTimeInMillis();
+
+                                //Store both expires in and access token in shared preferences
+                                SharedPreferences preferences = getSharedPreferences("user_info", 0);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putLong("expires", expireDate);
+                                editor.putString("accessToken", accessToken);
+                                editor.apply();
+
+                                return true;
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.e("Authorize", "Error Http response " + e.getLocalizedMessage());
+                } catch (ParseException e) {
+                    Log.e("Authorize", "Error Parsing Http response " + e.getLocalizedMessage());
+                } catch (JSONException e) {
+                    Log.e("Authorize", "Error Parsing Http response " + e.getLocalizedMessage());
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean status) {
+            if (pd != null && pd.isShowing()) {
+                pd.dismiss();
+            }
+            if (status) {
+                //If everything went Ok, change to another activity.
+                String profileUrl = getProfileUrl(accessToken);
+                new GetProfileRequestAsyncTask().execute(profileUrl);
+            }
+        }
+    }
+
+    private class GetProfileRequestAsyncTask extends AsyncTask<String, Void, JSONObject> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            pd = ProgressDialog.show(Login.this, "", "Please Wait...", true);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            if (urls.length > 0) {
+                String url = urls[0];
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpget = new HttpGet(url);
+                httpget.setHeader("x-li-format", "json");
+                try {
+                    HttpResponse response = httpClient.execute(httpget);
+                    if (response != null) {
+                        //If status is OK 200
+                        if (response.getStatusLine().getStatusCode() == 200) {
+                            String result = EntityUtils.toString(response.getEntity());
+                            //Convert the string result to a JSON Object
+                            return new JSONObject(result);
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.e("Authorize", "Error Http response " + e.getLocalizedMessage());
+                } catch (JSONException e) {
+                    Log.e("Authorize", "Error Http response " + e.getLocalizedMessage());
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject data) {
+            if (pd != null && pd.isShowing()) {
+                pd.dismiss();
+            }
+            if (alertDialog != null && alertDialog.isShowing()) {
+                alertDialog.dismiss();
+            }
+            if (data != null) {
+
+                try {
+
+                    String Name = data.getString("firstName");
+                    String Email = data.getString("emailAddress");
+                    String ID = data.getString("id");
+                    String userpic = data.getString("pictureUrl");
+
+                    social_user_data.put("name", Name);
+                    social_user_data.put("email", Email);
+                    social_user_data.put("type", "linkedin");
+                    social_user_data.put("type_id", ID);
+                    social_user_data.put("image", userpic);
+                    social_user_data.put("gcm_id", 1);
+
+                    FB_Login fbLogin = new FB_Login();
+                    fbLogin.execute();
+
+                } catch (JSONException e) {
+                    Log.e("Authorize", "Error Parsing json " + e.getLocalizedMessage());
+                }
+            }
+        }
     }
 
     private class Task_changePwd extends AsyncTask<String, String, String> {
@@ -1532,75 +1557,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
             progressDialog.dismiss();
         }
-    }
-
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-
-        LISessionManager.getInstance(getApplicationContext()).onActivityResult(this, requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-        btn_twitter.onActivityResult(requestCode, resultCode, data);
-
-
-    }
-
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-
-    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        List<android.location.Address> addresses = null;
-
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-
-                String cityName = addresses.get(0).getAddressLine(0);
-                String stateName = addresses.get(0).getAddressLine(1);
-                String countryName = addresses.get(0).getAddressLine(2);
-
-                mstr_locationAddress = cityName + "," + stateName + "," + countryName;
-                mstr_locationCity = addresses.get(0).getLocality();
-                //Log.d("LocationAddress", mstr_locationAddress+"\n"+addresses.get(0).getAddressLine(0));
-                //Log.d("City", addresses.get(0).getLocality());
-                return addresses;
-            }
-            return null;
-        } catch (IOException ignored) {
-            //do something
-        }
-        return addresses;
     }
 
 

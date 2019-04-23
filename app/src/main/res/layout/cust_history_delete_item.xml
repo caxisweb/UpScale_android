@@ -40,6 +40,7 @@
                 <LinearLayout
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
+
                 <sa.upscale.coworking.CustomFont.Mybutton
                     android:layout_weight="1"
                     android:layout_marginRight="@dimen/margin3"
@@ -47,7 +48,7 @@
                     android:id="@+id/btn_hiostory_delete_cancle"
                     android:background="@color/profile_contact"
                     android:layout_width="match_parent"
-                    android:text="@string/cancle"
+                    android:text="@string/no"
                     android:textSize="16dp"
                     android:textAllCaps="false"
                     android:paddingLeft="@dimen/margin10"
@@ -65,7 +66,7 @@
                     android:layout_marginLeft="@dimen/margin3"
                     android:background="@color/historydlg_delete"
                     android:layout_width="match_parent"
-                    android:text="@string/delete"
+                    android:text="@string/yes"
                     android:textSize="16dp"
                     android:paddingLeft="@dimen/margin5"
                     android:paddingRight="@dimen/margin5"

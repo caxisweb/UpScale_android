@@ -33,7 +33,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import sa.upscale.coworking.Getdata;
 import sa.upscale.coworking.Login;
 import sa.upscale.coworking.NavigationActivity;
 import sa.upscale.coworking.Postdata;
@@ -80,7 +79,7 @@ public class Package_freg extends Fragment {
 
         session = new SessionManager(getActivity());
 
-        lv_packagelist = (ListView) view.findViewById(R.id.lst_package);
+        lv_packagelist = view.findViewById(R.id.lst_package);
 
         lv_packagelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -206,22 +205,22 @@ public class Package_freg extends Fragment {
         dialog.setContentView(R.layout.package_detail_view);
         dialog.setCancelable(false);
 
-        ImageView img_close = (ImageView) dialog.findViewById(R.id.img_filter_close);
-        Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-        Button btn_confirm = (Button) dialog.findViewById(R.id.btn_confirm);
-        final RadioGroup rg_paymenthod = (RadioGroup) dialog.findViewById(R.id.rg_paymentmethod);
+        ImageView img_close = dialog.findViewById(R.id.img_filter_close);
+        Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+        Button btn_confirm = dialog.findViewById(R.id.btn_confirm);
+        final RadioGroup rg_paymenthod = dialog.findViewById(R.id.rg_paymentmethod);
 
-        RadioButton rd_cod = (RadioButton) dialog.findViewById(R.id.rd_cod);
-        RadioButton rd_visa = (RadioButton) dialog.findViewById(R.id.rd_visa);
-        RadioButton rd_bank = (RadioButton) dialog.findViewById(R.id.rd_bank);
+        RadioButton rd_cod = dialog.findViewById(R.id.rd_cod);
+        RadioButton rd_visa = dialog.findViewById(R.id.rd_visa);
+        RadioButton rd_bank = dialog.findViewById(R.id.rd_bank);
 
-        TextView tv_package_detail = (TextView) dialog.findViewById(R.id.tv_package_detail);
-        TextView tv_package_space = (TextView) dialog.findViewById(R.id.tv_package_space);
-        final TextView tv_note_visa = (TextView) dialog.findViewById(R.id.tv_visa_note);
-        final LinearLayout lv_bank_detail = (LinearLayout) dialog.findViewById(R.id.lv_bank_detail);
-        final TextView tv_bank_name = (TextView) dialog.findViewById(R.id.tv_bank_name);
-        final TextView tv_ibn = (TextView) dialog.findViewById(R.id.tv_ibn);
-        final TextView tv_account_no = (TextView) dialog.findViewById(R.id.tv_account_no);
+        TextView tv_package_detail = dialog.findViewById(R.id.tv_package_detail);
+        TextView tv_package_space = dialog.findViewById(R.id.tv_package_space);
+        final TextView tv_note_visa = dialog.findViewById(R.id.tv_visa_note);
+        final LinearLayout lv_bank_detail = dialog.findViewById(R.id.lv_bank_detail);
+        final TextView tv_bank_name = dialog.findViewById(R.id.tv_bank_name);
+        final TextView tv_ibn = dialog.findViewById(R.id.tv_ibn);
+        final TextView tv_account_no = dialog.findViewById(R.id.tv_account_no);
 
         tv_package_detail.setText(pack_detail);
 
@@ -437,8 +436,8 @@ public class Package_freg extends Fragment {
 
     private void navImageIcon() {
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.navIcon);
-        TextView tv_title = (TextView) view.findViewById(R.id.tv_nav_action_titile);
+        ImageView imageView = view.findViewById(R.id.navIcon);
+        TextView tv_title = view.findViewById(R.id.tv_nav_action_titile);
         String strName = getString(R.string.packages);
         tv_title.setText(strName);
         final NavigationActivity navigationActivity = (NavigationActivity) getActivity();

@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress AndroidDomInspection -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidDomInspection -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+android:id/background"
+    <item
+        android:id="@+android:id/background"
         android:drawable="@drawable/star_emp" />
-    <item android:id="@+android:id/secondaryProgress"
+    <item
+        android:id="@+android:id/secondaryProgress"
         android:drawable="@drawable/star_emp" />
-    <item android:id="@+android:id/progress"
+    <item
+        android:id="@+android:id/progress"
         android:drawable="@drawable/star" />
 </layer-list>

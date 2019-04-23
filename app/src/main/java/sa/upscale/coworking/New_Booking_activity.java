@@ -109,7 +109,7 @@ public class New_Booking_activity extends Fragment implements View.OnClickListen
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
 
             snackbar.show();
@@ -162,7 +162,7 @@ public class New_Booking_activity extends Fragment implements View.OnClickListen
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();
@@ -184,8 +184,8 @@ public class New_Booking_activity extends Fragment implements View.OnClickListen
 
     private void navImageIcon() {
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.navIcon);
-        TextView tv_title = (TextView) view.findViewById(R.id.tv_nav_action_titile);
+        ImageView imageView = view.findViewById(R.id.navIcon);
+        TextView tv_title = view.findViewById(R.id.tv_nav_action_titile);
         String strName = getString(R.string.booking);
         tv_title.setText(strName);
         final NavigationActivity navigationActivity = (NavigationActivity) getActivity();
@@ -211,27 +211,27 @@ public class New_Booking_activity extends Fragment implements View.OnClickListen
     private void findViews() {
 
 
-        img_slider = (CarouselView) view.findViewById(R.id.imgslider_booking);
+        img_slider = view.findViewById(R.id.imgslider_booking);
 
-        linearLayout = (LinearLayout) view.findViewById(R.id.ll_snackbar);
-        btn_meetingroom = (FrameLayout) view.findViewById(R.id.fl_space_meetingRoom);
-        btn_desk = (FrameLayout) view.findViewById(R.id.fl_space_desk);
-        btn_discuroom = (FrameLayout) view.findViewById(R.id.fl_space_discussonroom);
-        btn_privateroom = (FrameLayout) view.findViewById(R.id.fl_space_privateRoom);
-        btn_conferenceroom = (FrameLayout) view.findViewById(R.id.fl_space_conferenceRoom);
-        btn_others = (FrameLayout) view.findViewById(R.id.fl_space_otherRoom);
+        linearLayout = view.findViewById(R.id.ll_snackbar);
+        btn_meetingroom = view.findViewById(R.id.fl_space_meetingRoom);
+        btn_desk = view.findViewById(R.id.fl_space_desk);
+        btn_discuroom = view.findViewById(R.id.fl_space_discussonroom);
+        btn_privateroom = view.findViewById(R.id.fl_space_privateRoom);
+        btn_conferenceroom = view.findViewById(R.id.fl_space_conferenceRoom);
+        btn_others = view.findViewById(R.id.fl_space_otherRoom);
 
-        tv_count1 = (TextView) view.findViewById(R.id.tv_newBooking_count1);
-        tv_count2 = (TextView) view.findViewById(R.id.tv_newBooking_count2);
-        tv_count3 = (TextView) view.findViewById(R.id.tv_newBooking_count3);
-        tv_count4 = (TextView) view.findViewById(R.id.tv_newBooking_count4);
-        tv_count5 = (TextView) view.findViewById(R.id.tv_newBooking_count5);
-        tv_count6 = (TextView) view.findViewById(R.id.tv_newBooking_count6);
+        tv_count1 = view.findViewById(R.id.tv_newBooking_count1);
+        tv_count2 = view.findViewById(R.id.tv_newBooking_count2);
+        tv_count3 = view.findViewById(R.id.tv_newBooking_count3);
+        tv_count4 = view.findViewById(R.id.tv_newBooking_count4);
+        tv_count5 = view.findViewById(R.id.tv_newBooking_count5);
+        tv_count6 = view.findViewById(R.id.tv_newBooking_count6);
 
-        btn_next = (LinearLayout) view.findViewById(R.id.btn_bookingNext);
+        btn_next = view.findViewById(R.id.btn_bookingNext);
 
 
-        ed_loation = (AutoCompleteTextView) view.findViewById(R.id.ed_locationNAme);
+        ed_loation = view.findViewById(R.id.ed_locationNAme);
         ed_loation.setThreshold(1);
 
         btn_next.setOnClickListener(this);

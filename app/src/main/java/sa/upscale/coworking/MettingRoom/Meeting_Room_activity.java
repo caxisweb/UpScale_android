@@ -100,7 +100,6 @@ public class Meeting_Room_activity extends AppCompatActivity implements View.OnC
 
     String mstr_location, mstr_locationId, mstr_count, mstr_type;
     public static String mstr_typeName;/* mstr_meeting_status, mstr_desk_status, mstr_discussion_status, mstr_private_status, mstr_conference_status*/
-    ;
     public static String mstr_book_date, mstr_book_from, mstr_book_to;
     private TextView tv_count, tv_date, tv_from, tv_to;
     private RelativeLayout btn_date, btn_from, btn_to;
@@ -253,8 +252,8 @@ public class Meeting_Room_activity extends AppCompatActivity implements View.OnC
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         View view = getSupportActionBar().getCustomView();
 
-        ImageButton imageButton = (ImageButton) view.findViewById(R.id.action_bar_back);
-        TextView tv_title = (TextView) view.findViewById(R.id.action_bar_title);
+        ImageButton imageButton = view.findViewById(R.id.action_bar_back);
+        TextView tv_title = view.findViewById(R.id.action_bar_title);
         String strName = getString(R.string.booking);
         tv_title.setText(strName);
 
@@ -265,7 +264,7 @@ public class Meeting_Room_activity extends AppCompatActivity implements View.OnC
             }
         });
 
-        ImageView img_filter = (ImageView) view.findViewById(R.id.action_bar_filter);
+        ImageView img_filter = view.findViewById(R.id.action_bar_filter);
         img_filter.setVisibility(View.GONE);
         img_filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,28 +276,28 @@ public class Meeting_Room_activity extends AppCompatActivity implements View.OnC
 
     private void findViews() {
 
-        ll_areaName = (LinearLayout) findViewById(R.id.ll_areaNameDisplay);
-        tv_areaName = (TextView) findViewById(R.id.tv_selected_areaName);
-        img_areaSelected= (ImageView) findViewById(R.id.img_selected_areaImg);
-        linearLayout = (RelativeLayout) findViewById(R.id.ll_snackbar);
-        tv_count = (TextView) findViewById(R.id.tv_meetingRoom_count);
-        tv_date = (TextView) findViewById(R.id.tv_meetingRoom_date);
-        tv_from = (TextView) findViewById(R.id.tv_meetingRoom_from);
-        tv_to = (TextView) findViewById(R.id.tv_meetingRoom_to);
+        ll_areaName = findViewById(R.id.ll_areaNameDisplay);
+        tv_areaName = findViewById(R.id.tv_selected_areaName);
+        img_areaSelected = findViewById(R.id.img_selected_areaImg);
+        linearLayout = findViewById(R.id.ll_snackbar);
+        tv_count = findViewById(R.id.tv_meetingRoom_count);
+        tv_date = findViewById(R.id.tv_meetingRoom_date);
+        tv_from = findViewById(R.id.tv_meetingRoom_from);
+        tv_to = findViewById(R.id.tv_meetingRoom_to);
 
-        tv_count = (TextView) findViewById(R.id.tv_meetingRoom_count);
-        btn_date = (RelativeLayout) findViewById(R.id.rl_meetingRoom_date);
-        btn_from = (RelativeLayout) findViewById(R.id.rl_meetingRoom_from);
-        btn_to = (RelativeLayout) findViewById(R.id.rl_meetingRoom_to);
+        tv_count = findViewById(R.id.tv_meetingRoom_count);
+        btn_date = findViewById(R.id.rl_meetingRoom_date);
+        btn_from = findViewById(R.id.rl_meetingRoom_from);
+        btn_to = findViewById(R.id.rl_meetingRoom_to);
 
-        btn_back = (LinearLayout) findViewById(R.id.ll_meetingRoom_back);
-        btn_next = (LinearLayout) findViewById(R.id.ll_meetingRoom_next);
-        sp_bookingEveryday = (Spinner) findViewById(R.id.sp_bookingList_detail_repeatBookingEveryday);
+        btn_back = findViewById(R.id.ll_meetingRoom_back);
+        btn_next = findViewById(R.id.ll_meetingRoom_next);
+        sp_bookingEveryday = findViewById(R.id.sp_bookingList_detail_repeatBookingEveryday);
 
-        tv_enddate = (TextView) findViewById(R.id.tv_bookingrommDetails_enddate);
-        chk_bookingReapt = (CheckBox) findViewById(R.id.chk_bookingrommDetails_repeat);
-        ll_repeatView = (LinearLayout) findViewById(R.id.ll_repeatView);
-        btn_endDate= (RelativeLayout) findViewById(R.id.rl_bookingrommDetails_enddate);
+        tv_enddate = findViewById(R.id.tv_bookingrommDetails_enddate);
+        chk_bookingReapt = findViewById(R.id.chk_bookingrommDetails_repeat);
+        ll_repeatView = findViewById(R.id.ll_repeatView);
+        btn_endDate = findViewById(R.id.rl_bookingrommDetails_enddate);
 
 
         btn_date.setOnClickListener(this);
@@ -440,7 +439,7 @@ public class Meeting_Room_activity extends AppCompatActivity implements View.OnC
 
                             // Changing action button text color
                             View sbView = snackbar.getView();
-                            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                             textView.setTextColor(Color.YELLOW);
 
                             snackbar.show();

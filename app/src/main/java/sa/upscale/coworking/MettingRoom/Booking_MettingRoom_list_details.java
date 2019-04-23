@@ -125,9 +125,9 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
     long total_hour = 0;
     float total_price = 0;
-    int privious_hour=0;
+    int privious_hour = 0;
     int vat_per = 0;
-    float tex_amount=0;
+    float tex_amount = 0;
 
     static String str_location, str_logo, str_description, str_esaal_product_id, str_spacId, str_spaceuserId, strName, str_capacity, str_price, mstr_book_time_diff, mstr_book_price, str_space_img, str_repet_no = "1";
     String str_is_subscriber = "0";
@@ -319,69 +319,21 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             @Override
             public void onClick(View view) {
 
-                if (str_is_subscriber.equals("0")) {
+                try {
 
-                    if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                    Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
+                    Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
 
-                        btn_code_apply.setVisibility(View.VISIBLE);
-                        btn_code_remove.setVisibility(View.GONE);
-                        tv_dis_amount.setVisibility(View.GONE);
-                        et_promo_code.setText("");
+                    long mills = date1.getTime() - date2.getTime();
+                    long hours = mills / (1000 * 60 * 60);
 
-                        //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-                        total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                    hours = (hours < 0 ? -hours : hours);
 
-                        promocode_id = "0";
-                        discount_amount = "0";
+                    Log.i("hour", hours + "");
+                    if (hours > 0) {
 
-                        Task_checkdate task_checkdate = new Task_checkdate();
-                        task_checkdate.execute();
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
-                    }
-
-                } else if (str_is_subscriber.equals("1") && str_type.equals("2")) {
-
-                    if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
-
-                        btn_code_apply.setVisibility(View.VISIBLE);
-                        btn_code_remove.setVisibility(View.GONE);
-                        tv_dis_amount.setVisibility(View.GONE);
-                        et_promo_code.setText("");
-
-                        //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-                        total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
-
-                        promocode_id = "0";
-                        discount_amount = "0";
-
-                        Task_checkdate task_checkdate = new Task_checkdate();
-                        task_checkdate.execute();
-
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
-                    }
-                } else {
-
-                    try {
-
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
-                        Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
-                        Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
-
-                        long mills = date1.getTime() - date2.getTime();
-                        long hours = mills / (1000 * 60 * 60);
-
-                        hours = (hours < 0 ? -hours : hours);
-
-                        Log.i("total_hour : ", (total_hour + hours+privious_hour) + "");
-
-                        if ((total_hour + hours+privious_hour) < 5) {
+                        if (str_is_subscriber.equals("0")) {
 
                             if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
 
@@ -391,7 +343,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                                 et_promo_code.setText("");
 
                                 //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-
                                 total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
                                 btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
@@ -406,16 +357,81 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
                             }
 
+                        } else if (str_is_subscriber.equals("1") && str_type.equals("2")) {
+
+                            if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+
+                                btn_code_apply.setVisibility(View.VISIBLE);
+                                btn_code_remove.setVisibility(View.GONE);
+                                tv_dis_amount.setVisibility(View.GONE);
+                                et_promo_code.setText("");
+
+                                //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
+                                total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
+                                btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+
+                                promocode_id = "0";
+                                discount_amount = "0";
+
+                                Task_checkdate task_checkdate = new Task_checkdate();
+                                task_checkdate.execute();
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
+                            }
                         } else {
 
-                            Toast.makeText(getApplicationContext(), "Your Can not book space for More than 4 Hour", Toast.LENGTH_LONG).show();
-                        }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                            Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
+                            Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
+
+                            long mills = date1.getTime() - date2.getTime();
+                            long hours = mills / (1000 * 60 * 60);
+
+                            hours = (hours < 0 ? -hours : hours);
+*/
+                            Log.i("total_hour 2 : ", (total_hour + hours + privious_hour) + "");
+
+                            if ((total_hour + hours + privious_hour) < 5) {
+
+                                if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+
+                                    btn_code_apply.setVisibility(View.VISIBLE);
+                                    btn_code_remove.setVisibility(View.GONE);
+                                    tv_dis_amount.setVisibility(View.GONE);
+                                    et_promo_code.setText("");
+
+                                    //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
+
+                                    total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
+                                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+
+                                    promocode_id = "0";
+                                    discount_amount = "0";
+
+                                    Task_checkdate task_checkdate = new Task_checkdate();
+                                    task_checkdate.execute();
+
+                                } else {
+
+                                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
+                                }
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), "Your Can not book space for More than 4 Hour", Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Can not book space for Less than 1 hour", Toast.LENGTH_LONG).show();
                     }
 
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -523,42 +539,42 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     private void findViews() {
 
 
-        rating_profile = (RatingBar) findViewById(R.id.rating_bookingList_detail_hote_rating);
+        rating_profile = findViewById(R.id.rating_bookingList_detail_hote_rating);
 
-        linearLayout = (RelativeLayout) findViewById(R.id.ll_snackbar);
+        linearLayout = findViewById(R.id.ll_snackbar);
 
-        img_slider = (CarouselView) findViewById(R.id.imgslider_bookingDetails);
+        img_slider = findViewById(R.id.imgslider_bookingDetails);
 
-        tv_date = (TextView) findViewById(R.id.tv_bookingList_detail_date);
-        tv_from = (TextView) findViewById(R.id.tv_bookingList_detail_from);
-        tv_to = (TextView) findViewById(R.id.tv_bookingList_detail_to);
+        tv_date = findViewById(R.id.tv_bookingList_detail_date);
+        tv_from = findViewById(R.id.tv_bookingList_detail_from);
+        tv_to = findViewById(R.id.tv_bookingList_detail_to);
 
-        tv_title = (TextView) findViewById(R.id.tv_bookingList_detail_Title);
-        tv_price = (TextView) findViewById(R.id.tv_price);
+        tv_title = findViewById(R.id.tv_bookingList_detail_Title);
+        tv_price = findViewById(R.id.tv_price);
 
-        tv_personCapacity = (TextView) findViewById(R.id.tv_bookingList_detail_person);
-        tv_location = (TextView) findViewById(R.id.tv_bookingList_detais_location);
-        tv_ratingreview = (TextView) findViewById(R.id.tv_bookingList_detail_hote_ratingreview);
+        tv_personCapacity = findViewById(R.id.tv_bookingList_detail_person);
+        tv_location = findViewById(R.id.tv_bookingList_detais_location);
+        tv_ratingreview = findViewById(R.id.tv_bookingList_detail_hote_ratingreview);
 
-        sp_repet_type = (Spinner) findViewById(R.id.sp_repet_type);
-        sp_repet_no = (Spinner) findViewById(R.id.sp_repet_no);
+        sp_repet_type = findViewById(R.id.sp_repet_type);
+        sp_repet_no = findViewById(R.id.sp_repet_no);
 
-        lv_bookdate = (LinearLayout) findViewById(R.id.lv_bookdate);
-        img_add_date = (ImageView) findViewById(R.id.img_add_date);
+        lv_bookdate = findViewById(R.id.lv_bookdate);
+        img_add_date = findViewById(R.id.img_add_date);
 
-        tv_note_visa = (TextView) findViewById(R.id.tv_visa_note);
+        tv_note_visa = findViewById(R.id.tv_visa_note);
 
-        rd_cod = (RadioButton) findViewById(R.id.rd_cod);
-        rd_visa = (RadioButton) findViewById(R.id.rd_visa);
-        rd_bank = (RadioButton) findViewById(R.id.rd_bank);
-        rg_paymenthod = (RadioGroup) findViewById(R.id.rg_paymentmethod);
+        rd_cod = findViewById(R.id.rd_cod);
+        rd_visa = findViewById(R.id.rd_visa);
+        rd_bank = findViewById(R.id.rd_bank);
+        rg_paymenthod = findViewById(R.id.rg_paymentmethod);
 
-        lv_bank_detail = (LinearLayout) findViewById(R.id.lv_bank_detail);
-        tv_bank_name = (TextView) findViewById(R.id.tv_bank_name);
-        tv_ibn = (TextView) findViewById(R.id.tv_ibn);
-        tv_account_no = (TextView) findViewById(R.id.tv_account_no);
+        lv_bank_detail = findViewById(R.id.lv_bank_detail);
+        tv_bank_name = findViewById(R.id.tv_bank_name);
+        tv_ibn = findViewById(R.id.tv_ibn);
+        tv_account_no = findViewById(R.id.tv_account_no);
 
-        tv_subscriber = (TextView) findViewById(R.id.tv_subscriber);
+        tv_subscriber = findViewById(R.id.tv_subscriber);
 
         repet_type.add("Monthly");
 
@@ -572,8 +588,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         final ArrayAdapter<String> rep_type_adp_no = new ArrayAdapter<String>(getApplicationContext(), R.layout.custome_spiner_view, R.id.tv_item, repet_no);
         sp_repet_no.setAdapter(rep_type_adp_no);
 
-        expandableLayout1 = (ExpandableLayout) findViewById(R.id.expandable_layout_1);
-        expand_button_1 = (TextView) findViewById(R.id.expand_button_1);
+        expandableLayout1 = findViewById(R.id.expandable_layout_1);
+        expand_button_1 = findViewById(R.id.expand_button_1);
 
         expandableLayout1.expand();
         expand_button_1.setTextColor(getResources().getColor(R.color.white));
@@ -614,8 +630,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             }
         });
 
-        expandableLayout2 = (ExpandableLayout) findViewById(R.id.expandable_layout_2);
-        expand_button_2 = (TextView) findViewById(R.id.expand_button_2);
+        expandableLayout2 = findViewById(R.id.expandable_layout_2);
+        expand_button_2 = findViewById(R.id.expand_button_2);
         expand_button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -653,8 +669,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             }
         });
 
-        expandableLayout3 = (ExpandableLayout) findViewById(R.id.expandable_layout_3);
-        expand_button_3 = (TextView) findViewById(R.id.expand_button_3);
+        expandableLayout3 = findViewById(R.id.expandable_layout_3);
+        expand_button_3 = findViewById(R.id.expand_button_3);
         expand_button_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -691,8 +707,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             }
         });
 
-        expandableLayout4 = (ExpandableLayout) findViewById(R.id.expandable_layout_4);
-        expand_button_4 = (TextView) findViewById(R.id.expand_button_4);
+        expandableLayout4 = findViewById(R.id.expandable_layout_4);
+        expand_button_4 = findViewById(R.id.expand_button_4);
         expand_button_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -724,14 +740,14 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             }
         });
 
-        tv_summarydetails = (TextView) findViewById(R.id.tv_summarydetails);
+        tv_summarydetails = findViewById(R.id.tv_summarydetails);
 
-        tv_dis_amount = (TextView) findViewById(R.id.tv_dis_amount);
+        tv_dis_amount = findViewById(R.id.tv_dis_amount);
 
-        et_promo_code = (EditText) findViewById(R.id.et_promo_code);
-        btn_bookroom = (Button) findViewById(R.id.btn_book_room);
-        btn_code_apply = (Button) findViewById(R.id.btn_code_apply);
-        btn_code_remove = (Button) findViewById(R.id.btn_code_remove);
+        et_promo_code = findViewById(R.id.et_promo_code);
+        btn_bookroom = findViewById(R.id.btn_book_room);
+        btn_code_apply = findViewById(R.id.btn_code_apply);
+        btn_code_remove = findViewById(R.id.btn_code_remove);
 
 
         btn_bookroom.setOnClickListener(this);
@@ -1423,7 +1439,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     }
 
 
-
                 } else {
                     message1 = job_details.getString(message);
                 }
@@ -1521,8 +1536,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     book_price.clear();
                     ch_book_date.clear();
 
-                    total_hour=0;
-                    total_price=0;
+                    total_hour = 0;
+                    total_price = 0;
                     lv_bookdate.removeAllViews();
                 }
 
@@ -1618,13 +1633,13 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 data_ch_date.put("date", tv_date.getText().toString().trim());
                 data_ch_date.put("from_time", tv_from.getText().toString().trim());
                 data_ch_date.put("to_time", tv_to.getText().toString().trim());
-                data_ch_date.put("is_subscribe",str_is_subscriber);
+                data_ch_date.put("is_subscribe", str_is_subscriber);
 
-                if(session.isLoggedIn()){
-                    user_details=session.getUserDetails();
-                    data_ch_date.put("u_id",user_details.get(SessionManager.user_Id));
-                }else{
-                    data_ch_date.put("u_id","0");
+                if (session.isLoggedIn()) {
+                    user_details = session.getUserDetails();
+                    data_ch_date.put("u_id", user_details.get(SessionManager.user_Id));
+                } else {
+                    data_ch_date.put("u_id", "0");
                 }
 
                 Postdata postdata = new Postdata();
@@ -1636,12 +1651,11 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 status1 = job_details.getString(status);
                 message1 = job_details.getString(message);
 
-                if(status1.equals("1")){
-                    privious_hour=job_details.getInt("hours");
-                }else{
-                    privious_hour=0;
+                if (status1.equals("1")) {
+                    privious_hour = job_details.getInt("hours");
+                } else {
+                    privious_hour = 0;
                 }
-
 
 
             } catch (JSONException e) {
@@ -1688,7 +1702,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     total_hour = total_hour + hours;
                     tex_amount = ((Float.parseFloat(str_price) * total_hour * Float.parseFloat(str_repet_no)) * vat_per) / 100;
 
-                    Log.i("text_total",tex_amount+"");
+                    Log.i("text_total", tex_amount + "");
 
                     total_price = ((Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no)) + tex_amount;
 

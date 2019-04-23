@@ -1,5 +1,6 @@
 package sa.upscale.coworking;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -10,7 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.location.Geocoder;
-import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -65,41 +66,31 @@ import sa.upscale.coworking.Notifications.Notification;
 import sa.upscale.coworking.fregment.Home_freg;
 import sa.upscale.coworking.fregment.Package_freg;
 
+import static sa.upscale.coworking.SplashScreen.location;
+
 public class NavigationActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
-    public static Location location;
-
-    final int REQUEST_LOCATION = 11;
     private static final int LOCATION_REQUEST_CODE = 111;
-    public static String mstr_locationAddress;
-    public static String mstr_locationCity;
-
-    private GoogleApiClient mGoogleApiClient;
-
     private static final String status = "status";
     private static final String message = "message";
-    String status1 = "0", message1 = "try Again";
 
-    JSONObject data_fatchProfile = new JSONObject();
-
-
+    public static String mstr_locationAddress;
+    public static String mstr_locationCity;
+    public static int backFlag = 0;
+    final int REQUEST_LOCATION = 11;
     public CustomNavigationView navView;
     public DrawerLayout drawerLayout;
-
+    String status1 = "0", message1 = "try Again";
+    JSONObject data_fatchProfile = new JSONObject();
     android.support.v4.app.FragmentTransaction ft;
 
     SessionManager sessionManager;
     HashMap<String, String> user_details = new HashMap<>();
     HashMap<String, String> lang = new HashMap<>();
-
-    public static int backFlag = 0;
-
     boolean doubleBackToExitPressedOnce = false;
-
     RelativeLayout nav_profile, nav_wishList, nav_notification, nav_package, nav_about, nav_location, nav_chat, nav_chngLanguage, nav_feedback, nav_logOut, nav_list_space, nav_signup, nav_login;
     RelativeLayout nav_home, nav_history;
     ImageView img_facebook, img_twitter, img_google;
-
     String picpath_identify = "";
     Activity activity;
     String str_language_Code = "";
@@ -107,7 +98,33 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     TextView tv_swEnglish, tv_swArabic;
     ImageView img_profile, img_logo;
     TextView tv_userName;
+    private GoogleApiClient mGoogleApiClient;
 
+    //    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
+    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<android.location.Address> addresses = null;
+
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+
+                String cityName = addresses.get(0).getAddressLine(0);
+                String stateName = addresses.get(0).getAddressLine(1);
+                String countryName = addresses.get(0).getAddressLine(2);
+
+                mstr_locationAddress = cityName + "," + stateName + "," + countryName;
+                mstr_locationCity = addresses.get(0).getLocality();
+                //Log.d("LocationAddress", mstr_locationAddress+"\n"+addresses.get(0).getAddressLine(0));
+                //Log.d("City", addresses.get(0).getLocality());
+                return addresses;
+            }
+            return null;
+        } catch (IOException ignored) {
+            //do something
+        }
+        return addresses;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +138,8 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
         sessionManager = new SessionManager(this);
 
-        navView = (CustomNavigationView) findViewById(R.id.navView);
-        drawerLayout = (DrawerLayout) findViewById(R.id.activity_main);
+        navView = findViewById(R.id.navView);
+        drawerLayout = findViewById(R.id.activity_main);
 
         navView.setHeaderView(getHeader(), 20);
         navView.setScrollState(CustomNavigationView.MENU_ITEM_SCROLLABLE);
@@ -151,45 +168,74 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        enableLocationService();
+        if (!isGPSEnabled(this)) {
+            enableLocationService();
+        } else {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Home_freg new_booking_activity = new Home_freg();
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainContent, new_booking_activity).commit();
+        }
+    }
+
+    public boolean isGPSEnabled(Context mContext) {
+        LocationManager lm = (LocationManager)
+                mContext.getSystemService(Context.LOCATION_SERVICE);
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     private View getHeader() {
 
         View view = getLayoutInflater().inflate(R.layout.header, null);
-        img_profile = (ImageView) view.findViewById(R.id.img_profile);
-        img_logo = (ImageView) view.findViewById(R.id.img_logo);
-        tv_userName = (TextView) view.findViewById(R.id.tv_userName);
+        img_profile = view.findViewById(R.id.img_profile);
+        img_logo = view.findViewById(R.id.img_logo);
+        tv_userName = view.findViewById(R.id.tv_userName);
 
 
-        tv_swEnglish = (TextView) view.findViewById(R.id.tv_sw_english);
-        tv_swArabic = (TextView) view.findViewById(R.id.tv_sw_arabic);
+        tv_swEnglish = view.findViewById(R.id.tv_sw_english);
+        tv_swArabic = view.findViewById(R.id.tv_sw_arabic);
 
         // setdefault_languageselected();
 
         tv_swArabic.setOnClickListener(this);
         tv_swEnglish.setOnClickListener(this);
 
-        nav_home = (RelativeLayout) view.findViewById(R.id.nav_home);
+        nav_home = view.findViewById(R.id.nav_home);
 
-        nav_profile = (RelativeLayout) view.findViewById(R.id.nav_profile);
-        nav_wishList = (RelativeLayout) view.findViewById(R.id.nav_wishlist);
-        nav_notification = (RelativeLayout) view.findViewById(R.id.nav_notification);
-        nav_package = (RelativeLayout) view.findViewById(R.id.nav_package);
-        nav_about = (RelativeLayout) view.findViewById(R.id.nav_aboutUs);
-        nav_location = (RelativeLayout) view.findViewById(R.id.nav_ourLocation);
-        nav_chat = (RelativeLayout) view.findViewById(R.id.nav_chat);
-        nav_chngLanguage = (RelativeLayout) view.findViewById(R.id.nav_language_change);
-        nav_history = (RelativeLayout) view.findViewById(R.id.nav_history);
-        nav_feedback = (RelativeLayout) view.findViewById(R.id.nav_feedBack);
-        nav_signup = (RelativeLayout) view.findViewById(R.id.nav_list_signup);
-        nav_login = (RelativeLayout) view.findViewById(R.id.nav_list_login);
-        nav_logOut = (RelativeLayout) view.findViewById(R.id.nav_logOut);
-        nav_list_space = (RelativeLayout) view.findViewById(R.id.nav_list_space);
+        nav_profile = view.findViewById(R.id.nav_profile);
+        nav_wishList = view.findViewById(R.id.nav_wishlist);
+        nav_notification = view.findViewById(R.id.nav_notification);
+        nav_package = view.findViewById(R.id.nav_package);
+        nav_about = view.findViewById(R.id.nav_aboutUs);
+        nav_location = view.findViewById(R.id.nav_ourLocation);
+        nav_chat = view.findViewById(R.id.nav_chat);
+        nav_chngLanguage = view.findViewById(R.id.nav_language_change);
+        nav_history = view.findViewById(R.id.nav_history);
+        nav_feedback = view.findViewById(R.id.nav_feedBack);
+        nav_signup = view.findViewById(R.id.nav_list_signup);
+        nav_login = view.findViewById(R.id.nav_list_login);
+        nav_logOut = view.findViewById(R.id.nav_logOut);
+        nav_list_space = view.findViewById(R.id.nav_list_space);
 
-        img_facebook = (ImageView) view.findViewById(R.id.btn_share_fb);
-        img_twitter = (ImageView) view.findViewById(R.id.btn_share_twitter1);
-        img_google = (ImageView) view.findViewById(R.id.btn_google_share);
+        img_facebook = view.findViewById(R.id.btn_share_fb);
+        img_twitter = view.findViewById(R.id.btn_share_twitter1);
+        img_google = view.findViewById(R.id.btn_google_share);
 
         if (sessionManager.isLoggedIn()) {
 
@@ -507,18 +553,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
                 intent.putExtra("city", mstr_locationCity);
                 startActivity(intent);
 
-
-                //getCountryName(this, Double.parseDouble(latitude), Double.parseDouble(longitude));
-                //lat_flag = 1;
-
-               /* Intent intent = new Intent(NavigationActivity.this, List_ur_Space.class);
-                intent.putExtra("type", "login");
-                intent.putExtra("lati", latitude);
-                intent.putExtra("longi", longitude);
-                intent.putExtra("address", mstr_locationAddress);
-                intent.putExtra("city", mstr_locationCity);
-                startActivity(intent);*/
-
                 break;
             case R.id.nav_list_signup:
 
@@ -568,7 +602,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         drawerLayout.closeDrawers();
     }
 
-
     private void changeLanguageDLG() {
 
         if (str_language_Code.equals("1"))  //english
@@ -606,18 +639,9 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             Intent refresh = new Intent(NavigationActivity.this, NavigationActivity.class);
             startActivity(refresh);
             finish();
-
-/*
-            Home_freg new_booking_activity = new Home_freg();
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainContent, new_booking_activity).commit();
-*/
-
-
         }
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -661,7 +685,6 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-
     private void langugeDlg() {
 
         if (sessionManager.isLoggedIn()) {
@@ -695,6 +718,203 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onStart() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    private void enableLocationService() {
+
+        if (mGoogleApiClient == null) {
+
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
+
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setInterval(30 * 1000);
+            locationRequest.setFastestInterval(5 * 1000);
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                    .addLocationRequest(locationRequest);
+
+            builder.setAlwaysShow(true);
+
+            PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+            result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+                @Override
+                public void onResult(LocationSettingsResult result) {
+                    final Status status = result.getStatus();
+                    switch (status.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                // Show the dialog by calling startResolutionForResult(),
+                                // and check the result in onActivityResult().
+                                status.startResolutionForResult(NavigationActivity.this, REQUEST_LOCATION);
+
+                            } catch (IntentSender.SendIntentException e) {
+                                // Ignore the error.
+                                e.printStackTrace();
+                            }
+
+                            break;
+                        case LocationSettingsStatusCodes.SUCCESS:
+                            if (ActivityCompat.checkSelfPermission(NavigationActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(NavigationActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+                                return;
+                            }
+                            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                            Home_freg new_booking_activity = new Home_freg();
+                            ft = getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.mainContent, new_booking_activity).commit();
+                            break;
+                    }
+                }
+            });
+        }
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestLocationPermission() {
+
+        // BEGIN_INCLUDE(Location_permission_request)
+        if (ActivityCompat.shouldShowRequestPermissionRationale(NavigationActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                || ActivityCompat.shouldShowRequestPermissionRationale(NavigationActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+            ActivityCompat.requestPermissions(NavigationActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+            Home_freg new_booking_activity = new Home_freg();
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainContent, new_booking_activity).commit();
+
+        } else {
+
+            // Location permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(NavigationActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == REQUEST_LOCATION) {
+            switch (resultCode) {
+                case Activity.RESULT_CANCELED:
+                    enableLocationService();
+                    break;
+                case Activity.RESULT_OK:
+                    location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+                    Home_freg new_booking_activity = new Home_freg();
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainContent, new_booking_activity).commit();
+                    break;
+                default:
+                    break;
+
+            }
+        } else {
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+            Home_freg new_booking_activity = new Home_freg();
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainContent, new_booking_activity).commit();
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Home_freg new_booking_activity = new Home_freg();
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainContent, new_booking_activity).commit();
+
+                }
+            }, 500);
+        } else {
+            requestLocationPermission();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_option_menu, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_filter) {
+
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
+    }
 
     private class Task_getProfileDetails extends AsyncTask<String, String, String> {
 
@@ -785,275 +1005,5 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             super.onPreExecute();
         }
 
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-
-    @Override
-    public void onStart() {
-        if (mGoogleApiClient != null)
-            mGoogleApiClient.connect();
-
-
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        if (mGoogleApiClient != null)
-            mGoogleApiClient.disconnect();
-
-        super.onStop();
-    }
-
-    //    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
-    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        List<android.location.Address> addresses = null;
-
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-
-                String cityName = addresses.get(0).getAddressLine(0);
-                String stateName = addresses.get(0).getAddressLine(1);
-                String countryName = addresses.get(0).getAddressLine(2);
-
-                mstr_locationAddress = cityName + "," + stateName + "," + countryName;
-                mstr_locationCity = addresses.get(0).getLocality();
-                //Log.d("LocationAddress", mstr_locationAddress+"\n"+addresses.get(0).getAddressLine(0));
-                //Log.d("City", addresses.get(0).getLocality());
-                return addresses;
-            }
-            return null;
-        } catch (IOException ignored) {
-            //do something
-        }
-        return addresses;
-    }
-
-
-    private void enableLocationService() {
-
-        if (mGoogleApiClient == null) {
-
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addApi(LocationServices.API)
-                    .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                        @Override
-                        public void onConnected(Bundle bundle) {
-
-                            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
-                                if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                                    return;
-                                }
-
-                                location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-                                Home_freg new_booking_activity = new Home_freg();
-                                ft = getSupportFragmentManager().beginTransaction();
-                                ft.replace(R.id.mainContent, new_booking_activity).commit();
-
-                                //Log.i("latlang1",location.getLatitude()+","+location.getLongitude());
-                            } else {
-
-                            }
-                        }
-
-                        @Override
-                        public void onConnectionSuspended(int i) {
-                            mGoogleApiClient.connect();
-                        }
-                    })
-                    .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
-                        @Override
-                        public void onConnectionFailed(ConnectionResult connectionResult) {
-
-                        }
-                    }).build();
-
-            mGoogleApiClient.connect();
-
-            LocationRequest locationRequest = LocationRequest.create();
-            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            locationRequest.setInterval(30 * 1000);
-            locationRequest.setFastestInterval(5 * 1000);
-            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                    .addLocationRequest(locationRequest);
-
-            builder.setAlwaysShow(true);
-
-            PendingResult<LocationSettingsResult> result =
-                    LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-            result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-                @Override
-                public void onResult(LocationSettingsResult result) {
-                    final Status status = result.getStatus();
-                    switch (status.getStatusCode()) {
-
-                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
-                            try {
-                                // Show the dialog by calling startResolutionForResult(),
-                                // and check the result in onActivityResult().
-                                if (!activity.isFinishing()) {
-                                    status.startResolutionForResult(activity, REQUEST_LOCATION);
-                                    Log.i("step 1", "hello");
-                                }
-
-
-                            } catch (IntentSender.SendIntentException e) {
-                                // Ignore the error.
-                                e.printStackTrace();
-                            }
-
-                            break;
-                        case LocationSettingsStatusCodes.SUCCESS:
-                            requestLocationPermission();
-                            break;
-                    }
-                }
-            });
-        }
-
-    }
-
-    @SuppressLint("MissingPermission")
-    private void requestLocationPermission() {
-
-        // BEGIN_INCLUDE(Location_permission_request)
-        if (ActivityCompat.shouldShowRequestPermissionRationale(NavigationActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                || ActivityCompat.shouldShowRequestPermissionRationale(NavigationActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
-            ActivityCompat.requestPermissions(NavigationActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
-
-            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-            Home_freg new_booking_activity = new Home_freg();
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainContent, new_booking_activity).commit();
-
-        } else {
-
-            // Location permission has not been granted yet. Request it directly.
-            ActivityCompat.requestPermissions(NavigationActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == REQUEST_LOCATION) {
-
-            switch (resultCode) {
-
-                case Activity.RESULT_CANCELED: {
-
-                    enableLocationService();
-
-                    break;
-                }
-                case Activity.RESULT_OK: {
-
-                    location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-                    Home_freg new_booking_activity = new Home_freg();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.mainContent, new_booking_activity).commit();
-
-                    break;
-                }
-
-                default: {
-                    break;
-                }
-            }
-        }
-    }
-
-
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    Home_freg new_booking_activity = new Home_freg();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.mainContent, new_booking_activity).commit();
-
-                }
-            }, 500);
-
-
-        } else {
-
-            requestLocationPermission();
-
-        }
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.home_option_menu, menu);
-
-        return true;
-
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.action_filter) {
-
-
-        }
-
-        return super.onOptionsItemSelected(item);
-
-    }
-
-
-    private boolean appInstalledOrNot(String uri) {
-        PackageManager pm = getPackageManager();
-        try {
-            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-        }
-
-        return false;
     }
 }

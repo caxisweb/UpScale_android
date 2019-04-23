@@ -27,14 +27,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,10 +40,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -74,8 +70,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import sa.upscale.coworking.fregment.Home_freg;
 
 public class List_ur_Space extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -158,8 +152,8 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
         Intent intent = getIntent();
         str_type_location = intent.getStringExtra("type");
-        str_lat = String.valueOf(NavigationActivity.location.getLatitude());
-        str_lng = String.valueOf(NavigationActivity.location.getLongitude());
+        str_lat = String.valueOf(SplashScreen.location.getLatitude());
+        str_lng = String.valueOf(SplashScreen.location.getLongitude());
 
         if (str_type_location.equals("login")) {
 
@@ -320,50 +314,50 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
     private void findViews() {
 
-        linearLayout = (LinearLayout) findViewById(R.id.ll_snackbar);
-        img_back = (TextView) findViewById(R.id.img_back_listurSpace);
+        linearLayout = findViewById(R.id.ll_snackbar);
+        img_back = findViewById(R.id.img_back_listurSpace);
 
-        sp_cpacity = (EditText) findViewById(R.id.sp_space_capacity);
-        sp_avalibility = (EditText) findViewById(R.id.sp_space_avalibility);
+        sp_cpacity = findViewById(R.id.sp_space_capacity);
+        sp_avalibility = findViewById(R.id.sp_space_avalibility);
 
-        btn_location = (Button) findViewById(R.id.btn_space_location);
+        btn_location = findViewById(R.id.btn_space_location);
 
-        ed_name = (EditText) findViewById(R.id.edt_space_name);
-        ed_email = (EditText) findViewById(R.id.edt_space_email);
-        ed_mobile = (EditText) findViewById(R.id.edt_space_mobileNumber);
+        ed_name = findViewById(R.id.edt_space_name);
+        ed_email = findViewById(R.id.edt_space_email);
+        ed_mobile = findViewById(R.id.edt_space_mobileNumber);
 
-        chk_projector = (CheckBox) findViewById(R.id.chk_space_projector);
-        chk_aircondi = (CheckBox) findViewById(R.id.chk_space_air_condi);
-        chk_mailservice = (CheckBox) findViewById(R.id.chk_space_mailservice);
+        chk_projector = findViewById(R.id.chk_space_projector);
+        chk_aircondi = findViewById(R.id.chk_space_air_condi);
+        chk_mailservice = findViewById(R.id.chk_space_mailservice);
 
-        chk_scanner = (CheckBox) findViewById(R.id.chk_space_scanner);
-        chk_locker = (CheckBox) findViewById(R.id.chk_space_locker);
-        chk_internet = (CheckBox) findViewById(R.id.chk_space_internet);
+        chk_scanner = findViewById(R.id.chk_space_scanner);
+        chk_locker = findViewById(R.id.chk_space_locker);
+        chk_internet = findViewById(R.id.chk_space_internet);
 
-        chk_parking = (CheckBox) findViewById(R.id.chk_space_parking);
-        chk_phone = (CheckBox) findViewById(R.id.chk_space_phone);
-        chk_work = (CheckBox) findViewById(R.id.chk_space_work);
+        chk_parking = findViewById(R.id.chk_space_parking);
+        chk_phone = findViewById(R.id.chk_space_phone);
+        chk_work = findViewById(R.id.chk_space_work);
 
-        chk_male = (CheckBox) findViewById(R.id.chk_space_Man);
-        chk_female = (CheckBox) findViewById(R.id.chk_space_female);
-        chk_coffee = (CheckBox) findViewById(R.id.chk_space_coffee);
+        chk_male = findViewById(R.id.chk_space_Man);
+        chk_female = findViewById(R.id.chk_space_female);
+        chk_coffee = findViewById(R.id.chk_space_coffee);
 
-        rg_gender = (RadioGroup) findViewById(R.id.rg_listurSpace_gender);
-        ed_price = (EditText) findViewById(R.id.edt_space_price);
+        rg_gender = findViewById(R.id.rg_listurSpace_gender);
+        ed_price = findViewById(R.id.edt_space_price);
 
-        tv_displayLocation = (TextView) findViewById(R.id.tv_listUrSpace_CurrentLocation);
+        tv_displayLocation = findViewById(R.id.tv_listUrSpace_CurrentLocation);
 
-        img_1 = (ImageView) findViewById(R.id.img_space_1);
-        img_2 = (ImageView) findViewById(R.id.img_space_2);
-        img_3 = (ImageView) findViewById(R.id.img_space_3);
-        img_add1 = (ImageView) findViewById(R.id.img_space_add1);
-        img_add2 = (ImageView) findViewById(R.id.img_space_add2);
-        img_add3 = (ImageView) findViewById(R.id.img_space_add3);
+        img_1 = findViewById(R.id.img_space_1);
+        img_2 = findViewById(R.id.img_space_2);
+        img_3 = findViewById(R.id.img_space_3);
+        img_add1 = findViewById(R.id.img_space_add1);
+        img_add2 = findViewById(R.id.img_space_add2);
+        img_add3 = findViewById(R.id.img_space_add3);
 
-        btn_submit = (Button) findViewById(R.id.btn_space_submit);
+        btn_submit = findViewById(R.id.btn_space_submit);
 
-        sp_space_type = (Spinner) findViewById(R.id.sp_type);
-        sp_city = (Spinner) findViewById(R.id.sp_city);
+        sp_space_type = findViewById(R.id.sp_type);
+        sp_city = findViewById(R.id.sp_city);
 
 
         btn_submit.setOnClickListener(List_ur_Space.this);
@@ -611,7 +605,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
                             // Changing action button text color
                             View sbView = snackbar.getView();
-                            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                             textView.setTextColor(Color.YELLOW);
 
                             snackbar.show();
@@ -1350,7 +1344,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
                     // Changing action button text color
                     View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
                     textView.setTextColor(Color.YELLOW);
 
                     snackbar.show();

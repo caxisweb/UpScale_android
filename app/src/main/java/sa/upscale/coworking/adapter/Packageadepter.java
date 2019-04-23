@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,11 +47,11 @@ public class Packageadepter extends ArrayAdapter<String> {
             v = inflater.inflate(R.layout.custom_package_view, null);
         }
 
-        TextView tv_pname= (TextView) v.findViewById(R.id.tv_package_name);
-        TextView tv_ptype= (TextView) v.findViewById(R.id.tv_package_type);
-        TextView tv_pprice= (TextView) v.findViewById(R.id.tv_package_price);
-        TextView tv_is_subscriber= (TextView) v.findViewById(R.id.tv_is_subscribe);
-        TextView tv_company= (TextView) v.findViewById(R.id.tv_company);
+        TextView tv_pname = v.findViewById(R.id.tv_package_name);
+        TextView tv_ptype = v.findViewById(R.id.tv_package_type);
+        TextView tv_pprice = v.findViewById(R.id.tv_package_price);
+        TextView tv_is_subscriber = v.findViewById(R.id.tv_is_subscribe);
+        TextView tv_company = v.findViewById(R.id.tv_company);
         //RatingBar prat= (RatingBar) v.findViewById(R.id.ret_package);
 
         tv_pname.setText(package_list.get(position).getPack_name());
