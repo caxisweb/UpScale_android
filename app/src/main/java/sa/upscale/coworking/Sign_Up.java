@@ -49,10 +49,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
@@ -76,7 +79,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
 
 import static sa.upscale.coworking.Utils.REDIRECT_URI;
@@ -121,19 +123,27 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     private Button btn_signup;
     private String mstr_name, mstr_mobile, mstr_email, mstr_password, str_esaal_cust_id, mstr_password_again;
     private CallbackManager callbackManager;
-    private TwitterLoginButton btn_twitter;
     private GoogleApiClient mGoogleApiClient;
+    private TwitterLoginButton btn_twitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))//enable logging when app is in debug mode
+                .twitterAuthConfig(authConfig)//pass the created app Consumer KEY and Secret also called API Key and Secret
+                .debug(true)//enable debug mode
+                .build();
+
+        //finally initialize twitter with created configs
+        Twitter.initialize(config);
+        //Fabric.with(this, new Twitter(authConfig));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -156,6 +166,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 }
             }
         });
+
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -370,9 +381,9 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     public void success(Result<TwitterSession> result) {
 
                         // Success
-                        session1 = Twitter.getSessionManager().getActiveSession();
+                        session1 = result.data;
 
-                        Call<User> userResult = Twitter.getApiClient(session1).getAccountService().verifyCredentials(true, false);
+                        Call<User> userResult = TwitterCore.getInstance().getApiClient().getAccountService().verifyCredentials(true, false, true);
                         userResult.enqueue(new Callback<User>() {
 
                             @Override
@@ -410,7 +421,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             }
         });
 
-        btn_twitter.setCallback(new Callback<TwitterSession>() {
+        /*btn_twitter.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
 
@@ -464,7 +475,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             public void failure(TwitterException exception) {
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
             }
-        });
+        });*/
 
         btn_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -599,6 +610,46 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         });
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    private Bundle getFacebookData(JSONObject object) {
+
+
+        try {
+            Bundle bundle = new Bundle();
+            String id = object.getString("id");
+
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+
+            if (object.has("picture"))
+                bundle.putString("picture", object.getString("picture"));
+            return bundle;
+        } catch (JSONException e) {
+            Log.d("Facebook", "Error parsing JSON");
+        }
+
+        return null;
+    }
+
     private void findViews() {
 
         linearLayout = findViewById(R.id.ll_snackbar);
@@ -631,6 +682,19 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
 
         //generateHashkey("com.inforaam.upscale");
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resCode, Intent i) {
+
+        callbackManager.onActivityResult(reqCode, resCode, i);
+
+        if (reqCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(i);
+            handleSignInResult(result);
+        }
+
+        btn_twitter.onActivityResult(reqCode, resCode, i);
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
@@ -695,43 +759,8 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    private Bundle getFacebookData(JSONObject object) {
-
-
-        try {
-            Bundle bundle = new Bundle();
-            String id = object.getString("id");
-
-            try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
-                Log.i("profile_pic", profile_pic + "");
-                bundle.putString("profile_pic", profile_pic.toString());
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            }
-            bundle.putString("idFacebook", id);
-            if (object.has("first_name"))
-                bundle.putString("first_name", object.getString("first_name"));
-            if (object.has("last_name"))
-                bundle.putString("last_name", object.getString("last_name"));
-            if (object.has("email"))
-                bundle.putString("email", object.getString("email"));
-
-            if (object.has("picture"))
-                bundle.putString("picture", object.getString("picture"));
-            return bundle;
-        } catch (JSONException e) {
-            Log.d("Facebook", "Error parsing JSON");
-        }
-
-        return null;
     }
 
     private boolean isNetworkAvailable() {
@@ -742,19 +771,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     }
 
     @Override
-    protected void onActivityResult(int reqCode, int resCode, Intent i) {
-
-        callbackManager.onActivityResult(reqCode, resCode, i);
-
-        if (reqCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(i);
-            handleSignInResult(result);
-        }
-
-        btn_twitter.onActivityResult(reqCode, resCode, i);
-    }
-
-    @Override
     public void onBackPressed() {
 
         Intent i_navigation = new Intent(Sign_Up.this, NavigationActivity.class);
@@ -762,11 +778,6 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         startActivity(i_navigation);
 
         super.onBackPressed();
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     private class PostRequestAsyncTask extends AsyncTask<String, Void, Boolean> {

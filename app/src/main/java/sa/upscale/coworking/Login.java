@@ -64,11 +64,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
@@ -95,7 +97,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
 import sa.upscale.coworking.fregment.Home_freg;
 
@@ -191,8 +192,17 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))//enable logging when app is in debug mode
+                .twitterAuthConfig(authConfig)//pass the created app Consumer KEY and Secret also called API Key and Secret
+                .debug(true)//enable debug mode
+                .build();
+
+        //finally initialize twitter with created configs
+        Twitter.initialize(config);
+        //Fabric.with(this, new Twitter(authConfig));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -202,7 +212,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Log.d("AppLog", "key:" + FacebookSdk.getApplicationSignature(this));
         callbackManager = CallbackManager.Factory.create();
-
 
         setContentView(R.layout.activity_login);
 
@@ -496,10 +505,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     @Override
                     public void success(Result<TwitterSession> result) {
                         // Success
-                        session1 =
-                                Twitter.getSessionManager().getActiveSession();
+                        session1 = result.data;
 
-                        Call<User> userResult = Twitter.getApiClient(session1).getAccountService().verifyCredentials(true, false);
+                        Call<User> userResult = TwitterCore.getInstance().getApiClient().getAccountService().verifyCredentials(true, false, true);
                         userResult.enqueue(new Callback<User>() {
 
                             @Override
@@ -538,18 +546,18 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             }
         });
 
-        btn_twitter.setCallback(new Callback<TwitterSession>() {
+        /*btn_twitter.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 //The TwitterSession is also available through:
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
-               /* TwitterSession session1 = result.data;
+               *//* TwitterSession session1 = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
                 // with your app's user model
                 Log.d("Twitterdata", result.data.toString());
                 String msg = "@" + session1.getUserName() + " logged in! (#" + session1.getUserId() + ")";
                 Log.d("TwitterData", session1.getUserName() + "\nuserId :->" + session1.getUserId());
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();*/
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();*//*
 
                 //Twitter.getApiClient(session).getAccountService().verifyCredentials()
 
@@ -590,8 +598,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 String token = authToken.token;
                 String secret = authToken.secret;
 
-               /* Log.i(TAG,"TOKEN TWITTER:" + token);
-                Log.i(TAG,"SECRET TWITTER:" + secret);*/
+               *//* Log.i(TAG,"TOKEN TWITTER:" + token);
+                Log.i(TAG,"SECRET TWITTER:" + secret);*//*
 
                 TwitterAuthClient authClient = new TwitterAuthClient();
                 authClient.requestEmail(session, new Callback<String>() {
@@ -600,8 +608,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         // Do something with the result, which provides the email address
 
                         twitter_email = result.data;
-                        /*Log.i(TAG,"RESULT:" + result.data);
-                         */
+                        *//*Log.i(TAG,"RESULT:" + result.data);
+         *//*
                         Log.i("Twitter Email :", result.data);
                         //seesf;
 
@@ -646,7 +654,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void failure(TwitterException exception) {
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
             }
-        });
+        });*/
 
         btn_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
