@@ -54,6 +54,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import sa.upscale.coworking.Login;
 import sa.upscale.coworking.MettingRoom.TImePicker.CustomTimePickerDialog;
@@ -67,43 +68,30 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
     private static final String status = "status";
     private static final String message = "message";
-
+    static String str_location, str_logo, str_description, str_esaal_product_id, str_spacId, str_spaceuserId, strName, str_capacity, str_price, mstr_book_time_diff, mstr_book_price, str_space_img, str_repet_no = "1";
     String status1 = "0", message1 = "try Again";
-
     JSONObject data_details = new JSONObject();
     JSONObject data_review = new JSONObject();
     JSONObject data_bookNow = new JSONObject();
     JSONObject visa_data_payment = new JSONObject();
     JSONObject data_code = new JSONObject();
     JSONObject data_favorite = new JSONObject();
-
     SessionManager session;
     HashMap<String, String> user_details = new HashMap<>();
     HashMap<String, String> lang = new HashMap<>();
-
     ArrayList<String> repet_type = new ArrayList<>();
     ArrayList<String> repet_no = new ArrayList<>();
-
-    private String coupan_code = "0", promocode_id = "0", code_type, code_amount = "0", discount_amount = "0", final_price = "0";
-    private TextView tv_title, tv_price, tv_date, tv_to, tv_from, tv_personCapacity, tv_location, tv_ratingreview, tv_summarydetails;
-
-    private CarouselView img_slider;
-    private Button btn_bookroom, btn_code_apply, btn_code_remove;
     EditText et_promo_code;
-    private TextView tv_dis_amount;
-
     ArrayList<String> ar_dayname = new ArrayList<>();
     ArrayList<String> ar_openTime = new ArrayList<>();
     ArrayList<String> ar_closeTime = new ArrayList<>();
     ArrayList<String> ar_images = new ArrayList<>();
-
     ArrayList<String> ar_reviewId = new ArrayList<>();
     ArrayList<String> ar_user_id = new ArrayList<>();
     ArrayList<String> ar_user_name = new ArrayList<>();
     ArrayList<String> ar_rate = new ArrayList<>();
     ArrayList<String> ar_review = new ArrayList<>();
     ArrayList<String> ar_datetime = new ArrayList<>();
-
     ArrayList<String> ch_book_date = new ArrayList<>();
     ArrayList<String> book_date = new ArrayList<>();
     ArrayList<String> book_fromtime = new ArrayList<>();
@@ -111,42 +99,30 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     ArrayList<String> book_hour = new ArrayList<>();
     ArrayList<String> book_price = new ArrayList<>();
     ArrayList<String> book_tax_price = new ArrayList<>();
-
     String format;
-
-    private int mYear, mMonth, mDay;
     ImageView img_add_date;
     LinearLayout lv_bookdate;
     int book_date_count = 0;
-
     String strprojector = "0", strscanner = "0", strParking = "0", str_ac = "0", str_locker = "0", str_ph = "0",
             str_mail = "0", str_wifi = "0", str_work = "0", str_male = "0", str_female = "0", str_cofee = "0",
             str_rating, str_rating_count, str_wishStatus = "0";
-
-    long total_hour = 0;
+    long total_hour = 0, final_calculate_hours;
     float total_price = 0;
     int privious_hour = 0;
     int vat_per = 0;
     float tex_amount = 0;
-
-    static String str_location, str_logo, str_description, str_esaal_product_id, str_spacId, str_spaceuserId, strName, str_capacity, str_price, mstr_book_time_diff, mstr_book_price, str_space_img, str_repet_no = "1";
     String str_is_subscriber = "0";
     String str_pack_enddate;
     String str_pack_id = "0";
     String str_pack_name;
-
     String lati = "0", longi = "0";
     String str_bank_name, str_iban, str_account_no;
     String str_bank_name_ar, str_iban_ar, str_account_no_ar;
-
     String str_booking_id, str_reference_no;
-
     String visa_payment_url;
-
     RadioButton rd_visa, rd_cod, rd_bank;
     TextView tv_note_visa;
     RadioGroup rg_paymenthod;
-
     RelativeLayout linearLayout;
     RatingBar rating_profile;
     ImageView img_likeUnlike, img_mapdirection;
@@ -156,11 +132,74 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     LinearLayout lv_bank_detail;
     TextView tv_bank_name, tv_ibn, tv_account_no;
     TextView tv_subscriber;
-
     int[] logo = {R.drawable.logo1};
     String temp_sliderimg = "0", temp_imglike = "0";
     String str_type, str_spaceid, str_capacityId, str_date_, str_fromtime_, str_totime_;
+    private String coupan_code = "0", promocode_id = "0", code_type, code_amount = "0", discount_amount = "0", final_price = "0";
+    private TextView tv_title, tv_price, tv_date, tv_to, tv_from, tv_personCapacity, tv_location, tv_ratingreview, tv_summarydetails;
+    private CarouselView img_slider;
+    private Button btn_bookroom, btn_code_apply, btn_code_remove;
+    private TextView tv_dis_amount;
+    private int mYear, mMonth, mDay;
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+            String str_minute;
+
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
+
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
+
+            // mstr_toTime = hourOfDay + ":" + str_minute + " " + format;
+
+
+            tv_to.setText(hourOfDay + ":" + str_minute + " " + format);
+        }
+    };
+    private CustomTimePickerDialog.OnTimeSetListener timeSetListener1 = new CustomTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            String str_minute;
+            if (hourOfDay == 0) {
+                hourOfDay += 12;
+                format = "AM";
+            } else if (hourOfDay == 12) {
+                format = "PM";
+            } else if (hourOfDay > 12) {
+                hourOfDay -= 12;
+                format = "PM";
+            } else {
+                format = "AM";
+            }
+
+            if (minute == 0) {
+                str_minute = "0" + minute;
+            } else {
+                str_minute = String.valueOf(minute);
+            }
+
+            //mstr_fromTime = hourOfDay + ":" + str_minute + " " + format;
+
+            tv_from.setText(hourOfDay + ":" + str_minute + " " + format);
+
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -304,7 +343,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                             SimpleDateFormat hourSDF2 = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
                             Date hourDt = hourSDF1.parse(selectedHour + ":" + selectedMinute);
                             tv_to.setText(hourSDF2.format(hourDt));
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -321,115 +359,57 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                 try {
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
-                    Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
-                    Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
+                    if (tv_from.getText().toString().substring(tv_from.length() - 2, tv_from.length()).equals("PM") && tv_to.getText().toString().substring(tv_to.length() - 2, tv_to.length()).equals("AM")) {
 
-                    long mills = date1.getTime() - date2.getTime();
-                    long hours = mills / (1000 * 60 * 60);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
+                        Date date1 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_from.getText().toString().trim());
 
-                    hours = (hours < 0 ? -hours : hours);
+                        String changetodate;
+                        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(sdf.parse(tv_date.getText().toString()));
+                        c.add(Calendar.DATE, 1);
+                        sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+                        Date resultdate = new Date(c.getTimeInMillis());
+                        changetodate = sdf.format(resultdate);
 
-                    Log.i("hour", hours + "");
-                    if (hours > 0) {
+                        Date date2 = simpleDateFormat.parse(changetodate + " " + tv_to.getText().toString().trim());
 
-                        if (str_is_subscriber.equals("0")) {
+                        long mills = date2.getTime() - date1.getTime();
+                        long minutes = TimeUnit.MILLISECONDS.toMinutes(mills);
+                        final_calculate_hours = mills / (1000 * 60 * 60);
 
-                            if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+                        final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
 
-                                btn_code_apply.setVisibility(View.VISIBLE);
-                                btn_code_remove.setVisibility(View.GONE);
-                                tv_dis_amount.setVisibility(View.GONE);
-                                et_promo_code.setText("");
+                        Log.i("hour", final_calculate_hours + "");
+                        FinalCalculation();
 
-                                //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-                                total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                                btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                    } else if (tv_from.getText().toString().substring(tv_from.length() - 2, tv_from.length()).equals("AM") && tv_to.getText().toString().substring(tv_to.length() - 2, tv_to.length()).equals("PM")) {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
+                        Date date1 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_from.getText().toString().trim());
+                        Date date2 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_to.getText().toString().trim());
 
-                                promocode_id = "0";
-                                discount_amount = "0";
+                        long mills = date2.getTime() - date1.getTime();
+                        long minutes = TimeUnit.MILLISECONDS.toMinutes(mills);
+                        final_calculate_hours = mills / (1000 * 60 * 60);
 
-                                Task_checkdate task_checkdate = new Task_checkdate();
-                                task_checkdate.execute();
+                        final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
 
-                            } else {
-
-                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
-                            }
-
-                        } else if (str_is_subscriber.equals("1") && str_type.equals("2")) {
-
-                            if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
-
-                                btn_code_apply.setVisibility(View.VISIBLE);
-                                btn_code_remove.setVisibility(View.GONE);
-                                tv_dis_amount.setVisibility(View.GONE);
-                                et_promo_code.setText("");
-
-                                //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-                                total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                                btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
-
-                                promocode_id = "0";
-                                discount_amount = "0";
-
-                                Task_checkdate task_checkdate = new Task_checkdate();
-                                task_checkdate.execute();
-
-                            } else {
-
-                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-
-
-                            /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
-                            Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
-                            Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
-
-                            long mills = date1.getTime() - date2.getTime();
-                            long hours = mills / (1000 * 60 * 60);
-
-                            hours = (hours < 0 ? -hours : hours);
-*/
-                            Log.i("total_hour 2 : ", (total_hour + hours + privious_hour) + "");
-
-                            if ((total_hour + hours + privious_hour) < 5) {
-
-                                if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
-
-                                    btn_code_apply.setVisibility(View.VISIBLE);
-                                    btn_code_remove.setVisibility(View.GONE);
-                                    tv_dis_amount.setVisibility(View.GONE);
-                                    et_promo_code.setText("");
-
-                                    //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
-
-                                    total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
-
-                                    promocode_id = "0";
-                                    discount_amount = "0";
-
-                                    Task_checkdate task_checkdate = new Task_checkdate();
-                                    task_checkdate.execute();
-
-                                } else {
-
-                                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
-                                }
-
-                            } else {
-
-                                Toast.makeText(getApplicationContext(), "Your Can not book space for More than 4 Hour", Toast.LENGTH_LONG).show();
-                            }
-
-
-                        }
+                        Log.i("hour", final_calculate_hours + "");
+                        FinalCalculation();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Your Can not book space for Less than 1 hour", Toast.LENGTH_LONG).show();
-                    }
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                        Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
+                        Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
 
+                        long mills = date1.getTime() - date2.getTime();
+                        final_calculate_hours = mills / (1000 * 60 * 60);
+
+                        final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
+
+                        Log.i("hour", final_calculate_hours + "");
+                        FinalCalculation();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -503,7 +483,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     i_login.putExtra("flag", 1);
                     startActivity(i_login);
                 }
-
             }
         });
 
@@ -535,6 +514,88 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         });
     }
 
+    public void FinalCalculation() {
+        if (final_calculate_hours > 0) {
+
+            if (str_is_subscriber.equals("0")) {
+
+                if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+
+                    btn_code_apply.setVisibility(View.VISIBLE);
+                    btn_code_remove.setVisibility(View.GONE);
+                    tv_dis_amount.setVisibility(View.GONE);
+                    et_promo_code.setText("");
+
+                    //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
+                    total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
+                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+
+                    promocode_id = "0";
+                    discount_amount = "0";
+
+                    Task_checkdate task_checkdate = new Task_checkdate();
+                    task_checkdate.execute();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
+                }
+
+            } else if (str_is_subscriber.equals("1") && str_type.equals("2")) {
+
+                if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+
+                    btn_code_apply.setVisibility(View.VISIBLE);
+                    btn_code_remove.setVisibility(View.GONE);
+                    tv_dis_amount.setVisibility(View.GONE);
+                    et_promo_code.setText("");
+
+                    //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
+                    total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
+                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+
+                    promocode_id = "0";
+                    discount_amount = "0";
+
+                    Task_checkdate task_checkdate = new Task_checkdate();
+                    task_checkdate.execute();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Log.i("total_hour 2 : ", (total_hour + final_calculate_hours + privious_hour) + "");
+
+                if ((total_hour + final_calculate_hours + privious_hour) < 5) {
+
+                    if (ch_book_date.indexOf(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim()) < 0) {
+
+                        btn_code_apply.setVisibility(View.VISIBLE);
+                        btn_code_remove.setVisibility(View.GONE);
+                        tv_dis_amount.setVisibility(View.GONE);
+                        et_promo_code.setText("");
+
+                        //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
+
+                        total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
+                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+
+                        promocode_id = "0";
+                        discount_amount = "0";
+
+                        Task_checkdate task_checkdate = new Task_checkdate();
+                        task_checkdate.execute();
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.duplicate_date), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Your Can not book space for More than 4 Hour", Toast.LENGTH_LONG).show();
+                }
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Your Can not book space for Less than 1 hour", Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void findViews() {
 
@@ -756,67 +817,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
 
     }
-
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            // mstr_toTime = hourOfDay + ":" + str_minute + " " + format;
-
-
-            tv_to.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
-
-    private CustomTimePickerDialog.OnTimeSetListener timeSetListener1 = new CustomTimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            String str_minute;
-            if (hourOfDay == 0) {
-                hourOfDay += 12;
-                format = "AM";
-            } else if (hourOfDay == 12) {
-                format = "PM";
-            } else if (hourOfDay > 12) {
-                hourOfDay -= 12;
-                format = "PM";
-            } else {
-                format = "AM";
-            }
-
-            if (minute == 0) {
-                str_minute = "0" + minute;
-            } else {
-                str_minute = String.valueOf(minute);
-            }
-
-            //mstr_fromTime = hourOfDay + ":" + str_minute + " " + format;
-
-            tv_from.setText(hourOfDay + ":" + str_minute + " " + format);
-        }
-    };
 
     private void to_timePicker() {
 
@@ -1279,61 +1279,212 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
     }
 
+    private void datePicker() {
+
+        final Calendar c;
+        c = Calendar.getInstance();
+
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    String month;
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        int m = monthOfYear + 1;
+                        if (m == 1) {
+                            month = "Jan";
+                        } else if (m == 2) {
+                            month = "Feb";
+                        } else if (m == 3) {
+                            month = "Mar";
+                        } else if (m == 4) {
+                            month = "Apr";
+                        } else if (m == 5) {
+                            month = "May";
+                        } else if (m == 6) {
+                            month = "Jun";
+                        } else if (m == 7) {
+                            month = "Jul";
+                        } else if (m == 8) {
+                            month = "Aug";
+                        } else if (m == 9) {
+                            month = "Sep";
+                        } else if (m == 10) {
+                            month = "Oct";
+                        } else if (m == 11) {
+                            month = "Nov";
+                        } else if (m == 12) {
+                            month = "Dec";
+                        }
+
+                        // tv_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        try {
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+                            str_date_ = sdf.format(sdf.parse(month + " " + dayOfMonth + ", " + year));
+                            tv_date.setText(str_date_);
+
+                        } catch (Exception e) {
+
+                        }
 
 
-/*
-    private class Task_postReview extends AsyncTask<String, String, String> {
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
 
-        ProgressDialog progressDialog;
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
-        @Override
-        protected String doInBackground(String... params) {
+        if (str_is_subscriber.equals("0")) {
 
+        } else {
             try {
 
-                Postdata postdata = new Postdata();
-                String str_review = postdata.post(Url_info.main_url + "insert_review.php", data_review.toString());
-                JSONObject jobj_review = new JSONObject(str_review);
-                status1 = jobj_review.getString(status);
 
-                if (status1.equals("1")) {
-                    Log.d("Review", "sucess");
-                } else {
-                    message1 = jobj_review.getString(message);
-                }
-            } catch (JSONException e) {
+                Log.i("end_date", str_pack_enddate);
+                Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(str_pack_enddate.trim());
+                long milliseconds = date.getTime();
+                Log.i("Time Mili secound : ", "" + milliseconds);
+                datePickerDialog.getDatePicker().setMaxDate(milliseconds);
+
+
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return null;
-        }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            if (status1.equals("1")) {
-
-                Log.d("Review", "sucess");
-                dialog.dismiss();
-            } else {
-                Toast.makeText(Booking_MettingRoom_list_details.this, "" + message1, Toast.LENGTH_SHORT).show();
-            }
-
-            progressDialog.dismiss();
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = new ProgressDialog(Booking_MettingRoom_list_details.this);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Please wait ..");
-            progressDialog.show();
-            super.onPreExecute();
         }
     }
-*/
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 10) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+                if (str_is_subscriber.equals("0")) {
+                    try {
+
+
+                        data_bookNow.put("space_id", str_spaceid);
+                        data_bookNow.put("user_id", user_details.get(SessionManager.user_Id));
+                        data_bookNow.put("total_cost", String.valueOf(total_price));
+                        data_bookNow.put("payment_type", "2");
+                        data_bookNow.put("promocode_id", promocode_id);
+                        data_bookNow.put("transcation_id", "0");
+                        data_bookNow.put("payment_time", "");
+                        data_bookNow.put("discount_amount", discount_amount);
+
+                        JSONArray booking = new JSONArray();
+
+                        for (int p = 0; p < book_date.size(); p++) {
+
+                            JSONObject job_book = new JSONObject();
+                            job_book.put("date", book_date.get(p));
+                            job_book.put("from_time", book_fromtime.get(p));
+                            job_book.put("to_time", book_totime.get(p));
+                            job_book.put("base_amount", str_price);
+                            job_book.put("hours", book_hour.get(p));
+                            job_book.put("actual_amount", book_price.get(p));
+                            job_book.put("discount_price", "0");
+                            job_book.put("amount", book_price.get(p));
+
+                            booking.put(job_book);
+                        }
+
+                        data_bookNow.put("booking", booking);
+                        data_bookNow.put("package_id", str_pack_id);
+                        data_bookNow.put("is_subscriber", str_is_subscriber);
+                        data_bookNow.put("booking_from", "1");
+
+                        Task_Payment task_payment1 = new Task_Payment();
+                        task_payment1.execute();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+
+                    try {
+
+                        user_details = session.getUserDetails();
+
+                        data_bookNow.put("space_id", str_spaceid);
+                        data_bookNow.put("user_id", user_details.get(SessionManager.user_Id));
+                        data_bookNow.put("total_cost", "0");
+                        data_bookNow.put("payment_type", "1");
+                        data_bookNow.put("promocode_id", promocode_id);
+                        data_bookNow.put("transcation_id", "0");
+                        data_bookNow.put("payment_time", "");
+                        data_bookNow.put("discount_amount", "0");
+
+                        JSONArray booking = new JSONArray();
+
+                        for (int p = 0; p < book_date.size(); p++) {
+
+                            JSONObject job_book = new JSONObject();
+                            job_book.put("date", book_date.get(p));
+                            job_book.put("from_time", book_fromtime.get(p));
+                            job_book.put("to_time", book_totime.get(p));
+                            job_book.put("base_amount", str_price);
+                            job_book.put("hours", book_hour.get(p));
+                            job_book.put("amount", "0");
+                            job_book.put("discount_price", "0");
+                            job_book.put("actual_amount", "0");
+
+                            booking.put(job_book);
+                        }
+
+                        data_bookNow.put("booking", booking);
+                        data_bookNow.put("package_id", str_pack_id);
+                        data_bookNow.put("is_subscriber", str_is_subscriber);
+                        data_bookNow.put("booking_from", "1");
+
+                        Task_Payment task_payment1 = new Task_Payment();
+                        task_payment1.execute();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+
+                Toast.makeText(getApplicationContext(), "Payment Fail Please Try again", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void hideSoftKeyboard() {
+        if (getCurrentFocus() != null && getCurrentFocus() instanceof EditText) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(et_promo_code.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+
+        Task_bookinDetails task_bookinDetails = new Task_bookinDetails();
+        task_bookinDetails.execute();
+
+        super.onResume();
+
+    }
 
     private class Task_bookinDetails extends AsyncTask<String, String, String> {
 
@@ -1560,7 +1711,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         }
     }
 
-
     private class Task_InsertFavorite extends AsyncTask<String, String, String> {
 
         String wish_status_1;
@@ -1617,7 +1767,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
 
     }
-
 
     private class Task_checkdate extends AsyncTask<String, String, String> {
 
@@ -1683,23 +1832,23 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                 try {
 
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                    /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
                     Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
                     Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
 
                     long mills = date1.getTime() - date2.getTime();
                     long hours = mills / (1000 * 60 * 60);
 
-                    hours = (hours < 0 ? -hours : hours);
+                    hours = (hours < 0 ? -hours : hours);*/
 
                     book_date.add(tv_date.getText().toString().trim());
                     book_fromtime.add(tv_from.getText().toString().trim());
                     book_totime.add(tv_to.getText().toString().trim());
-                    book_hour.add(String.valueOf(hours));
-                    book_price.add(String.valueOf(Float.parseFloat(str_price) * hours));
+                    book_hour.add(String.valueOf(final_calculate_hours));
+                    book_price.add(String.valueOf(Float.parseFloat(str_price) * final_calculate_hours));
                     ch_book_date.add(tv_date.getText().toString().trim() + "," + tv_from.getText().toString().trim() + "," + tv_to.getText().toString().trim());
 
-                    total_hour = total_hour + hours;
+                    total_hour = total_hour + final_calculate_hours;
                     tex_amount = ((Float.parseFloat(str_price) * total_hour * Float.parseFloat(str_repet_no)) * vat_per) / 100;
 
                     Log.i("text_total", tex_amount + "");
@@ -1715,7 +1864,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
 
                 img_date.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1780,98 +1928,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
     }
 
-
-    private void datePicker() {
-
-        final Calendar c;
-        c = Calendar.getInstance();
-
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    String month;
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        int m = monthOfYear + 1;
-                        if (m == 1) {
-                            month = "Jan";
-                        } else if (m == 2) {
-                            month = "Feb";
-                        } else if (m == 3) {
-                            month = "Mar";
-                        } else if (m == 4) {
-                            month = "Apr";
-                        } else if (m == 5) {
-                            month = "May";
-                        } else if (m == 6) {
-                            month = "Jun";
-                        } else if (m == 7) {
-                            month = "Jul";
-                        } else if (m == 8) {
-                            month = "Aug";
-                        } else if (m == 9) {
-                            month = "Sep";
-                        } else if (m == 10) {
-                            month = "Oct";
-                        } else if (m == 11) {
-                            month = "Nov";
-                        } else if (m == 12) {
-                            month = "Dec";
-                        }
-
-                        // tv_date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                        try {
-
-                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-                            str_date_ = sdf.format(sdf.parse(month + " " + dayOfMonth + ", " + year));
-                            tv_date.setText(str_date_);
-
-                        } catch (Exception e) {
-
-                        }
-
-
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-        if (str_is_subscriber.equals("0")) {
-
-        } else {
-            try {
-
-
-                Log.i("end_date", str_pack_enddate);
-                Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(str_pack_enddate.trim());
-                long milliseconds = date.getTime();
-                Log.i("Time Mili secound : ", "" + milliseconds);
-                datePickerDialog.getDatePicker().setMaxDate(milliseconds);
-
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-
     private class Task_Payment extends AsyncTask<String, String, String> {
 
         ProgressDialog progressDialog;
@@ -1935,7 +1991,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             super.onPreExecute();
         }
     }
-
 
     private class Task_apply extends AsyncTask<String, String, String> {
         ProgressDialog progressDialog;
@@ -2129,124 +2184,5 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             progressDialog.show();
             super.onPreExecute();
         }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 10) {
-
-            if (resultCode == Activity.RESULT_OK) {
-
-                if (str_is_subscriber.equals("0")) {
-                    try {
-
-
-                        data_bookNow.put("space_id", str_spaceid);
-                        data_bookNow.put("user_id", user_details.get(SessionManager.user_Id));
-                        data_bookNow.put("total_cost", String.valueOf(total_price));
-                        data_bookNow.put("payment_type", "2");
-                        data_bookNow.put("promocode_id", promocode_id);
-                        data_bookNow.put("transcation_id", "0");
-                        data_bookNow.put("payment_time", "");
-                        data_bookNow.put("discount_amount", discount_amount);
-
-                        JSONArray booking = new JSONArray();
-
-                        for (int p = 0; p < book_date.size(); p++) {
-
-                            JSONObject job_book = new JSONObject();
-                            job_book.put("date", book_date.get(p));
-                            job_book.put("from_time", book_fromtime.get(p));
-                            job_book.put("to_time", book_totime.get(p));
-                            job_book.put("base_amount", str_price);
-                            job_book.put("hours", book_hour.get(p));
-                            job_book.put("actual_amount", book_price.get(p));
-                            job_book.put("discount_price", "0");
-                            job_book.put("amount", book_price.get(p));
-
-                            booking.put(job_book);
-                        }
-
-                        data_bookNow.put("booking", booking);
-                        data_bookNow.put("package_id", str_pack_id);
-                        data_bookNow.put("is_subscriber", str_is_subscriber);
-                        data_bookNow.put("booking_from", "1");
-
-                        Task_Payment task_payment1 = new Task_Payment();
-                        task_payment1.execute();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-
-                    try {
-
-                        user_details = session.getUserDetails();
-
-                        data_bookNow.put("space_id", str_spaceid);
-                        data_bookNow.put("user_id", user_details.get(SessionManager.user_Id));
-                        data_bookNow.put("total_cost", "0");
-                        data_bookNow.put("payment_type", "1");
-                        data_bookNow.put("promocode_id", promocode_id);
-                        data_bookNow.put("transcation_id", "0");
-                        data_bookNow.put("payment_time", "");
-                        data_bookNow.put("discount_amount", "0");
-
-                        JSONArray booking = new JSONArray();
-
-                        for (int p = 0; p < book_date.size(); p++) {
-
-                            JSONObject job_book = new JSONObject();
-                            job_book.put("date", book_date.get(p));
-                            job_book.put("from_time", book_fromtime.get(p));
-                            job_book.put("to_time", book_totime.get(p));
-                            job_book.put("base_amount", str_price);
-                            job_book.put("hours", book_hour.get(p));
-                            job_book.put("amount", "0");
-                            job_book.put("discount_price", "0");
-                            job_book.put("actual_amount", "0");
-
-                            booking.put(job_book);
-                        }
-
-                        data_bookNow.put("booking", booking);
-                        data_bookNow.put("package_id", str_pack_id);
-                        data_bookNow.put("is_subscriber", str_is_subscriber);
-                        data_bookNow.put("booking_from", "1");
-
-                        Task_Payment task_payment1 = new Task_Payment();
-                        task_payment1.execute();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-
-                Toast.makeText(getApplicationContext(), "Payment Fail Please Try again", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    private void hideSoftKeyboard() {
-        if (getCurrentFocus() != null && getCurrentFocus() instanceof EditText) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(et_promo_code.getWindowToken(), 0);
-        }
-    }
-
-
-    @Override
-    protected void onResume() {
-
-        Task_bookinDetails task_bookinDetails = new Task_bookinDetails();
-        task_bookinDetails.execute();
-
-        super.onResume();
-
     }
 }
