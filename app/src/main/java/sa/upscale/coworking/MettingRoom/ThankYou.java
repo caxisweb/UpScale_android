@@ -3,7 +3,6 @@ package sa.upscale.coworking.MettingRoom;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 import android.widget.ViewFlipper;
 
 import com.facebook.share.model.ShareOpenGraphAction;
@@ -24,12 +22,9 @@ import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.plus.PlusShare;
 import com.squareup.picasso.Picasso;
 
-import sa.upscale.coworking.Login;
 import sa.upscale.coworking.NavigationActivity;
-import sa.upscale.coworking.New_Booking_activity;
 import sa.upscale.coworking.R;
 import sa.upscale.coworking.Url_info;
 import sa.upscale.coworking.fregment.Home_freg;
@@ -65,12 +60,12 @@ public class ThankYou extends AppCompatActivity {
         str_reference_no = b.getString("reference_no");
 
 
-        tv_invitation = (TextView) findViewById(R.id.tv_invite);
-        tv_refCode = (TextView) findViewById(R.id.tv_referal_no);
-        img_facebook = (ImageView) findViewById(R.id.login_button_fb);
-        img_twitter = (ImageView) findViewById(R.id.img_thankyou_twitter);
-        img_google = (ImageView) findViewById(R.id.img_thankyou_googlePlus);
-        img_close = (ImageView) findViewById(R.id.img_thankyou_close);
+        tv_invitation = findViewById(R.id.tv_invite);
+        tv_refCode = findViewById(R.id.tv_referal_no);
+        img_facebook = findViewById(R.id.login_button_fb);
+        img_twitter = findViewById(R.id.img_thankyou_twitter);
+        img_google = findViewById(R.id.img_thankyou_googlePlus);
+        img_close = findViewById(R.id.img_thankyou_close);
 
         tv_refCode.setText(str_reference_no);
 
@@ -132,13 +127,19 @@ public class ThankYou extends AppCompatActivity {
 
 
                 String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "http://hive.sa/app.php";
-                Intent shareIntent = new PlusShare.Builder(ThankYou.this)
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Hive Upscale");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, str_msg);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+
+                /*Intent shareIntent = new PlusShare.Builder(ThankYou.this)
                         .setType("text/plain")
                         .setText(str_msg)
                         .setContentUrl(Uri.parse("https://developers.google.com/+/"))
                         .getIntent();
 
-                startActivityForResult(shareIntent, 0);
+                startActivityForResult(shareIntent, 0);*/
 
             }
         });
@@ -174,8 +175,8 @@ public class ThankYou extends AppCompatActivity {
             }
         });
 
-        ViewFlipper fliper_add = (ViewFlipper) findViewById(R.id.flipper_add);
-        AdView google_AdView = (AdView) findViewById(R.id.adView);
+        ViewFlipper fliper_add = findViewById(R.id.flipper_add);
+        AdView google_AdView = findViewById(R.id.adView);
 
         if(Home_freg.add_url.size()>0){
 
@@ -189,7 +190,7 @@ public class ThankYou extends AppCompatActivity {
                         ThankYou.this).inflate(
                         R.layout.custome_addview, null);
 
-                ImageView img_adv= (ImageView) add_view.findViewById(R.id.img_adv);
+                ImageView img_adv = add_view.findViewById(R.id.img_adv);
 
                 Picasso.with(ThankYou.this)
                         .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))

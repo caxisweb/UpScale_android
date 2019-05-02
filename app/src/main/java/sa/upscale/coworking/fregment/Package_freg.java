@@ -62,7 +62,7 @@ public class Package_freg extends Fragment {
 
     ArrayList<Package> package_list = new ArrayList<>();
 
-    String pack_id, pack_name, pack_rat, pack_price, pack_type, pack_detail, pack_space, str_bank_name, str_iban, str_account_no, str_bank_name_ar, str_iban_ar, str_account_no_ar;
+    String pack_id, pack_name, pack_rat, pack_price, pack_type, pack_detail, pack_space, str_bank_name, str_iban, str_account_no, str_bank_name_ar, str_iban_ar, str_account_no_ar, str_is_subscribe;
 
     Dialog dialog;
     ListView lv_packagelist;
@@ -97,6 +97,7 @@ public class Package_freg extends Fragment {
                 str_bank_name_ar = package_list.get(i).getStr_bank_name_ar();
                 str_account_no_ar = package_list.get(i).getStr_account_no_ar();
                 str_iban_ar = package_list.get(i).getStr_iban_ar();
+                str_is_subscribe = package_list.get(i).getStr_subscribe_status();
 
                 detailDlg();
 
@@ -206,7 +207,7 @@ public class Package_freg extends Fragment {
         dialog.setCancelable(false);
 
         ImageView img_close = dialog.findViewById(R.id.img_filter_close);
-        Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+        Button btn_unsubscribe = dialog.findViewById(R.id.btn_unsubscribe);
         Button btn_confirm = dialog.findViewById(R.id.btn_confirm);
         final RadioGroup rg_paymenthod = dialog.findViewById(R.id.rg_paymentmethod);
 
@@ -224,7 +225,7 @@ public class Package_freg extends Fragment {
 
         tv_package_detail.setText(pack_detail);
 
-        String array3[] = pack_space.split(",");
+        String[] array3 = pack_space.split(",");
         String space_name = "";
 
         for (String temp : array3) {
@@ -270,10 +271,58 @@ public class Package_freg extends Fragment {
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        if (str_is_subscribe.equals("1")) {
+            btn_unsubscribe.setVisibility(View.VISIBLE);
+        } else {
+            btn_unsubscribe.setVisibility(View.GONE);
+        }
+
+        btn_unsubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                //dialog.dismiss();
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Are you sure you want to Unsubscribe this package ?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // FIRE ZE MISSILES!
+
+                                if (session.isLoggedIn()) {
+
+                                    try {
+                                        user_details = session.getUserDetails();
+
+                                        data_bookNow.put("package_id", pack_id);
+                                        data_bookNow.put("user_id", user_details.get(SessionManager.user_Id));
+
+
+                                        Task_Unsubscribe task_unsubscribe = new Task_Unsubscribe();
+                                        task_unsubscribe.execute();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+
+                                    Intent i_login = new Intent(getActivity(), Login.class);
+                                    i_login.putExtra("flag", 1);
+                                    startActivity(i_login);
+
+                                }
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                builder.create().show();
             }
         });
 
@@ -377,6 +426,7 @@ public class Package_freg extends Fragment {
             }
         });
 
+
         dialog.show();
 
     }
@@ -410,12 +460,67 @@ public class Package_freg extends Fragment {
 
             if (status1.equals("1")) {
 
-
                 dialog.dismiss();
                 Toast.makeText(getActivity(), "Package Successfully Subscribed", Toast.LENGTH_SHORT).show();
+                Task_package t_p = new Task_package();
+                t_p.execute();
+            } else {
+
+                Toast.makeText(getActivity(), "You are Already Subscriber of this package", Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Please wait ..");
+            progressDialog.show();
+            super.onPreExecute();
+        }
+    }
+
+
+    private class Task_Unsubscribe extends AsyncTask<String, String, String> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                Postdata postdata = new Postdata();
+                Log.i("request", data_bookNow.toString());
+                String str_responce = postdata.post(Url_info.main_url + "package_unsubscribe.php", data_bookNow.toString());
+                Log.i("responce", str_responce);
+                JSONObject jobj_payment = new JSONObject(str_responce);
+                status1 = jobj_payment.getString(status);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (status1.equals("1")) {
+
+                dialog.dismiss();
+                Toast.makeText(getActivity(), "Package Successfully Unsubscribed", Toast.LENGTH_SHORT).show();
+                Task_package t_p = new Task_package();
+                t_p.execute();
 
             } else {
-                Toast.makeText(getActivity(), "You are Already Subscriber of this package", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getActivity(), "You are Not Subscriber of this package", Toast.LENGTH_SHORT).show();
             }
 
             progressDialog.dismiss();

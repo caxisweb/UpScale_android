@@ -385,6 +385,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         FinalCalculation();
 
                     } else if (tv_from.getText().toString().substring(tv_from.length() - 2, tv_from.length()).equals("AM") && tv_to.getText().toString().substring(tv_to.length() - 2, tv_to.length()).equals("PM")) {
+
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
                         Date date1 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_from.getText().toString().trim());
                         Date date2 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_to.getText().toString().trim());
@@ -397,7 +398,9 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                         Log.i("hour", final_calculate_hours + "");
                         FinalCalculation();
+
                     } else {
+
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
                         Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
                         Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
@@ -408,6 +411,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
 
                         Log.i("hour", final_calculate_hours + "");
+
                         FinalCalculation();
                     }
                 } catch (Exception e) {
@@ -528,7 +532,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                     //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
                     total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                    btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                     promocode_id = "0";
                     discount_amount = "0";
@@ -551,7 +555,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                     //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
                     total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                    btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                     promocode_id = "0";
                     discount_amount = "0";
@@ -577,7 +581,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         //tex_amount=(((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no))*vat_per)/100;
 
                         total_price = (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no);
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                        btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                         promocode_id = "0";
                         discount_amount = "0";
@@ -906,7 +910,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                 et_promo_code.setText("");
 
                 total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no));
-                btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                 promocode_id = "0";
                 discount_amount = "0";
@@ -1479,8 +1483,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     @Override
     protected void onResume() {
 
-        Task_bookinDetails task_bookinDetails = new Task_bookinDetails();
-        task_bookinDetails.execute();
+        //Task_bookinDetails task_bookinDetails = new Task_bookinDetails();
+        //task_bookinDetails.execute();
 
         super.onResume();
 
@@ -1856,7 +1860,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     total_price = ((Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no)) + tex_amount;
 
                     if (str_is_subscriber.equals("0")) {
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                        btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
                     } else {
                         btn_bookroom.setText("Book Now");
                     }
@@ -1875,7 +1879,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         et_promo_code.setText("");
 
                         total_price = ((Float.parseFloat(str_price) * total_hour) * Float.parseFloat(str_repet_no));
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                        btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                         book_date_count = book_date_count - 1;
                         total_hour = total_hour - Long.parseLong(book_hour.get(book_date_count));
@@ -1894,7 +1898,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                             if (total_price == 0) {
                                 btn_bookroom.setText(str_price + " SAR " + getResources().getString(R.string.paynow));
                             } else {
-                                btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                                btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
                             }
                         } else {
                             btn_bookroom.setText("Book Now");
@@ -2051,7 +2055,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                     total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount) + tex_amount;
 
-                    btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                    btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
                     tv_dis_amount.setText("You get " + discount_amount + " SAR " + getResources().getString(R.string.discount_amount));
                     btn_code_apply.setVisibility(View.GONE);
                     btn_code_remove.setVisibility(View.VISIBLE);
@@ -2064,7 +2068,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         discount_amount = code_amount;
                         total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount);
                         //tv_finalprice.setText(final_price);
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                        btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
 
                         tv_dis_amount.setText("You get " + discount_amount + " SAR " + getResources().getString(R.string.discount_amount));
 
@@ -2074,7 +2078,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
 
                         discount_amount = code_amount;
                         total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount);
-                        btn_bookroom.setText(String.valueOf(total_price) + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
+                        btn_bookroom.setText(total_price + " SAR " + vat_per + " " + getResources().getString(R.string.paynow));
                         //tv_finalprice.setText(final_price);
                         tv_dis_amount.setText("You get " + discount_amount + " SAR " + getResources().getString(R.string.discount_amount));
                     }
@@ -2185,4 +2189,6 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
             super.onPreExecute();
         }
     }
+
+
 }
