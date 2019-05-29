@@ -149,8 +149,7 @@
                         android:id="@+id/btn_login_linkedIn"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/linkedin_con"
-                        android:visibility="gone" />
+                        android:src="@drawable/linkedin_con" />
 
 
                     <ImageView

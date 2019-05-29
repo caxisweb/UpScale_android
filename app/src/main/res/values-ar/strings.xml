@@ -112,7 +112,7 @@
     <string name="are_you_sure">هل انت متأكد</string>
     <string name="you_want_to_delete_the_booking">تود ان يتم الغاء الحجز</string>
     <string name="cancle">الالغاء</string>
-    <string name="delete">مسح</string>
+    <string name="delete">مسح, مشاركة</string>
     <string name="update">تحديث</string>
     <string name="my_profile">الملف الشخصي</string>
     <string name="notifications">التنبيهات</string>
@@ -212,7 +212,7 @@
     <string name="manual_location">تحديد يدوي (اختياري)</string>
     <string name="sharing_with_social_media">شارك مع من تحب</string>
     <string name="price1">السعر</string>
-    <string name="e_mail">E-mail</string>
+    <string name="e_mail">البريد الالكتروني</string>
     <string name="add_more_invitation">اضافة المزيد</string>
     <string name="find_your_workspace">اكتشف المساحات المتاحة من حولك</string>
     <string name="where_do_you_want_to_work">اختر مكان عملك</string>

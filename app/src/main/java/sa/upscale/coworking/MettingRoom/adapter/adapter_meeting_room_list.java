@@ -196,6 +196,7 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
 
                     ImageView img_adv= (ImageView) add_view.findViewById(R.id.img_adv);
 
+
                     Picasso.with(mContext)
                             .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))
                             .error(R.drawable.addbaner)

@@ -519,6 +519,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     }
 
     public void FinalCalculation() {
+
         if (final_calculate_hours > 0) {
 
             if (str_is_subscriber.equals("0")) {
