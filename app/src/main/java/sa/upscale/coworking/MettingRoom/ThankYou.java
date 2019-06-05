@@ -3,6 +3,7 @@ package sa.upscale.coworking.MettingRoom;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.facebook.share.model.ShareOpenGraphAction;
@@ -23,6 +25,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import sa.upscale.coworking.NavigationActivity;
 import sa.upscale.coworking.R;
@@ -41,7 +45,7 @@ public class ThankYou extends AppCompatActivity {
     android.support.v4.app.FragmentTransaction ft;
 
     TextView tv_refCode;
-    ImageView img_facebook, img_twitter, img_google, img_close;
+    ImageView img_facebook, img_twitter, img_google, img_close,img_linkedin;
 
     String str_reference_no, str_booking_id;
     View view;
@@ -65,6 +69,7 @@ public class ThankYou extends AppCompatActivity {
         img_facebook = findViewById(R.id.login_button_fb);
         img_twitter = findViewById(R.id.img_thankyou_twitter);
         img_google = findViewById(R.id.img_thankyou_googlePlus);
+        img_linkedin=findViewById(R.id.btn_login_linkedIn);
         img_close = findViewById(R.id.img_thankyou_close);
 
         tv_refCode.setText(str_reference_no);
@@ -100,7 +105,7 @@ public class ThankYou extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "http://hive.sa/app.php";
+                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "https://coworkinghive.com/app.php";
 
                 ShareDialog shareDialog = new ShareDialog(ThankYou.this);
                 ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
@@ -126,7 +131,7 @@ public class ThankYou extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "http://hive.sa/app.php";
+                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "https://coworkinghive.com/app.php";
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Hive Upscale");
@@ -150,7 +155,8 @@ public class ThankYou extends AppCompatActivity {
 
                 boolean isAppInstalled = appInstalledOrNot("com.twitter.android");
                 Intent intent = new Intent();
-                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "http://hive.sa/app.php";
+                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "https://coworkinghive.com/app.php";
+
                 if (isAppInstalled) {
 
                     intent.setAction(Intent.ACTION_SEND);
@@ -171,6 +177,40 @@ public class ThankYou extends AppCompatActivity {
 
                 }
                 startActivity(intent);
+
+            }
+        });
+
+        img_linkedin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String str_msg = "Please explore " + Booking_MettingRoom_list_details.strName + " and join the coworkers community now by booking a space" + "\n" + "https://coworkinghive.com/app.php";
+
+                Intent linkedinIntent = new Intent(Intent.ACTION_SEND);
+                linkedinIntent.setType("text/plain");
+                linkedinIntent.putExtra(Intent.EXTRA_TEXT, str_msg);
+
+                boolean linkedinAppFound = false;
+                List<ResolveInfo> matches2 = getPackageManager()
+                        .queryIntentActivities(linkedinIntent, 0);
+
+                for (ResolveInfo info : matches2) {
+                    if (info.activityInfo.packageName.toLowerCase().startsWith(
+                            "com.linkedin")) {
+                        linkedinIntent.setPackage(info.activityInfo.packageName);
+                        linkedinAppFound = true;
+                        break;
+                    }
+                }
+
+                if (linkedinAppFound) {
+                    startActivity(linkedinIntent);
+                }
+                else
+                {
+                    Toast.makeText(ThankYou.this,"LinkedIn app not Insatlled in your mobile", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

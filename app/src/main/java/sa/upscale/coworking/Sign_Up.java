@@ -959,7 +959,10 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 ed_password.setText("");
                 ed_name.setText("");
                 ed_mobile.setText("");
+                ed_password_again.setText("");
+
                 finish();
+
                 startActivity(new Intent(Sign_Up.this, Login.class));
                 //Toast.makeText(Sign_Up.this, "Success", Toast.LENGTH_SHORT).show();
             } else {
