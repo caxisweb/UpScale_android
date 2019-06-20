@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
     Context context = this;
     ImageButton img_back;
     TextView tv_actionText;
+    Button btn_change;
     String str_lat = "0", str_lng = "0", str_address, str_city;
 
     @Override
@@ -55,6 +57,7 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
 
         img_back = (ImageButton) findViewById(R.id.action_bar_back);
         tv_actionText = (TextView) findViewById(R.id.action_bar_title);
+        btn_change=(Button)findViewById(R.id.btn_change);
 
         Intent intent = getIntent();
         str_lat = intent.getStringExtra("lat");
@@ -84,6 +87,21 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        btn_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent1 = new Intent();
+                intent1.putExtra("type", "mapLocation");
+                intent1.putExtra("lati", str_lat);
+                intent1.putExtra("longi", str_lng);
+                intent1.putExtra("address", str_address);
+                intent1.putExtra("city", "null");
+                setResult(10,intent1);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -260,7 +278,6 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
         Intent intent1 = new Intent();
         intent1.putExtra("type", "mapLocation");
@@ -268,8 +285,12 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
         intent1.putExtra("longi", str_lng);
         intent1.putExtra("address", str_address);
         intent1.putExtra("city", "null");
-        setResult(Activity.RESULT_OK,intent1);
+        setResult(10,intent1);
         finish();
+
+        super.onBackPressed();
+
+
 
     }
 

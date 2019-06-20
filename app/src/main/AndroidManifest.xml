@@ -167,9 +167,8 @@
                  &lt;!&ndash; Accepts URIs "com.example.myapp://" &ndash;&gt;
                  <data android:scheme="sa.upscale.coworking" />
              </intent-filter>-->
-
-
         </activity>
+
         <activity
             android:name=".MettingRoom.Invitation"
             android:parentActivityName=".NavigationActivity"
@@ -183,9 +182,11 @@
         <activity
             android:name=".Thank_U_listUrSpace"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden|stateHidden" />
+
         <activity
             android:name=".list_ur_spce_location_map"
             android:label="@string/title_activity_list_ur_spce_location_map" />
+
     </application>
 
 </manifest>

@@ -1,12 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/lv_header"
         android:padding="@dimen/margin10"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_height="55dp">
 
         <ImageButton
@@ -33,12 +35,42 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
+        android:layout_below="@+id/lv_header"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="sa.upscale.coworking.list_ur_spce_location_map" />
 
-</LinearLayout>
+    <sa.upscale.coworking.CustomFont.MytextView
+        android:id="@+id/tv_lab"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/lv_header"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        android:background="#80000000"
+        android:text="Please Long press on Map for Select your New address"/>
+
+    <sa.upscale.coworking.CustomFont.Mybutton
+        android:id="@+id/btn_change"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/button_color"
+        android:text="@string/change"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

@@ -307,6 +307,19 @@ public class Invitation extends AppCompatActivity {
                     flag = 0;
                     llgoUp.setVisibility(View.VISIBLE);
                     llInvitationAddmore.setVisibility(View.GONE);
+                    edInvitationEmail4.setText("");
+                    edInvitationEmail5.setText("");
+                    edInvitationEmail6.setText("");
+                    edInvitationEmail7.setText("");
+                    edInvitationEmail8.setText("");
+                    edInvitationEmail9.setText("");
+
+                    edInvitationMobile4.setText("");
+                    edInvitationMobile5.setText("");
+                    edInvitationMobile6.setText("");
+                    edInvitationMobile7.setText("");
+                    edInvitationMobile8.setText("");
+                    edInvitationMobile9.setText("");
                 }
             }
         });

@@ -251,7 +251,7 @@
     <string name="number_of_room">عدد الغرف</string>
     <string name="number_of_people">عدد الاشخاص</string>
     <string name="address">العنوان</string>
-    <string name="change">تغيير</string>
+    <string name="change">تغير </string>
 
     <string name="save_your_space_now">حفظ </string>
     <string name="use_the_form_below_to_send_us_your_comment">شارك معنا ملاحظاتك وتعليقاتك</string>
@@ -272,7 +272,7 @@
     <string name="packages">عروض</string>
     <string name="invitation">دعوات</string>
     <string name="advance_search">بحث متقدم</string>
-    <string name="package_detail">Package Detail</string>
+    <string name="package_detail">تفاصيل العرض</string>
     <string name="facility">المرافق</string>
     <string name="share">مشاركة</string>
 
@@ -282,5 +282,25 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
 
+    <string name="send_invitation">إرسال دعوة</string>
+
+    <string name="valid_enter_name">من فضلك ادخل الاسم</string>
+    <string name="valid_enter_mobile">الرجاء إدخال رقم الجوال</string>
+    <string name="valid_enter_correct_mobile">من فضلك ادخل رقم صحيح</string>
+    <string name="valid_enter_email">الرجاء إدخال البريد الإلكتروني</string>
+    <string name="valid_enter_correct_email">الرجاء إدخال بريد إلكتروني صحيح</string>
+    <string name="valid_enter_password">من فضلك أدخل كلمة المرور</string>
+    <string name="valid_enter_correct_password">الرجاء إدخال تأكيد كلمة المرور</string>
+    <string name="check_terms_condition">يرجى تفعيل الشروط والأحكام</string>
+
+    <string name="valid_enter_price">من فضلك  ادخل سعر الساعة</string>
+    <string name="valid_select_spactype"> من فضلك اختر نوع المساحة</string>
+    <string name="valid_select_city">من فضلك اختار المدينة</string>
+
+    <string name="valid_enter_space">الرجاء إدخال اسم الفضاء</string>
+    <string name="valid_enter_person">الرجاء إدخال عدد الأشخاص</string>
+    <string name="valid_enter_num_room">الرجاء إدخال عدد الغرف</string>
+    <string name="valid_select_location">يرجى اختيار الموقع</string>
+    <string name="valid_select_image">يرجى اختيار الصورة</string>
 
 </resources>

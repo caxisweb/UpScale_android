@@ -353,6 +353,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                         Log.d("FaceBook", fb_name + "\n Emial :\t" + fb_email + "\n" + fb_id + "\n" + fb_img);
 
                                         try {
+
                                             social_user_data.put("name", fb_name);
                                             social_user_data.put("email", fb_email);
                                             social_user_data.put("type", "facebook");

@@ -485,7 +485,6 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(intent,10);
 
                 //getCurrentlocation();
-
                 break;
             case R.id.btn_space_submit:
 
@@ -501,37 +500,37 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                 mstr_price = ed_price.getText().toString().trim();
 
                 if (mstr_cap1.length() == 0) {
-                    sp_cpacity.setError("Enter Capacity");
+                    sp_cpacity.setError(getResources().getString(R.string.valid_enter_person));
                     sp_cpacity.requestFocus();
                 } else if (mstr_avali1.length() == 0) {
-                    sp_avalibility.setError("Enter Count");
+                    sp_avalibility.setError(getResources().getString(R.string.valid_enter_num_room));
                     sp_avalibility.requestFocus();
                 } else if (mstr_price.length() == 0) {
-                    ed_price.setError("Enter Price");
+                    ed_price.setError(getResources().getString(R.string.valid_enter_price));
                     ed_price.requestFocus();
                 } else if (mstr_name.length() == 0) {
-                    ed_name.setError("Please Enter Name");
+                    ed_name.setError(getResources().getString(R.string.valid_enter_name));
                     ed_name.setFocusable(true);
                 } else if (mstr_email.length() == 0) {
-                    ed_email.setError("Please Enter Email");
+                    ed_email.setError(getResources().getString(R.string.valid_enter_email));
                     ed_email.setFocusable(true);
                 } else if (!mstr_email.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
                     /*[a-zA-Z0-9._-]+@[a-z]+.[a-z]+*/
-                    ed_email.setError("Invalid Email Address");
+                    ed_email.setError(getResources().getString(R.string.valid_enter_correct_email));
                     ed_email.setFocusable(true);
                 } else if (str.equals("false")) {
-                    ed_mobile.setError("Number Start With 05");
+                    ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     ed_mobile.setFocusable(true);
                     ed_mobile.requestFocus();
                 } else if (mstr_mobile.length() != 10) {
-                    ed_mobile.setError("Please Enter Correct Number");
+                    ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     ed_mobile.setFocusable(true);
                 } else if (str_lat.equals("0") && str_lng.equals("0")) {
-                    Toast.makeText(activity, "Please Select Location", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getResources().getString(R.string.valid_select_location), Toast.LENGTH_SHORT).show();
                 } else if (mstr_type.equals("0")) {
-                    Toast.makeText(activity, "Please Select Space Type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getResources().getString(R.string.valid_select_spactype), Toast.LENGTH_SHORT).show();
                 } else if (mstr_cityid.equals("0")) {
-                    Toast.makeText(activity, "Please Select City", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getResources().getString(R.string.valid_select_city), Toast.LENGTH_SHORT).show();
                 } else {
 
                     if (!str_img_path1.equals("0") || !str_img_path2.equals("0") || !str_img_path3.equals("0")) {
@@ -887,7 +886,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
         if(requestCode == 10){
 
-            Log.i("in_select address","in");
+            //Log.i("in_select address",data.getDataString());
 
             try {
 
@@ -1461,7 +1460,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                 //finish();
                 //startActivity(new Intent(List_ur_Space.this, Thank_U_listUrSpace.class));
 
-                Toast.makeText(activity, "Space is Successfully added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Space is Successfully added Now admin will review then approve new space", Toast.LENGTH_SHORT).show();
 
             } else {
                 Toast.makeText(activity, "" + message1, Toast.LENGTH_SHORT).show();
@@ -1571,4 +1570,6 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Claim", null);
         return Uri.parse(path);
     }
+
+
 }

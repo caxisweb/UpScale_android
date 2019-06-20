@@ -1,5 +1,6 @@
 package sa.upscale.coworking.fregment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -191,6 +192,7 @@ public class Package_freg extends Fragment {
     }
 
 
+    @SuppressLint({"NewApi", "WrongConstant"})
     private void detailDlg() {
 
         AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
@@ -224,6 +226,10 @@ public class Package_freg extends Fragment {
         final TextView tv_account_no = dialog.findViewById(R.id.tv_account_no);
 
         tv_package_detail.setText(pack_detail);
+
+        if(!session.getlanguageCode().equals("1")){
+            tv_package_detail.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+        }
 
         String[] array3 = pack_space.split(",");
         String space_name = "";

@@ -665,6 +665,9 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         ed_loation = dialog.findViewById(R.id.at_location);
         rangeSeekbar = dialog.findViewById(R.id.seekbar_price);
 
+        rangeSeekbar.setSelectedMinValue(10);
+        rangeSeekbar.setSelectedMaxValue(990);
+
         tv_date = dialog.findViewById(R.id.tv_bookingList_detail_date_filter);
         tv_from = dialog.findViewById(R.id.tv_bookingList_detail_from_filter);
         tv_To = dialog.findViewById(R.id.tv_bookingList_detail_to_filter);
@@ -1942,7 +1945,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 } else {
                     message1 = job_location.getString(message);
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

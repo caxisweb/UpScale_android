@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -180,31 +181,31 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 String str = String.valueOf(mstr_mobile.startsWith("05"));
 
                 if (mstr_name.length() == 0) {
-                    ed_name.setError("Please Enter Name");
+                    ed_name.setError(getResources().getString(R.string.valid_enter_name));
                     ed_name.setFocusable(true);
                 } else if (mstr_mobile.length() == 0) {
-                    ed_mobile.setError("Please Enter Contact No.");
+                    ed_name.setError(getResources().getString(R.string.valid_enter_mobile));
                     ed_mobile.setFocusable(true);
                 } else if (str.equals("false")) {
                     ed_mobile.setError("Number Start With 05");
                     ed_mobile.setFocusable(true);
                     ed_mobile.requestFocus();
                 } else if (mstr_mobile.length() != 10) {
-                    ed_mobile.setError("Please Enter Correct Number");
+                    ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     ed_mobile.setFocusable(true);
                 } else if (mstr_email.length() == 0) {
-                    ed_email.setError("Please Enter Email Id");
+                    ed_email.setError(getResources().getString(R.string.valid_enter_email));
                     ed_email.setFocusable(true);
                 } else if (!mstr_email.matches("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
-                    ed_email.setError("Invalid Email Address");
+                    ed_email.setError(getResources().getString(R.string.valid_enter_correct_email));
                     ed_email.setFocusable(true);
                 } else if (mstr_password.length() == 0) {
-                    ed_password.setError("Please Enter Password");
+                    ed_password.setError(getResources().getString(R.string.valid_enter_password));
                     ed_password.setFocusable(true);
                 } else if (!mstr_password.equals(mstr_password_again)) {
-                    ed_password_again.setError("Password Does not match");
+                    ed_password_again.setError(getResources().getString(R.string.valid_enter_correct_password));
                 } else if (!ch_terms.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "Please Enable Terms & Condition", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.check_terms_condition), Toast.LENGTH_SHORT).show();
                 } else {
 
                     if (isNetworkAvailable()) {
@@ -681,6 +682,15 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 .build();
 
 
+        HashMap<String, String> lang = new HashMap<String, String>();
+        lang=session.getlanguageCode();
+        Log.i("language_code",lang.get(SessionManager.user_languageCode));
+        if(!lang.get(SessionManager.user_languageCode).equals("1")){
+
+            ed_password.setGravity(Gravity.END);
+            ed_password_again.setGravity(Gravity.END);
+            ed_mobile.setGravity(Gravity.END);
+        }
         //generateHashkey("com.inforaam.upscale");
     }
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <RelativeLayout
@@ -45,12 +46,11 @@
                 android:id="@+id/tv_package_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Package description for user and it is change accding to package selection coming from data table from server it may be html content for user than it is display well formated in view"
                 android:textColor="@color/textcolor_input"
                 android:textSize="12dp" />
 
             <sa.upscale.coworking.CustomFont.MytextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="15dp"
@@ -61,7 +61,7 @@
 
             <sa.upscale.coworking.CustomFont.MytextView
                 android:id="@+id/tv_package_space"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin10"
                 android:textColor="@color/textcolor_input"
@@ -69,7 +69,7 @@
 
 
             <sa.upscale.coworking.CustomFont.MytextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="15dp"
@@ -338,6 +338,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/margin10"
             android:background="@drawable/orange_border"
             android:text="Unsubscribe"
             android:textColor="@color/colorPrimary" />

@@ -273,4 +273,26 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
 
+    <string name="send_invitation">Send Invitation</string>
+
+    <!--Validation method-->
+    <string name="valid_enter_name">Please Enter the Name</string>
+    <string name="valid_enter_mobile">Please Enter Mobile Number</string>
+    <string name="valid_enter_correct_mobile">Please Enter the Correct Number</string>
+    <string name="valid_enter_email">Please Enter Email</string>
+    <string name="valid_enter_correct_email">Please Enter Valid Email</string>
+    <string name="valid_enter_password">Please Enter Password</string>
+    <string name="valid_enter_correct_password">Please Enter Password</string>
+    <string name="check_terms_condition"><![CDATA[Please Enable Terms & Condition]]></string>
+
+    <string name="valid_enter_price">Please Enter the price</string>
+    <string name="valid_select_spactype">Please select space type</string>
+    <string name="valid_select_city">Please select city</string>
+
+    <string name="valid_enter_space">Please Enter Space Name</string>
+    <string name="valid_enter_person">Please Enter Number of Person</string>
+    <string name="valid_enter_num_room">Please Enter Number of Room</string>
+    <string name="valid_select_location">Please Select Location</string>
+    <string name="valid_select_image">Please Select Image</string>
+
 </resources>

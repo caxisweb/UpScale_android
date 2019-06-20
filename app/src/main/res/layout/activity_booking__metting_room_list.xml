@@ -68,8 +68,8 @@
                 <LinearLayout
                     android:id="@+id/tab_content"
                     android:layout_width="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
@@ -90,8 +90,8 @@
             android:id="@+id/lv_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_gray"
             android:animateLayoutChanges="true"
+            android:background="@color/light_gray"
             android:orientation="horizontal"
             android:padding="7dp">
 
@@ -135,10 +135,10 @@
                 android:id="@+id/lst_tab_bookingList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="true"
                 android:divider="@color/light_gray"
                 android:dividerHeight="5dp"
-                android:elevation="10dp" />
+                android:elevation="10dp"
+                android:nestedScrollingEnabled="true" />
         </LinearLayout>
 
 
@@ -164,8 +164,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/lv_footer"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/margin20"
         android:layout_marginRight="@dimen/margin10"
+        android:layout_marginBottom="@dimen/margin20"
         android:orientation="vertical">
 
         <ImageView
@@ -199,9 +199,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#80FFFFFF"
+            android:drawableLeft="@drawable/ic_calender"
             android:gravity="center_vertical"
             android:hint="Date"
-            android:paddingLeft="@dimen/margin5" />
+            android:paddingLeft="@dimen/margin5"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <sa.upscale.coworking.CustomFont.MytextView
             android:id="@+id/tv_meetingRoom_from"
@@ -210,9 +213,12 @@
             android:layout_marginLeft="@dimen/margin5"
             android:layout_weight="1.1"
             android:background="#80FFFFFF"
+            android:drawableLeft="@drawable/ic_time"
             android:gravity="center_vertical"
             android:hint="From"
-            android:paddingLeft="@dimen/margin5" />
+            android:paddingLeft="@dimen/margin5"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <sa.upscale.coworking.CustomFont.MytextView
             android:id="@+id/tv_meetingRoom_to"
@@ -221,9 +227,12 @@
             android:layout_marginLeft="@dimen/margin5"
             android:layout_weight="1.1"
             android:background="#80FFFFFF"
+            android:drawableLeft="@drawable/ic_time"
             android:gravity="center_vertical"
             android:hint="To"
-            android:paddingLeft="@dimen/margin5" />
+            android:paddingLeft="@dimen/margin5"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <sa.upscale.coworking.CustomFont.MytextView
             android:id="@+id/tv_search1"

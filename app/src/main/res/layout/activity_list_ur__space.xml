@@ -23,7 +23,6 @@
                 android:layout_centerVertical="true"
                 android:drawableLeft="@drawable/left_arrow"
                 android:gravity="center_vertical"
-                android:text="@string/back"
                 android:textColor="@color/white" />
 
 

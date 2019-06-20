@@ -5,7 +5,7 @@
 
     <sa.upscale.coworking.CustomFont.MytextView
         android:id="@+id/tv_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin3"
         android:text="hii"

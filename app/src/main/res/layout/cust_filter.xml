@@ -20,10 +20,12 @@
                 android:layout_height="wrap_content">
 
                 <sa.upscale.coworking.CustomFont.MytextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/advance_search"
+                    android:layout_marginRight="@dimen/margin10"
+                    android:layout_toLeftOf="@+id/img_filter_close"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold" />
@@ -206,7 +208,7 @@
                 android:orientation="vertical">
 
                 <sa.upscale.coworking.CustomFont.MytextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/price_range"
@@ -499,24 +501,38 @@
                             android:textSize="10dp" />
 
                         <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_male"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/man"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+                        <!--<sa.upscale.coworking.CustomFont.MycheckBox
                             android:id="@+id/chk_space_work"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:singleLine="true"
                             android:text="@string/work_24_h"
                             android:textColor="@color/textcolor_input"
-                            android:textSize="10dp" />
+                            android:textSize="10dp" />-->
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <sa.upscale.coworking.CustomFont.MycheckBox
+                        <!--<sa.upscale.coworking.CustomFont.MycheckBox
                             android:id="@+id/chk_space_male"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/man"
+                            android:textColor="@color/textcolor_input"
+                            android:textSize="10dp" />
+-->
+                        <sa.upscale.coworking.CustomFont.MycheckBox
+                            android:id="@+id/chk_space_work"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/work_24_h"
                             android:textColor="@color/textcolor_input"
                             android:textSize="10dp" />
 

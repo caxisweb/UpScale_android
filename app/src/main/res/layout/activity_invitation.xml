@@ -697,7 +697,7 @@
             android:layout_width="200dp"
             android:layout_height="35dp"
             android:background="@color/button_color"
-            android:text="Send Invitation"
+            android:text="@string/send_invitation"
             android:textColor="@color/white"
             android:textSize="16dp" />
 
