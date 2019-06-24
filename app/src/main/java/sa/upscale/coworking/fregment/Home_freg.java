@@ -1559,6 +1559,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                     data_meetingroom.put("lat", "0");
                     data_meetingroom.put("long", "0");
                 }
+
                 Postdata p_user = new Postdata();
                 Log.d("list", data_meetingroom.toString());
 

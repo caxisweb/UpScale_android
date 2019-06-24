@@ -6,11 +6,11 @@ package sa.upscale.coworking;
 public class Url_info {
 
 
-    //public static String main_url = "http://coworkinghive.com/admin/new_api/";
-    //public static String main_img = "http://coworkinghive.com/upload/";
+    public static String main_url = "https://coworkinghive.com/admin/new_api/";
+    public static String main_img = "https://coworkinghive.com/upload/";
 
-    public static String main_url = "http://test.coworkinghive.com/admin/API/";
-    public static String main_img = "http://test.coworkinghive.com/admin/upload/";
+    /*public static String main_url = "http://test.coworkinghive.com/admin/API/";
+    public static String main_img = "http://test.coworkinghive.com/admin/upload/";*/
 
     //public static String main_url = "http://test.hive.sa/admin/API/";
     //public static String main_img = "http://test.hive.sa/admin/upload/";
