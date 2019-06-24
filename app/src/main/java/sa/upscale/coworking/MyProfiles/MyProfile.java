@@ -16,7 +16,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -215,9 +215,9 @@ String picpath_identify;
                     picpath_identify = mstr_img.substring(0, 5);
                     if (picpath_identify.equals("https"))
                     {
-                        Picasso.with(getActivity()).load(mstr_img).placeholder(R.drawable.logo3).into(img_profile);
+                        Glide.with(getActivity()).load(mstr_img).placeholder(R.drawable.logo3).into(img_profile);
                     }else {
-                        Picasso.with(getActivity()).load(Url_info.main_img+"profile/"+mstr_img).placeholder(R.drawable.logo3).into(img_profile);
+                        Glide.with(getActivity()).load(Url_info.main_img+"profile/"+mstr_img).placeholder(R.drawable.logo3).into(img_profile);
                     }
 
 

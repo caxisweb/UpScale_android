@@ -1611,14 +1611,14 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                     }
 
-                    JSONArray add_list = jobj_login.getJSONArray("advertise");
+                    /*JSONArray add_list = jobj_login.getJSONArray("advertise");
 
                     for (int j = 0; j < add_list.length(); j++) {
 
                         JSONObject jobj_addlist = add_list.getJSONObject(j);
                         add_img.add(jobj_addlist.getString("adv_img"));
                         add_url.add(jobj_addlist.getString("adv_url"));
-                    }
+                    }*/
 
                 } else {
                     message1 = jobj_login.getString(message);

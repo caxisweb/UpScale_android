@@ -4,10 +4,12 @@ import android.util.Log;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Protocol;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,6 +30,8 @@ public class Postdata {
 
         client.setConnectTimeout(300, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(300, TimeUnit.SECONDS);    // socket timeout
+
+        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
 
         body = RequestBody.create(JSON, json);
 

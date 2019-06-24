@@ -45,6 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -63,7 +64,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -769,7 +769,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                 ImageView img_adv = add_view.findViewById(R.id.img_adv);
 
-                Picasso.with(Login.this)
+
+                Glide.with(Login.this)
                         .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))
                         .error(R.drawable.addbaner)
                         .into(img_adv);
@@ -1432,6 +1433,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
 
             try {
+
+                Log.i("request",data_login.toString());
 
                 Postdata p_user = new Postdata();
                 String data_user = p_user.post(Url_info.main_url + "login.php", data_login.toString());

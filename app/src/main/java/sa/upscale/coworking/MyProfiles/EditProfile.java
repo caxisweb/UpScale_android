@@ -42,9 +42,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.location.LocationServices;
-import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -431,9 +430,9 @@ public class EditProfile extends Fragment {
         picpath_identify = user_details.get(SessionManager.user_profile).substring(0, 5);
 
         if (picpath_identify.equals("https")) {
-            Picasso.with(getActivity()).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(imgProfile);
+            Glide.with(getActivity()).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(imgProfile);
         } else {
-            Picasso.with(getActivity()).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(imgProfile);
+            Glide.with(getActivity()).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(imgProfile);
         }
     }
 
@@ -533,9 +532,9 @@ public class EditProfile extends Fragment {
 
                     picpath_identify = mstr_img.substring(0, 5);
                     if (picpath_identify.equals("https")) {
-                        Picasso.with(getActivity()).load(mstr_img).placeholder(R.drawable.logo3).into(imgProfile);
+                        Glide.with(getActivity()).load(mstr_img).placeholder(R.drawable.logo3).into(imgProfile);
                     } else {
-                        Picasso.with(getActivity()).load(Url_info.main_img + "profile/" + mstr_img).placeholder(R.drawable.logo3).into(imgProfile);
+                        Glide.with(getActivity()).load(Url_info.main_img + "profile/" + mstr_img).placeholder(R.drawable.logo3).into(imgProfile);
                     }
 
                     String compareValue = mstr_userType;
@@ -681,9 +680,9 @@ public class EditProfile extends Fragment {
                 picpath_identify = user_details.get(SessionManager.user_profile).substring(0, 5);
 
                 if (picpath_identify.equals("https")) {
-                    Picasso.with(getActivity()).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).into(imgProfile);
+                    Glide.with(getActivity()).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).into(imgProfile);
                 } else {
-                    Picasso.with(getActivity()).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).into(imgProfile);
+                    Glide.with(getActivity()).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).into(imgProfile);
                 }
 
                 Toast.makeText(getActivity(), "" + "Profile Update Successful", Toast.LENGTH_SHORT).show();

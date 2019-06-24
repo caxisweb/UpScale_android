@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.bumptech.glide.Glide;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
@@ -24,7 +25,6 @@ import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -232,7 +232,7 @@ public class ThankYou extends AppCompatActivity {
 
                 ImageView img_adv = add_view.findViewById(R.id.img_adv);
 
-                Picasso.with(ThankYou.this)
+                Glide.with(ThankYou.this)
                         .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))
                         .error(R.drawable.addbaner)
                         .into(img_adv);

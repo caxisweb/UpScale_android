@@ -5,11 +5,13 @@ import android.util.Log;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Protocol;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,6 +29,7 @@ public class Imageupload {
 
         client.setConnectTimeout(700, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(700, TimeUnit.SECONDS);
+        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
 
         RequestBody requestBody = new MultipartBuilder()
                 .type(MultipartBuilder.FORM)

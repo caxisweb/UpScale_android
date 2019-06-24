@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -37,7 +38,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -126,7 +126,7 @@ public class Fragment_Profile_OverView extends Fragment {
                     if (temp_sliderimg.equals("0")) {
                         imageView.setImageResource(logo[position]);
                     } else {
-                        Picasso.with(getActivity()).load(Url_info.main_img + "space/" + ar_images.get(position)).fit().centerCrop().into(imageView);
+                        Glide.with(getActivity()).load(Url_info.main_img + "space/" + ar_images.get(position)).centerCrop().into(imageView);
                     }
 
 
@@ -479,7 +479,7 @@ public class Fragment_Profile_OverView extends Fragment {
 //                img_slider.setPageCount(sampleImages.length);
 
 
-                Picasso.with(getActivity()).load(Url_info.main_img + "logo/" + str_logo).into(img_hoteLogo);
+                Glide.with(getActivity()).load(Url_info.main_img + "logo/" + str_logo).into(img_hoteLogo);
 
                 Log.d("ArSizeImages", String.valueOf(ar_images.size()));
 

@@ -16,7 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +97,7 @@ public class Invitation extends AppCompatActivity {
         tv_capacity.setText(Booking_MettingRoom_list_details.str_capacity);
         tv_sprice.setText(Booking_MettingRoom_list_details.str_price);
 
-        Picasso.with(Invitation.this).load(Url_info.main_img + "space/" + Booking_MettingRoom_list_details.str_space_img).error(R.drawable.logo1).into(img_space);
+        Glide.with(Invitation.this).load(Url_info.main_img + "space/" + Booking_MettingRoom_list_details.str_space_img).error(R.drawable.logo1).into(img_space);
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override

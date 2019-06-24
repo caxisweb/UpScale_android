@@ -1,5 +1,6 @@
 package sa.upscale.coworking.MettingRoom;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -37,7 +38,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -272,7 +273,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     if (temp_sliderimg.equals("0")) {
                         imageView.setImageResource(logo[position]);
                     } else {
-                        Picasso.with(Booking_MettingRoom_list_details.this).load(Url_info.main_img + "space/" + ar_images.get(position)).fit().into(imageView);
+                        Glide.with(Booking_MettingRoom_list_details.this).load(Url_info.main_img + "space/" + ar_images.get(position)).into(imageView);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1800,6 +1801,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
         ProgressDialog progressDialog;
         JSONObject data_ch_date = new JSONObject();
 
+        @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(String... params) {
 

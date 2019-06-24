@@ -22,10 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -197,7 +197,7 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
                     ImageView img_adv= (ImageView) add_view.findViewById(R.id.img_adv);
 
 
-                    Picasso.with(mContext)
+                    Glide.with(mContext)
                             .load(Url_info.main_img + "advertise/" + Home_freg.add_img.get(i))
                             .error(R.drawable.addbaner)
                             .into(img_adv);
@@ -260,7 +260,8 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
             tv_hotelLocation.setText(ar_location1.get(position));
             tv_hotelPrice.setText(ar_price1.get(position));
 
-            Picasso.with(mContext).load(Url_info.main_img + "space/" + ar_img1.get(position)).into(img_hotel_pic);
+            Log.i("image_url",Url_info.main_img + "space/" + ar_img1.get(position));
+            Glide.with(mContext).load(Url_info.main_img + "space/" + ar_img1.get(position)).into(img_hotel_pic);
 
             String wifi = ar_wifi1.get(position);
             String call = ar_ph1.get(position);

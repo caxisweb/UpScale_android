@@ -980,6 +980,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 ed_password.setText("");
                 ed_name.setText("");
                 ed_mobile.setText("");
+                ed_password_again.setText("");
                 Toast.makeText(Sign_Up.this, "" + message1, Toast.LENGTH_SHORT).show();
             }
             progressDialog.dismiss();

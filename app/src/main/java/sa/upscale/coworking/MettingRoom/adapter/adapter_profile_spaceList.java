@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -121,7 +121,7 @@ public class adapter_profile_spaceList extends ArrayAdapter<String> {
         tv_hotelLocation.setText(ar_location1.get(position));
         tv_hotelPrice.setText(ar_price1.get(position));
         tv_hotelNearLocation.setText(ar_distance1.get(position));
-        Picasso.with(mContext).load(img).into(img_hotel_pic);
+        Glide.with(mContext).load(img).into(img_hotel_pic);
 
         String wifi=ar_wifi1.get(position);
         String call=ar_ph1.get(position);

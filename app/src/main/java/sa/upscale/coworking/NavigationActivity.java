@@ -33,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
@@ -48,7 +49,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.plus.PlusShare;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -247,14 +247,14 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             if (picpath_identify.equals("https")) {
 
                 img_profile.setVisibility(View.VISIBLE);
-                Picasso.with(NavigationActivity.this).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(img_profile);
+                Glide.with(NavigationActivity.this).load(user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(img_profile);
 
             } else {
 
                 //img_logo.setVisibility(View.GONE);
                 img_profile.setVisibility(View.VISIBLE);
 
-                Picasso.with(NavigationActivity.this).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(img_profile);
+                Glide.with(NavigationActivity.this).load(Url_info.main_img + "profile/" + user_details.get(SessionManager.user_profile)).placeholder(R.drawable.logo1).error(R.drawable.logo1).into(img_profile);
             }
 
             nav_signup.setVisibility(View.GONE);
@@ -268,7 +268,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
             img_profile.setVisibility(View.GONE);
             img_logo.setVisibility(View.VISIBLE);
 
-            Picasso.with(NavigationActivity.this).load(R.drawable.logo1).into(img_logo);
+            Glide.with(NavigationActivity.this).load(R.drawable.logo1).into(img_logo);
         }
 
         nav_home.setOnClickListener(this);
@@ -975,14 +975,14 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
                         //img_profile.setVisibility(View.GONE);
                         img_profile.setVisibility(View.VISIBLE);
-                        Picasso.with(NavigationActivity.this).load(mstr_img).placeholder(R.drawable.logo1).into(img_profile);
+                        Glide.with(NavigationActivity.this).load(mstr_img).placeholder(R.drawable.logo1).into(img_profile);
 
                     } else {
 
                         //img_logo.setVisibility(View.GONE);
                         img_profile.setVisibility(View.VISIBLE);
                         Log.i("img_url", mstr_img);
-                        Picasso.with(NavigationActivity.this).load(Url_info.main_img + "profile/" + mstr_img).placeholder(R.drawable.logo1).into(img_profile);
+                        Glide.with(NavigationActivity.this).load(Url_info.main_img + "profile/" + mstr_img).placeholder(R.drawable.logo1).into(img_profile);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
