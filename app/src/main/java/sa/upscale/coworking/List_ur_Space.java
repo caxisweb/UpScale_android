@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
@@ -86,6 +87,10 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
     private ArrayList<String> ar_city = new ArrayList<>();
     private ArrayList<String> ar_cityid = new ArrayList<>();
 
+    private ArrayList<String> ar_country = new ArrayList<>();
+    private ArrayList<String> ar_countryid = new ArrayList<>();
+    private ArrayList<String> ar_country_code = new ArrayList<>();
+
     ArrayList<String> ar_capacity2 = new ArrayList<>();
     ArrayList<String> ar_avalibility2 = new ArrayList<>();
 
@@ -100,6 +105,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
     String mstr_projector, mstr_aircondi, mstr_mailservice, mstr_scanner, mstr_locker, mstr_internet,
             mstr_parking, mstr_phone, mstr_work, mstr_price, mstr_male, mstr_female, mstr_coffee;
     String flag = "0";
+    String mstr_country_name,mstr_country_id,mstr_country_code;
 
     //private FrameLayout btn_meetingroom, btn_desk, btn_discuroom, btn_privateroom, btn_conferenceroom,btn_others;
     private EditText sp_cpacity, sp_avalibility, ed_price;
@@ -128,7 +134,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
     TextView img_back;
     LinearLayout linearLayout;
     RadioGroup rg_gender;
-    Spinner sp_space_type, sp_city;
+    Spinner sp_space_type, sp_city,sp_country;
 
     String str_lat = "0", str_lng = "0", str_address, str_city;
     String str_type_location;
@@ -219,6 +225,30 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                     mstr_cityid = ar_cityid.get(i);
                 } else {
                     mstr_cityid = "0";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        sp_country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if (i != 0) {
+
+                    mstr_country_name = ar_country.get(i);
+                    mstr_country_code=ar_country_code.get(i);
+
+                    Task_fatch_city task_fatch_city=new Task_fatch_city();
+                    task_fatch_city.execute();
+
+                } else {
+                    mstr_country_id = "0";
+                    Toast.makeText(getApplicationContext(),"Please select Country First",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -358,6 +388,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
         sp_space_type = findViewById(R.id.sp_type);
         sp_city = findViewById(R.id.sp_city);
+        sp_country = findViewById(R.id.sp_country);
 
 
         btn_submit.setOnClickListener(List_ur_Space.this);
@@ -496,7 +527,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                 mstr_cap1 = sp_cpacity.getText().toString().trim();
                 mstr_avali1 = sp_avalibility.getText().toString().trim();
 
-                String str = String.valueOf(mstr_mobile.startsWith("05"));
+                //String str = String.valueOf(mstr_mobile.startsWith("05"));
                 mstr_price = ed_price.getText().toString().trim();
 
                 if (mstr_cap1.length() == 0) {
@@ -518,11 +549,7 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
                     /*[a-zA-Z0-9._-]+@[a-z]+.[a-z]+*/
                     ed_email.setError(getResources().getString(R.string.valid_enter_correct_email));
                     ed_email.setFocusable(true);
-                } else if (str.equals("false")) {
-                    ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
-                    ed_mobile.setFocusable(true);
-                    ed_mobile.requestFocus();
-                } else if (mstr_mobile.length() != 10) {
+                } else if (mstr_mobile.length() > 10) {
                     ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     ed_mobile.setFocusable(true);
                 } else if (str_lat.equals("0") && str_lng.equals("0")) {
@@ -559,7 +586,9 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
                                 data_space.put("ac", mstr_aircondi);
                                 data_space.put("locker", mstr_locker);
-                                data_space.put("phone", mstr_phone);
+
+                                data_space.put("phone",mstr_phone.replaceFirst("0",""));
+                                data_space.put("country_code",mstr_country_code);
 
                                 data_space.put("mail_ser", mstr_mailservice);
                                 data_space.put("wifi", mstr_internet);
@@ -1496,6 +1525,75 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
         @Override
         protected String doInBackground(String... params) {
 
+            ar_country.clear();
+            ar_countryid.clear();
+            ar_country_code.clear();
+
+            ar_country.add(getResources().getString(R.string.select_country));
+            ar_countryid.add("0");
+            ar_country_code.add("0");
+
+            try {
+
+                Getdata getdata = new Getdata();
+                String mstr_location = getdata.getJSONFromUrl(Url_info.main_url + "fetch_country.php");
+                JSONObject job_location = new JSONObject(mstr_location);
+                status1 = job_location.getString(status);
+
+                if (status1.equals("1")) {
+                    JSONArray j_loc = job_location.getJSONArray("country");
+
+                    for (int i = 0; i < j_loc.length(); i++) {
+
+                        JSONObject location = j_loc.getJSONObject(i);
+                        ar_countryid.add(location.getString("country_id"));
+                        ar_country.add(location.getString("country_name"));
+                        ar_country_code.add(location.getString("country_code"));
+                    }
+                } else {
+                    message1 = job_location.getString(message);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (status1.equals("1")) {
+
+                //ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, ar_city);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custome_spiner_view, R.id.tv_item, ar_country);
+                sp_country.setAdapter(adapter);
+
+            } else {
+                Toast.makeText(getApplicationContext(), "" + message1, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(List_ur_Space.this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Please wait ..");
+            progressDialog.show();
+            super.onPreExecute();
+        }
+    }
+
+
+    private class Task_fatch_city extends AsyncTask<String, String, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+
             ar_city.clear();
             ar_cityid.clear();
 
@@ -1504,8 +1602,13 @@ public class List_ur_Space extends AppCompatActivity implements View.OnClickList
 
             try {
 
-                Getdata getdata = new Getdata();
-                String mstr_location = getdata.getJSONFromUrl(Url_info.main_url + "fetch_city.php");
+                JSONObject data_country=new JSONObject();
+                data_country.put("country_name",mstr_country_name);
+
+                Log.i("request",data_country.toString());
+
+                Postdata getdata = new Postdata();
+                String mstr_location = getdata.post(Url_info.main_url + "fetch_city.php",data_country.toString());
                 JSONObject job_location = new JSONObject(mstr_location);
                 status1 = job_location.getString(status);
 

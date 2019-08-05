@@ -23,9 +23,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/advance_search"
                     android:layout_marginRight="@dimen/margin10"
                     android:layout_toLeftOf="@+id/img_filter_close"
+                    android:text="@string/advance_search"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold" />
@@ -40,12 +40,28 @@
 
             </RelativeLayout>
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/border">
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:padding="2dp">
+
+                <Spinner
+                    android:id="@+id/sp_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="@dimen/margin5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:padding="2dp">
 
 
                 <Spinner
@@ -53,21 +69,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/margin5"
                     android:clickable="false"
-                    android:background="#00000000"
-                    android:paddingLeft="@dimen/margin5"
-                    android:paddingRight="@dimen/margin10" />
+                    android:paddingLeft="@dimen/margin5" />
 
-                <ImageView
-                    android:id="@+id/img_down"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin10"
-                    android:src="@drawable/down_arrow" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -98,8 +105,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="@dimen/margin10"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin10"
                 android:orientation="horizontal">
 
                 <sa.upscale.coworking.CustomFont.MytextView
@@ -107,10 +114,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:padding="@dimen/margin5"
                     android:background="@drawable/border"
                     android:drawableRight="@drawable/calander"
                     android:gravity="left|center_vertical"
+                    android:padding="@dimen/margin5"
                     android:textSize="10dp" />
 
 
@@ -119,11 +126,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/margin5"
-                    android:padding="@dimen/margin5"
-                    android:background="@drawable/border"
-                    android:gravity="left|center_vertical"
-                    android:drawableRight="@drawable/clock"
                     android:layout_weight="1.1"
+                    android:background="@drawable/border"
+                    android:drawableRight="@drawable/clock"
+                    android:gravity="left|center_vertical"
+                    android:padding="@dimen/margin5"
                     android:textSize="10dp" />
 
                 <sa.upscale.coworking.CustomFont.MytextView
@@ -131,11 +138,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/margin5"
-                    android:padding="@dimen/margin5"
-                    android:background="@drawable/border"
-                    android:gravity="left|center_vertical"
-                    android:drawableRight="@drawable/clock"
                     android:layout_weight="1.1"
+                    android:background="@drawable/border"
+                    android:drawableRight="@drawable/clock"
+                    android:gravity="left|center_vertical"
+                    android:padding="@dimen/margin5"
                     android:textSize="10dp" />
 
 
@@ -561,9 +568,9 @@
                 android:id="@+id/btn_bookingList_Filter"
                 android:layout_width="150dp"
                 android:layout_height="45dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="@dimen/margin20"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin20"
+                android:layout_marginBottom="20dp"
                 android:background="@color/button_color"
                 android:text="@string/search"
                 android:textColor="@color/white"

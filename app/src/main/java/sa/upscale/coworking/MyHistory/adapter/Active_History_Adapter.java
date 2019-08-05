@@ -93,7 +93,7 @@ public class Active_History_Adapter extends RecyclerView.Adapter<Active_History_
         holder.txt_title.setText(arraylist.get(position).getTitle());
         holder.txt_location.setText(arraylist.get(position).getLocation());
         holder.txt_datetime.setText(arraylist.get(position).getDateTime());
-        holder.txt_Amount.setText(arraylist.get(position).getAmount() + " SAR");
+        holder.txt_Amount.setText(arraylist.get(position).getAmount() + " "+Home_freg.curancy_code+" ");
         holder.txt_capacity.setText(arraylist.get(position).getCapacity());
         //holder.txt_BaseAmount.setText("Cost " + arraylist.get(position).getBaseAmount() + " Per Hour");
         //holder.txt_hour.setText(arraylist.get(position).getHour() + "h");

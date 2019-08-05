@@ -166,8 +166,8 @@ public class list_ur_spce_location_map extends FragmentActivity implements OnMap
 
                             try {
 
-
-                                    String uri = "https://maps.google.com/maps/api/geocode/json?latlng="+point.latitude+","+point.longitude+"&location_type=ROOFTOP&result_type=street_address&key=AIzaSyBVjfD3hJd8XhjDqNZva0Af-M_L0EV7mDk";
+                                    //old api key: AIzaSyBVjfD3hJd8XhjDqNZva0Af-M_L0EV7mDk
+                                    String uri = "https://maps.google.com/maps/api/geocode/json?latlng="+point.latitude+","+point.longitude+"&location_type=ROOFTOP&result_type=street_address&key=AIzaSyB3yM5wfju9C8MHF22nfndnF0M2zuht9Vg";
                                     HttpGet httpGet = new HttpGet(uri);
                                     HttpClient client = new DefaultHttpClient();
                                     StringBuilder stringBuilder = new StringBuilder();

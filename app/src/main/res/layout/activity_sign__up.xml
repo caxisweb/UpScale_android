@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_snackbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -222,23 +223,37 @@
                         android:paddingRight="@dimen/margin10"
                         android:textColor="@color/textcolor_input" />
 
-
-                    <sa.upscale.coworking.CustomFont.MyeditText
-                        android:id="@+id/edt_signup_mobile"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/margin10"
-                        android:layout_weight="1"
-                        android:background="@drawable/edittextshape"
-                        android:hint="@string/_05xxxxxxxx"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:paddingStart="@dimen/margin10"
-                        android:paddingLeft="@dimen/margin10"
-                        android:paddingRight="@dimen/margin10"
-                        android:textColor="@color/textcolor_input" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin10">
 
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/edt_ccp"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            app:ccp_showPhoneCode="true"
+                            app:ccp_showFullName="false"
+                            app:ccp_showFlag="false"
+                            android:background="@drawable/edittextshape"
+                            app:ccp_autoDetectCountry="true"/>
+
+                        <sa.upscale.coworking.CustomFont.MyeditText
+                            android:id="@+id/edt_signup_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin5"
+                            android:layout_weight="1"
+                            android:background="@drawable/edittextshape"
+                            android:hint="@string/mobile_number"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingStart="@dimen/margin10"
+                            android:paddingLeft="@dimen/margin10"
+                            android:paddingRight="@dimen/margin10"
+                            android:textColor="@color/textcolor_input" />
+                    </LinearLayout>
 
                     <sa.upscale.coworking.CustomFont.MyeditText
                         android:id="@+id/edt_signup_email"

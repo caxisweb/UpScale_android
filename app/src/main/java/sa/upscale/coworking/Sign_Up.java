@@ -50,6 +50,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.hbb20.CountryCodePicker;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -121,6 +122,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     ImageView fbLoginButton, btnSignIn, btn_linkedin, btn_twitter1;
     AlertDialog alertDialog;
     private EditText ed_name, ed_mobile, ed_email, ed_password, ed_password_again;
+    private CountryCodePicker edt_ccp;
     private Button btn_signup;
     private String mstr_name, mstr_mobile, mstr_email, mstr_password, str_esaal_cust_id, mstr_password_again;
     private CallbackManager callbackManager;
@@ -178,7 +180,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 mstr_password = ed_password.getText().toString().trim();
                 mstr_password_again = ed_password_again.getText().toString().trim();
 
-                String str = String.valueOf(mstr_mobile.startsWith("05"));
+                //String str = String.valueOf(mstr_mobile.startsWith("05"));
 
                 if (mstr_name.length() == 0) {
                     ed_name.setError(getResources().getString(R.string.valid_enter_name));
@@ -186,11 +188,11 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                 } else if (mstr_mobile.length() == 0) {
                     ed_name.setError(getResources().getString(R.string.valid_enter_mobile));
                     ed_mobile.setFocusable(true);
-                } else if (str.equals("false")) {
+                } /*else if (str.equals("false")) {
                     ed_mobile.setError("Number Start With 05");
                     ed_mobile.setFocusable(true);
                     ed_mobile.requestFocus();
-                } else if (mstr_mobile.length() != 10) {
+                }*/ else if (mstr_mobile.length() != 10) {
                     ed_mobile.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     ed_mobile.setFocusable(true);
                 } else if (mstr_email.length() == 0) {
@@ -214,6 +216,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                             data_signup.put(s_password, mstr_password);
                             data_signup.put(s_name, mstr_name);
                             data_signup.put(s_mobile, mstr_mobile);
+                            data_signup.put("country_code", edt_ccp.getSelectedCountryCode());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -661,6 +664,8 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
         ed_password = findViewById(R.id.edt_signup_password);
         ed_password_again = findViewById(R.id.edt_signup_cpassword);
 
+        edt_ccp = findViewById(R.id.edt_ccp);
+
         btn_signup = findViewById(R.id.btn_signup_signup);
         fbLoginButton = findViewById(R.id.login_button_fb);
         // fbLoginButton.setReadPermissions(Arrays.asList("public_profile,email"));
@@ -683,9 +688,9 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
 
 
         HashMap<String, String> lang = new HashMap<String, String>();
-        lang=session.getlanguageCode();
-        Log.i("language_code",lang.get(SessionManager.user_languageCode));
-        if(!lang.get(SessionManager.user_languageCode).equals("1")){
+        lang = session.getlanguageCode();
+        Log.i("language_code", lang.get(SessionManager.user_languageCode));
+        if (!lang.get(SessionManager.user_languageCode).equals("1")) {
 
             ed_password.setGravity(Gravity.END);
             ed_password_again.setGravity(Gravity.END);

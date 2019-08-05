@@ -87,42 +87,67 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lv_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:background="@color/light_gray"
-            android:orientation="horizontal"
-            android:padding="7dp">
-
-            <sa.upscale.coworking.CustomFont.MytextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margin10"
-                android:text="@string/select_city"
-                android:textSize="14dp" />
+            android:background="@color/white"
+            android:padding="5dp">
 
             <LinearLayout
+                android:id="@+id/lv_city"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:gravity="center"
-                android:padding="2dp">
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/light_gray"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/ed_country1"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:paddingRight="@dimen/margin5"
+                    android:spinnerMode="dialog" />
+
+                <LinearLayout
+                    android:layout_width="7dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
 
                 <Spinner
                     android:id="@+id/ed_locationNAme"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="@dimen/margin5" />
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/margin5"
+                    android:paddingRight="@dimen/margin5"
+                    android:spinnerMode="dialog" />
+                <!--<sa.upscale.coworking.CustomFont.MytextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:text="@string/select_city"
+                    android:textSize="14dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:padding="2dp">
+
+                    <Spinner
+                        android:id="@+id/ed_locationNAme"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingRight="@dimen/margin5" />
+
+
+                </LinearLayout>-->
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/ll_list_details"

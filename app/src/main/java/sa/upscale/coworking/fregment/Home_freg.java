@@ -11,6 +11,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -65,12 +69,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Locale;
 
 import sa.upscale.coworking.Getdata;
@@ -86,15 +93,24 @@ import sa.upscale.coworking.SessionManager;
 import sa.upscale.coworking.Url_info;
 import sa.upscale.coworking.model.Fav_status;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 import static sa.upscale.coworking.SplashScreen.location;
 
 public class Home_freg extends Fragment implements View.OnClickListener, OnMapReadyCallback, CompoundButton.OnCheckedChangeListener {
 
+    private ArrayList<String> ar_country = new ArrayList<>();
+    private ArrayList<String> ar_country_curancy = new ArrayList<>();
+    private ArrayList<String> ar_countryid = new ArrayList<>();
+    private ArrayList<String> ar_country_code = new ArrayList<>();
+
     private static final String status = "status";
     private static final String message = "message";
+
     public static ArrayList<String> add_img = new ArrayList<>();
     public static ArrayList<String> add_url = new ArrayList<>();
+
     public static String str_userId, str_date, str_fromtime, str_totime, str_location, str_spacetype, str_lat, str_longi;
+
     String status1 = "0", message1 = "try Again";
     JSONObject data_meetingroom = new JSONObject();
     JSONObject data_Filter = new JSONObject();
@@ -121,7 +137,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
     TabHost tabHost;
     ImageView img_map, img_filter;
     ImageView img_arrow_left, img_arrow_right;
-    Spinner ed_loation, ed_loation1;
+    Spinner ed_loation, ed_loation1, sp_country, sp_country1;
     SimpleDateFormat simpleDateFormat;
     View view;
     private ArrayList<String> ar_space_id = new ArrayList<>();
@@ -156,7 +172,9 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private int mYear, mMonth, mDay;
-    private String format;
+    private String format, mstr_country_id;
+    public static String country_name, curancy_code = "SAR";
+
     private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -338,6 +356,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         tv_to1.setOnClickListener(this);
 
         ed_loation1 = view.findViewById(R.id.ed_locationNAme);
+        sp_country1 = view.findViewById(R.id.ed_country1);
 
         tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
@@ -396,8 +415,10 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
         if (isNetworkAvailable()) {
 
-            Task_getLocation1 t_task = new Task_getLocation1();
-            t_task.execute();
+            /*Task_getLocation1 t_task = new Task_getLocation1();
+            t_task.execute();*/
+            Task_getCountry_filter1 t_filter1 = new Task_getCountry_filter1();
+            t_filter1.execute();
 
         } else {
 
@@ -460,6 +481,35 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
             }
         });
 
+
+        sp_country1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if (i != 0) {
+
+                    mstr_country_id = ar_country.get(i);
+                    Log.i("sele_country", mstr_country_id);
+                    //curancy_code= String.valueOf(Currency.getInstance(new Locale("",mstr_country_id)));
+                    curancy_code = ar_country_curancy.get(i);
+
+                    Task_getLocation1 t_task = new Task_getLocation1();
+                    t_task.execute();
+                    /*Task_getLocation_filter task_getLocation = new Task_getLocation_filter();
+                    task_getLocation.execute();
+*/
+                } else {
+                    mstr_country_id = "0";
+                    Toast.makeText(getApplicationContext(), "Please select Country First", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         ed_loation1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -663,6 +713,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         ImageView img_close = dialog.findViewById(R.id.img_filter_close);
         sp_spaceType = dialog.findViewById(R.id.sp_cust_filter_spaceType);
         ed_loation = dialog.findViewById(R.id.at_location);
+        sp_country = dialog.findViewById(R.id.sp_country);
         rangeSeekbar = dialog.findViewById(R.id.seekbar_price);
 
         rangeSeekbar.setSelectedMinValue(10);
@@ -713,9 +764,34 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
         str_typeName = Meeting_Room_activity.mstr_typeName;
 
+        Task_getCountry_filter task_country = new Task_getCountry_filter();
+        task_country.execute();
 
-        Task_getLocation_filter task_getLocation = new Task_getLocation_filter();
-        task_getLocation.execute();
+        sp_country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if (i != 0) {
+
+                    mstr_country_id = ar_country.get(i);
+                    Log.i("sele_country", mstr_country_id);
+                    //curancy_code= String.valueOf(Currency.getInstance(new Locale("",mstr_country_id)));
+                    curancy_code = ar_country_curancy.get(i);
+
+                    Task_getLocation_filter task_getLocation = new Task_getLocation_filter();
+                    task_getLocation.execute();
+
+                } else {
+                    mstr_country_id = "0";
+                    Toast.makeText(getApplicationContext(), "Please select Country First", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(mContext, R.layout.textview, ar_spacetype);
@@ -1304,7 +1380,11 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
             }
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(24.774265, 46.738586), 10));
+        try {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(ar_lat.get(0)), Double.parseDouble(ar_long.get(0))), 13));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isNetworkAvailable() {
@@ -1874,7 +1954,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 txt_address.setText("");
             }
             if (str_price != null) {
-                txt_price.setText(str_price);
+                txt_price.setText(str_price+" "+Home_freg.curancy_code);
             } else {
                 txt_price.setText("");
             }
@@ -1925,10 +2005,44 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
             ar_location_filter.clear();
             ar_locationId_filter.clear();
 
+            /*ar_location_filter.add(getResources().getString(R.string.select_city));
+            ar_locationId_filter.add("0");
+*/
+
             try {
 
-                Getdata getdata = new Getdata();
-                String mstr_location = getdata.getJSONFromUrl(Url_info.main_url + "fetch_city.php");
+                /*LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+                Geocoder geocoder = new Geocoder(getApplicationContext());
+                for (String provider : lm.getAllProviders()) {
+                    @SuppressWarnings("ResourceType") Location location = lm.getLastKnownLocation(provider);
+                    if (location != null) {
+                        try {
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                            if (addresses != null && addresses.size() > 0) {
+                                country_name = addresses.get(0).getCountryName();
+                                Log.i("country_code",addresses.get(0).getCountryName());
+                                curancy_code= String.valueOf(Currency.getInstance(new Locale("",addresses.get(0).getCountryCode())));
+                                Log.i("currancy_code",curancy_code);
+                                break;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+*/
+                //Toast.makeText(getApplicationContext(), country_name, Toast.LENGTH_LONG).show();
+
+                //String country = getApplicationContext().getResources().getConfiguration().locale.getDisplayCountry(getDefault());
+                Log.i("location", country_name);
+
+                JSONObject data_country = new JSONObject();
+                data_country.put("country_name", mstr_country_id);
+
+                Log.i("city_request", data_country.toString());
+
+                Postdata getdata = new Postdata();
+                String mstr_location = getdata.post(Url_info.main_url + "fetch_city.php", data_country.toString());
                 JSONObject job_location = new JSONObject(mstr_location);
                 status1 = job_location.getString(status);
 
@@ -1992,13 +2106,22 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
         @Override
         protected String doInBackground(String... params) {
 
+
             ar_location_filter.clear();
             ar_locationId_filter.clear();
 
+            ar_location_filter.add(getResources().getString(R.string.select_city));
+            ar_locationId_filter.add("0");
+
             try {
 
-                Getdata getdata = new Getdata();
-                String mstr_location = getdata.getJSONFromUrl(Url_info.main_url + "fetch_city.php");
+
+                Postdata postdata = new Postdata();
+
+                JSONObject data_country = new JSONObject();
+                data_country.put("country_name", mstr_country_id);
+
+                String mstr_location = postdata.post(Url_info.main_url + "fetch_city.php", data_country.toString());
                 JSONObject job_location = new JSONObject(mstr_location);
                 status1 = job_location.getString(status);
 
@@ -2012,6 +2135,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 } else {
                     message1 = job_location.getString(message);
                 }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -2031,6 +2155,194 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
 
                 ed_loation.setSelection(0);
                 str_location = ar_locationId_filter.get(0);
+
+               /* Task_meetingRoomBooking task_meetingRoomBooking = new Task_meetingRoomBooking();
+                task_meetingRoomBooking.execute();
+*/
+
+            } else {
+                Toast.makeText(mContext, "" + message1, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(mContext);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Please wait ..");
+            progressDialog.show();
+            super.onPreExecute();
+
+        }
+    }
+
+    private class Task_getCountry_filter extends AsyncTask<String, String, String> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            ar_country.clear();
+            ar_countryid.clear();
+            ar_country_code.clear();
+            ar_country_curancy.clear();
+
+            ar_country.add(getResources().getString(R.string.select_country));
+            ar_countryid.add("0");
+            ar_country_code.add("0");
+            ar_country_curancy.add("0");
+
+            try {
+
+
+                Getdata getdata = new Getdata();
+                String mstr_location1 = getdata.getJSONFromUrl(Url_info.main_url + "fetch_country.php");
+                JSONObject job_location1 = new JSONObject(mstr_location1);
+                status1 = job_location1.getString(status);
+
+                if (status1.equals("1")) {
+
+                    JSONArray j_loc1 = job_location1.getJSONArray("country");
+                    for (int i = 0; i < j_loc1.length(); i++) {
+
+                        JSONObject location1 = j_loc1.getJSONObject(i);
+                        ar_countryid.add(location1.getString("country_id"));
+                        ar_country.add(location1.getString("country_name"));
+                        ar_country_code.add(location1.getString("country_code"));
+                        ar_country_curancy.add(location1.getString("currency"));
+                    }
+
+
+                } else {
+                    message1 = job_location1.getString(message);
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (status1.equals("1")) {
+
+                ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_list_item_1, ar_country);
+                sp_country.setAdapter(adapter);
+
+                sp_country.setSelection(0);
+
+               /* Task_meetingRoomBooking task_meetingRoomBooking = new Task_meetingRoomBooking();
+                task_meetingRoomBooking.execute();
+*/
+
+            } else {
+                Toast.makeText(mContext, "" + message1, Toast.LENGTH_SHORT).show();
+            }
+
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(mContext);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Please wait ..");
+            progressDialog.show();
+            super.onPreExecute();
+
+        }
+    }
+
+
+    private class Task_getCountry_filter1 extends AsyncTask<String, String, String> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            ar_country.clear();
+            ar_countryid.clear();
+            ar_country_code.clear();
+            ar_country_curancy.clear();
+
+            ar_country.add(getResources().getString(R.string.select_country));
+            ar_countryid.add("0");
+            ar_country_code.add("0");
+            ar_country_curancy.add("0");
+
+            try {
+
+
+                LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+                Geocoder geocoder = new Geocoder(getApplicationContext());
+                for (String provider : lm.getAllProviders()) {
+                    @SuppressWarnings("ResourceType") Location location = lm.getLastKnownLocation(provider);
+                    if (location != null) {
+                        try {
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                            if (addresses != null && addresses.size() > 0) {
+                                country_name = addresses.get(0).getCountryName();
+                                Log.i("country_code", addresses.get(0).getCountryName());
+                                curancy_code = String.valueOf(Currency.getInstance(new Locale("", addresses.get(0).getCountryCode())));
+                                Log.i("currancy_code", curancy_code);
+                                break;
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+
+                Getdata getdata = new Getdata();
+                String mstr_location1 = getdata.getJSONFromUrl(Url_info.main_url + "fetch_country.php");
+                JSONObject job_location1 = new JSONObject(mstr_location1);
+                status1 = job_location1.getString(status);
+
+                if (status1.equals("1")) {
+
+                    JSONArray j_loc1 = job_location1.getJSONArray("country");
+                    for (int i = 0; i < j_loc1.length(); i++) {
+
+                        JSONObject location1 = j_loc1.getJSONObject(i);
+                        ar_countryid.add(location1.getString("country_id"));
+                        ar_country.add(location1.getString("country_name"));
+                        ar_country_code.add(location1.getString("country_code"));
+                        ar_country_curancy.add(location1.getString("currency"));
+                    }
+
+
+                } else {
+                    message1 = job_location1.getString(message);
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (status1.equals("1")) {
+
+                ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_list_item_1, ar_country);
+                sp_country1.setAdapter(adapter);
+
+                sp_country1.setSelection(ar_country.indexOf(country_name));
 
                /* Task_meetingRoomBooking task_meetingRoomBooking = new Task_meetingRoomBooking();
                 task_meetingRoomBooking.execute();

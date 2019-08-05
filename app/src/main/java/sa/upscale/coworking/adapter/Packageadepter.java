@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import sa.upscale.coworking.R;
+import sa.upscale.coworking.fregment.Home_freg;
 import sa.upscale.coworking.model.Package;
 
 /**
@@ -55,7 +56,7 @@ public class Packageadepter extends ArrayAdapter<String> {
         //RatingBar prat= (RatingBar) v.findViewById(R.id.ret_package);
 
         tv_pname.setText(package_list.get(position).getPack_name());
-        tv_pprice.setText(package_list.get(position).getPack_price()+" SAR");
+        tv_pprice.setText(package_list.get(position).getPack_price()+" "+ Home_freg.curancy_code+" ");
         tv_ptype.setText(package_list.get(position).getPack_type());
         tv_company.setText(package_list.get(position).getStr_company_name());
 

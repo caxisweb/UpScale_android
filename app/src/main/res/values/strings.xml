@@ -269,7 +269,7 @@
 
     <string name="facebook_app_id">570960453396064</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb570960453396064</string>
-    <string name="_05xxxxxxxx">05xxxxxxxx</string>
+    <string name="_05xxxxxxxx">Enter Mobile number</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
 
@@ -294,5 +294,6 @@
     <string name="valid_enter_num_room">Please Enter Number of Room</string>
     <string name="valid_select_location">Please Select Location</string>
     <string name="valid_select_image">Please Select Image</string>
+    <string name="select_country">Select Country</string>
 
 </resources>

@@ -44,6 +44,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.LocationServices;
+import com.hbb20.CountryCodePicker;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,6 +82,7 @@ public class EditProfile extends Fragment {
     private EditText edProfileName, edProfileEmailId, edProfileMobileNo, edProfileNewPassword, edProfileRePassword;
     private String str_ProfileName, str_city = "0", str_expertise = "0", str_ProfileEmailId, str_ProfileMobileNo, str_ProfileNewPassword, str_ProfileRePassword;
     private Button btn_save;
+    private CountryCodePicker edt_ccp;
 
     Uri selectedImage;
     String selectedImage1 = "", picpath_identify;
@@ -152,7 +155,7 @@ public class EditProfile extends Fragment {
                     Toast.makeText(getActivity(), "Please select your City", Toast.LENGTH_SHORT).show();
                 } else {*/
 
-                String str = String.valueOf(str_ProfileMobileNo.startsWith("05"));
+                //String str = String.valueOf(str_ProfileMobileNo.startsWith("05"));
 
                 if (str_ProfileName.length() == 0) {
                     edProfileName.setError("Please Enter Name");
@@ -160,11 +163,11 @@ public class EditProfile extends Fragment {
                 } else if (str_ProfileMobileNo.length() == 0) {
                     edProfileMobileNo.setError("Please Enter Contact No.");
                     edProfileMobileNo.setFocusable(true);
-                } else if (str.equals("false")) {
+                } /*else if (str.equals("false")) {
                     edProfileMobileNo.setError("Number Start With 05");
                     edProfileMobileNo.setFocusable(true);
                     edProfileMobileNo.requestFocus();
-                } else if (str_ProfileMobileNo.length() != 10) {
+                } */else if (str_ProfileMobileNo.length() != 10) {
                     edProfileMobileNo.setError("Please Enter Correct Number");
                     edProfileMobileNo.setFocusable(true);
                 } else if (str_ProfileEmailId.length() == 0) {
@@ -187,6 +190,7 @@ public class EditProfile extends Fragment {
                             data_updateProfile.put("re_pass", str_ProfileRePassword);
                             data_updateProfile.put("user_type", str_expertise);
                             data_updateProfile.put("city", str_city);
+                            data_updateProfile.put("country_code",edt_ccp.getSelectedCountryCode());
 
                             Task_updateProfiles updateProfiles = new Task_updateProfiles();
                             updateProfiles.execute();
@@ -421,6 +425,7 @@ public class EditProfile extends Fragment {
         spProfileCity = (Spinner) view.findViewById(R.id.sp_profile_city);
         edProfileNewPassword = (EditText) view.findViewById(R.id.ed_profile_newPassword);
         edProfileRePassword = (EditText) view.findViewById(R.id.ed_profile_rePassword);
+        edt_ccp = view.findViewById(R.id.edt_ccp);
         btn_save = (Button) view.findViewById(R.id.btn_save);
 
         edProfileName.setText(user_details.get(SessionManager.user_name));

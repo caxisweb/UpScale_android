@@ -131,7 +131,7 @@ public class Invitation extends AppCompatActivity {
                         str_edInvitationMobile4 + "," + str_edInvitationMobile5 + "," + str_edInvitationMobile6 + "," +
                         str_edInvitationMobile7 + "," + str_edInvitationMobile8 + "," + str_edInvitationMobile9;
 
-                String str_1 = String.valueOf(str_edInvitationMobile1.startsWith("05"));
+                /*String str_1 = String.valueOf(str_edInvitationMobile1.startsWith("05"));
                 String str_2 = String.valueOf(str_edInvitationMobile2.startsWith("05"));
                 String str_3 = String.valueOf(str_edInvitationMobile3.startsWith("05"));
                 String str_4 = String.valueOf(str_edInvitationMobile4.startsWith("05"));
@@ -140,127 +140,127 @@ public class Invitation extends AppCompatActivity {
                 String str_7 = String.valueOf(str_edInvitationMobile7.startsWith("05"));
                 String str_8 = String.valueOf(str_edInvitationMobile8.startsWith("05"));
                 String str_9 = String.valueOf(str_edInvitationMobile9.startsWith("05"));
-
+*/
 
                 if (str_edInvitationEmail1.length() == 0) {
                     edInvitationEmail1.setError("Please Enter Email");
                     edInvitationEmail1.requestFocus();
                 } else if (!str_edInvitationEmail1.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
                     /*[a-zA-Z0-9._-]+@[a-z]+.[a-z]+*/
-                    edInvitationEmail1.setError("Invalid Email Address");
+                    edInvitationEmail1.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail1.setFocusable(true);
                 } else if (str_edInvitationMobile1.length() == 0) {
                     edInvitationMobile1.setError("Please Enter Mobile");
                     edInvitationMobile1.requestFocus();
 
-                } else if (str_1.equals("false")) {
+                } /*else if (str_1.equals("false")) {
                     edInvitationMobile1.setError("Number Start With 05");
                     edInvitationMobile1.requestFocus();
-                } else if (str_edInvitationMobile1.length() != 10) {
+                } */else if (str_edInvitationMobile1.length() != 10) {
 
-                    edInvitationMobile1.setError("Please Enter Correct Number");
+                    edInvitationMobile1.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile1.requestFocus();
 
                 } else if (str_edInvitationEmail2.length() != 0 && !str_edInvitationEmail2.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail2.setError("Invalid Email Address");
+                    edInvitationEmail2.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail2.setFocusable(true);
 
                 } else if (str_edInvitationMobile2.length() != 0 && str_edInvitationMobile2.length() != 10) {
 
-                    edInvitationMobile2.setError("Please Enter Correct Number");
+                    edInvitationMobile2.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile2.requestFocus();
 
-                } else if (str_edInvitationMobile2.length() == 10 && str_2.equals("false")) {
-                    edInvitationMobile2.setError("Number Start With 05");
+                } else if (str_edInvitationMobile2.length() == 10) {
+                    edInvitationMobile2.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile2.requestFocus();
                 } else if (str_edInvitationEmail3.length() != 0 && !str_edInvitationEmail3.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail3.setError("Invalid Email Address");
+                    edInvitationEmail3.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail3.setFocusable(true);
 
                 } else if (str_edInvitationMobile3.length() != 0 && str_edInvitationMobile3.length() != 10) {
 
-                    edInvitationMobile3.setError("Please Enter Correct Number");
+                    edInvitationMobile3.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile3.requestFocus();
 
-                } else if (str_edInvitationMobile3.length() == 10 && str_3.equals("false")) {
-                    edInvitationMobile3.setError("Number Start With 05");
+                } else if (str_edInvitationMobile3.length() == 10) {
+                    edInvitationMobile3.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile3.requestFocus();
                 } else if (str_edInvitationEmail4.length() != 0 && !str_edInvitationEmail4.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail4.setError("Invalid Email Address");
+                    edInvitationEmail4.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail4.setFocusable(true);
 
                 } else if (str_edInvitationMobile4.length() != 0 && str_edInvitationMobile4.length() != 10) {
 
-                    edInvitationMobile4.setError("Please Enter Correct Number");
+                    edInvitationMobile4.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile4.requestFocus();
 
-                } else if (str_edInvitationMobile4.length() == 10 && str_4.equals("false")) {
-                    edInvitationMobile4.setError("Number Start With 05");
+                } else if (str_edInvitationMobile4.length() == 10) {
+                    edInvitationMobile4.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile4.requestFocus();
-                } else if (str_edInvitationEmail5.length() != 0 && !str_edInvitationEmail5.matches("[[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
+                } else if (str_edInvitationEmail5.length() != 0 && !str_edInvitationEmail5.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail5.setError("Invalid Email Address");
+                    edInvitationEmail5.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail5.setFocusable(true);
 
                 } else if (str_edInvitationMobile5.length() != 0 && str_edInvitationMobile5.length() != 10) {
-                    edInvitationMobile5.setError("Please Enter Correct Number");
+                    edInvitationMobile5.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile5.requestFocus();
 
-                } else if (str_edInvitationMobile5.length() == 10 && str_5.equals("false")) {
-                    edInvitationMobile5.setError("Number Start With 05");
+                } else if (str_edInvitationMobile5.length() == 10) {
+                    edInvitationMobile5.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile5.requestFocus();
                 } else if (str_edInvitationEmail6.length() != 0 && !str_edInvitationEmail6.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail6.setError("Invalid Email Address");
+                    edInvitationEmail6.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail6.setFocusable(true);
 
                 } else if (str_edInvitationMobile6.length() != 0 && str_edInvitationMobile6.length() != 10) {
 
-                    edInvitationMobile6.setError("Please Enter Correct Number");
+                    edInvitationMobile6.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile6.requestFocus();
 
-                } else if (str_edInvitationMobile6.length() == 10 && str_6.equals("false")) {
-                    edInvitationMobile6.setError("Number Start With 05");
+                } else if (str_edInvitationMobile6.length() == 10) {
+                    edInvitationMobile6.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile6.requestFocus();
                 } else if (str_edInvitationEmail7.length() != 0 && !str_edInvitationEmail7.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail7.setError("Invalid Email Address");
+                    edInvitationEmail7.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail7.setFocusable(true);
 
                 } else if (str_edInvitationMobile7.length() != 0 && str_edInvitationMobile7.length() != 10) {
 
-                    edInvitationMobile7.setError("Please Enter Correct Number");
+                    edInvitationMobile7.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile7.requestFocus();
 
-                } else if (str_edInvitationMobile7.length() == 10 && str_7.equals("false")) {
-                    edInvitationMobile7.setError("Number Start With 05");
+                } else if (str_edInvitationMobile7.length() == 10) {
+                    edInvitationMobile7.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile7.requestFocus();
                 } else if (str_edInvitationEmail8.length() != 0 && !str_edInvitationEmail8.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
 
-                    edInvitationEmail8.setError("Invalid Email Address");
+                    edInvitationEmail8.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail8.setFocusable(true);
 
                 } else if (str_edInvitationMobile8.length() != 0 && str_edInvitationMobile8.length() != 10) {
 
-                    edInvitationMobile8.setError("Please Enter Correct Number");
+                    edInvitationMobile8.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile8.requestFocus();
 
-                } else if (str_edInvitationMobile8.length() == 10 && str_8.equals("false")) {
-                    edInvitationMobile8.setError("Number Start With 05");
+                } else if (str_edInvitationMobile8.length() == 10) {
+                    edInvitationMobile8.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile8.requestFocus();
                 } else if (str_edInvitationEmail9.length() != 0 && !str_edInvitationEmail9.matches("[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$+")) {
 
-                    edInvitationEmail9.setError("Invalid Email Address");
+                    edInvitationEmail9.setError(getResources().getString(R.string.valid_enter_correct_email));
                     edInvitationEmail9.setFocusable(true);
                 } else if (str_edInvitationMobile9.length() != 0 && str_edInvitationMobile9.length() != 10) {
 
-                    edInvitationMobile9.setError("Please Enter Correct Number");
+                    edInvitationMobile9.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile9.requestFocus();
-                } else if (str_edInvitationMobile9.length() == 10 && str_9.equals("false")) {
-                    edInvitationMobile9.setError("Number Start With 05");
+                } else if (str_edInvitationMobile9.length() == 10) {
+                    edInvitationMobile9.setError(getResources().getString(R.string.valid_enter_correct_mobile));
                     edInvitationMobile9.requestFocus();
                 } else {
 

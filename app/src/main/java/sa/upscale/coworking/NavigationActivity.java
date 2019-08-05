@@ -98,6 +98,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     TextView tv_swEnglish, tv_swArabic;
     ImageView img_profile, img_logo;
     TextView tv_userName;
+    public static String mstr_country_name;
     private GoogleApiClient mGoogleApiClient;
 
     //    public static List<android.location.Address> getCountryName(Context context, double latitude, double longitude) {
@@ -115,6 +116,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
                 mstr_locationAddress = cityName + "," + stateName + "," + countryName;
                 mstr_locationCity = addresses.get(0).getLocality();
+                mstr_country_name=addresses.get(0).getCountryName();
                 //Log.d("LocationAddress", mstr_locationAddress+"\n"+addresses.get(0).getAddressLine(0));
                 //Log.d("City", addresses.get(0).getLocality());
                 return addresses;
@@ -856,6 +858,7 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
 
             }
         } else {
+
             location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
             Home_freg new_booking_activity = new Home_freg();

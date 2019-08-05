@@ -31,7 +31,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 
 import sa.upscale.coworking.MettingRoom.Booking_MettingRoom_list_details;
 import sa.upscale.coworking.Postdata;
@@ -147,7 +149,7 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
         }
 
         ImageView img_hotel_pic, img_wifi, img_call, img_mail, img_cofee;
-        TextView tv_hotelTitle, tv_hotelLocation, tv_capacity, tv_hotelPrice, tv_ratingReview, tv_hotelNearLocation;
+        TextView tv_hotelTitle, tv_hotelLocation, tv_capacity, tv_hotelPrice, tv_ratingReview, tv_hotelNearLocation,tv_curancy;
         RatingBar rt_rating;
         Button btn_book;
 
@@ -165,6 +167,7 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
         tv_hotelLocation = (TextView) v.findViewById(R.id.tv_bookingList_hotel_location);
         tv_capacity = (TextView) v.findViewById(R.id.tv_bookingList_hotel_person_capacity);
         tv_hotelPrice = (TextView) v.findViewById(R.id.tv_bookingList_hotel_price);
+        tv_curancy = (TextView) v.findViewById(R.id.tv_curancy);
         tv_hotelNearLocation = (TextView) v.findViewById(R.id.tv_bookingList_hotel_location_1);
 
         btn_book = (Button) v.findViewById(R.id.btn_book);
@@ -176,6 +179,9 @@ public class adapter_meeting_room_list extends ArrayAdapter<String> {
         RelativeLayout lv_addvertice = (RelativeLayout) v.findViewById(R.id.lv_addvertice);
         ViewFlipper fliper_add = (ViewFlipper) v.findViewById(R.id.flipper_add);
         AdView google_AdView = (AdView) v.findViewById(R.id.adView);
+
+
+        tv_curancy.setText(Home_freg.curancy_code+" / hour");
 
         if(position==0) {
 
