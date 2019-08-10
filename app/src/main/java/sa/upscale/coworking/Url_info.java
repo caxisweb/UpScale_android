@@ -5,7 +5,6 @@ package sa.upscale.coworking;
  */
 public class Url_info {
 
-
    // public static String main_url = "https://coworkinghive.com/admin/new_api/";
    // public static String main_img = "https://coworkinghive.com/admin/upload/";
     //WhatsApp Image 2019-06-16 at 4.20.36 PM.jpeg
