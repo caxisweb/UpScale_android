@@ -75,7 +75,7 @@ public class Package_freg extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.packagelist_freg, container, false);
-
+        NavigationActivity.backFlag = 1;
         navImageIcon();
 
         session = new SessionManager(getActivity());
