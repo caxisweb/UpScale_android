@@ -128,9 +128,11 @@ public class Package_freg extends Fragment {
 
                     user_details = session.getUserDetails();
                     data_user.put("user_id", user_details.get(SessionManager.user_Id));
+                    data_user.put("country_code", Home_freg.country_code);
 
                 } else {
                     data_user.put("user_id", "0");
+                    data_user.put("country_code", Home_freg.country_code);
                 }
 
                 Postdata get_package = new Postdata();

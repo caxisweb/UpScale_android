@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UpScale.iml" filepath="$PROJECT_DIR$/UpScale.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UpScale_android.iml" filepath="$PROJECT_DIR$/UpScale_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/rangeseekbar/rangeseekbar.iml" filepath="$PROJECT_DIR$/rangeseekbar/rangeseekbar.iml" />
     </modules>

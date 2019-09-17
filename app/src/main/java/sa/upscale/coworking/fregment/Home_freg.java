@@ -173,7 +173,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
     private DisplayImageOptions options;
     private int mYear, mMonth, mDay;
     private String format, mstr_country_id;
-    public static String country_name, curancy_code = "SAR";
+    public static String country_name, curancy_code = "SAR",country_code;
 
     private CustomTimePickerDialog.OnTimeSetListener timeSetListener = new CustomTimePickerDialog.OnTimeSetListener() {
         @Override
@@ -489,6 +489,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 if (i != 0) {
 
                     mstr_country_id = ar_country.get(i);
+                    country_code=ar_country_code.get(i);
                     Log.i("sele_country", mstr_country_id);
                     //curancy_code= String.valueOf(Currency.getInstance(new Locale("",mstr_country_id)));
                     curancy_code = ar_country_curancy.get(i);
@@ -774,6 +775,7 @@ public class Home_freg extends Fragment implements View.OnClickListener, OnMapRe
                 if (i != 0) {
 
                     mstr_country_id = ar_country.get(i);
+                    country_code=ar_country_code.get(i);
                     Log.i("sele_country", mstr_country_id);
                     //curancy_code= String.valueOf(Currency.getInstance(new Locale("",mstr_country_id)));
                     curancy_code = ar_country_curancy.get(i);
