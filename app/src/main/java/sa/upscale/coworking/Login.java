@@ -64,6 +64,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -146,6 +147,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     String fb_img = "";
     int login_flag = 0;
     String str_language_Code = "";
+    String gcm_id = "1";
     Locale myLocale;
     TwitterAuthConfig authConfig;
     String twitter_name, twitter_email, twitter_Id, twitter_profilePic;
@@ -255,7 +257,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                             data_login.put(s_email, mstr_email);
                             data_login.put(s_password, mstr_pasword);
-                            data_login.put(s_gcm_id, "1");
+                            data_login.put(s_gcm_id, gcm_id);
 
                             Task_Login taskLogin = new Task_Login();
                             taskLogin.execute();
@@ -359,7 +361,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                             social_user_data.put("type", "facebook");
                                             social_user_data.put("type_id", fb_id);
                                             social_user_data.put("image", fb_img);
-                                            social_user_data.put("gcm_id", 1);
+                                            social_user_data.put("gcm_id", gcm_id);
 
 
                                             FB_Login fbLogin = new FB_Login();
@@ -834,7 +836,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         //social_user_data.put("type", "linkedin");
                         social_user_data.put("type_id", twitter_Id);
                         social_user_data.put("image", twitter_profilePic);
-                        social_user_data.put("gcm_id", 1);
+                        social_user_data.put("gcm_id", gcm_id);
 
                         FB_Login fbLogin = new FB_Login();
                         fbLogin.execute();
@@ -953,6 +955,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         fliper_add = findViewById(R.id.flipper_add);
         google_AdView = findViewById(R.id.adView);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(Login.this, instanceIdResult -> {
+
+            gcm_id = instanceIdResult.getToken();
+            Log.i("gcm_id", gcm_id);
+
+
+        });
     }
 
     public void getFbKeyHash(String packageName) {
@@ -1002,7 +1012,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     social_user_data.put("type", "google");
                     social_user_data.put("type_id", google_id);
                     social_user_data.put("image", personPhotoUrl);
-                    social_user_data.put("gcm_id", 1);
+                    social_user_data.put("gcm_id", gcm_id);
 
                     FB_Login fbLogin = new FB_Login();
                     fbLogin.execute();
@@ -1220,7 +1230,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     social_user_data.put("type", "linkedin");
                     social_user_data.put("type_id", ID);
                     social_user_data.put("image", userpic);
-                    social_user_data.put("gcm_id", 1);
+                    social_user_data.put("gcm_id", gcm_id);
 
                     FB_Login fbLogin = new FB_Login();
                     fbLogin.execute();

@@ -50,6 +50,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.hbb20.CountryCodePicker;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
@@ -102,16 +103,21 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     private static final String s_password = "password";
     private static final String s_name = "name";
     private static final String s_mobile = "mobile";
+    private static final String s_gcm_id = "gcm_id";
     private static final String TAG = "Twitter_error";
     private static final int RC_SIGN_IN = 1;
     private static final String TWITTER_KEY = "mr4zFMgZQtUh4iVGvuiEUvd0d";
     private static final String TWITTER_SECRET = "QskHYWA1kupQN28SKe1GIbBqFFE4SuiJGvEEnfMCBPrJyhDbZl";
+
     String status1 = "0", message1 = "try Again";
+
     JSONObject data_signup = new JSONObject();
     String fb_name, fb_email;
     CheckBox ch_terms;
     JSONObject social_user_data = new JSONObject();
+
     String fb_img = "";
+
     TwitterAuthConfig authConfig;
     TwitterAuthClient mTwitterAuthClient;
     TwitterSession session1;
@@ -121,6 +127,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
     HashMap<String, String> userDetails = new HashMap<>();
     ImageView fbLoginButton, btnSignIn, btn_linkedin, btn_twitter1;
     AlertDialog alertDialog;
+    String gcm_id = "1";
     private EditText ed_name, ed_mobile, ed_email, ed_password, ed_password_again;
     private CountryCodePicker edt_ccp;
     private Button btn_signup;
@@ -216,6 +223,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                             data_signup.put(s_password, mstr_password);
                             data_signup.put(s_name, mstr_name);
                             data_signup.put(s_mobile, mstr_mobile);
+                            data_signup.put(s_gcm_id, gcm_id);
                             data_signup.put("country_code", edt_ccp.getSelectedCountryCode());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -283,7 +291,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                                         social_user_data.put("type", "facebook");
                                         social_user_data.put("type_id", fb_id);
                                         social_user_data.put("image", fb_img);
-                                        social_user_data.put("gcm_id", 1);
+                                        social_user_data.put("gcm_id", gcm_id);
 
                                         FB_Login fbLogin = new FB_Login();
                                         fbLogin.execute();
@@ -323,7 +331,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                                         social_user_data.put("type", "facebook");
                                         social_user_data.put("type_id", fb_id);
                                         social_user_data.put("image", fb_img);
-                                        social_user_data.put("gcm_id", 1);
+                                        social_user_data.put("gcm_id", gcm_id);
 
                                         FB_Login fbLogin = new FB_Login();
                                         fbLogin.execute();
@@ -591,7 +599,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                         social_user_data.put("type", "twitter");
                         social_user_data.put("type_id", twitter_Id);
                         social_user_data.put("image", twitter_profilePic);
-                        social_user_data.put("gcm_id", 1);
+                        social_user_data.put("gcm_id", gcm_id);
 
                         FB_Login fbLogin = new FB_Login();
                         fbLogin.execute();
@@ -697,6 +705,14 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
             ed_mobile.setGravity(Gravity.END);
         }
         //generateHashkey("com.inforaam.upscale");
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(Sign_Up.this, instanceIdResult -> {
+
+            gcm_id = instanceIdResult.getToken();
+            Log.i("gcm_id", gcm_id);
+
+
+        });
     }
 
     @Override
@@ -740,7 +756,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     social_user_data.put("type", "google");
                     social_user_data.put("type_id", google_id);
                     social_user_data.put("image", personPhotoUrl);
-                    social_user_data.put("gcm_id", 1);
+                    social_user_data.put("gcm_id", gcm_id);
 
                     FB_Login fbLogin = new FB_Login();
                     fbLogin.execute();
@@ -922,7 +938,7 @@ public class Sign_Up extends AppCompatActivity implements GoogleApiClient.OnConn
                     social_user_data.put("type", "linkedin");
                     social_user_data.put("type_id", ID);
                     social_user_data.put("image", userpic);
-                    social_user_data.put("gcm_id", 1);
+                    social_user_data.put("gcm_id", gcm_id);
 
                     FB_Login fbLogin = new FB_Login();
                     fbLogin.execute();
