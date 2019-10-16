@@ -55,7 +55,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import sa.upscale.coworking.Login;
 import sa.upscale.coworking.MettingRoom.TImePicker.CustomTimePickerDialog;
@@ -108,7 +107,7 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
     String strprojector = "0", strscanner = "0", strParking = "0", str_ac = "0", str_locker = "0", str_ph = "0",
             str_mail = "0", str_wifi = "0", str_work = "0", str_male = "0", str_female = "0", str_cofee = "0",
             str_rating, str_rating_count, str_wishStatus = "0";
-    long total_hour = 0, final_calculate_hours;
+    float total_hour = 0, final_calculate_hours;
     float total_price = 0;
     int privious_hour = 0;
     int vat_per = 0;
@@ -378,12 +377,14 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         Date date2 = simpleDateFormat.parse(changetodate + " " + tv_to.getText().toString().trim());
 
                         long mills = date2.getTime() - date1.getTime();
-                        long minutes = TimeUnit.MILLISECONDS.toMinutes(mills);
+                        //long minutes = TimeUnit.MILLISECONDS.toMinutes(mills)/60;
                         final_calculate_hours = mills / (1000 * 60 * 60);
-
+                        float minutes = (int) (mills / (1000 * 60)) % 60;
+                        float min = minutes / 60;
                         final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
-
+                        final_calculate_hours = final_calculate_hours + min;
                         Log.i("hour", final_calculate_hours + "");
+
                         FinalCalculation();
 
                     } else if (tv_from.getText().toString().substring(tv_from.length() - 2, tv_from.length()).equals("AM") && tv_to.getText().toString().substring(tv_to.length() - 2, tv_to.length()).equals("PM")) {
@@ -393,11 +394,12 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         Date date2 = simpleDateFormat.parse(tv_date.getText().toString() + " " + tv_to.getText().toString().trim());
 
                         long mills = date2.getTime() - date1.getTime();
-                        long minutes = TimeUnit.MILLISECONDS.toMinutes(mills);
+                        //long minutes = TimeUnit.MILLISECONDS.toMinutes(mills)/60;
                         final_calculate_hours = mills / (1000 * 60 * 60);
-
+                        float minutes = (int) (mills / (1000 * 60)) % 60;
+                        float min = minutes / 60;
                         final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
-
+                        final_calculate_hours = final_calculate_hours + min;
                         Log.i("hour", final_calculate_hours + "");
                         FinalCalculation();
 
@@ -407,10 +409,15 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         Date date1 = simpleDateFormat.parse(tv_from.getText().toString().trim());
                         Date date2 = simpleDateFormat.parse(tv_to.getText().toString().trim());
 
-                        long mills = date1.getTime() - date2.getTime();
+                        long mills = date2.getTime() - date1.getTime();
                         final_calculate_hours = mills / (1000 * 60 * 60);
+                        //long minutes = TimeUnit.MILLISECONDS.toMinutes(mills)/60;
+                        float minutes = (int) (mills / (1000 * 60)) % 60;
+                        float min = minutes / 60;
 
                         final_calculate_hours = (final_calculate_hours < 0 ? -final_calculate_hours : final_calculate_hours);
+
+                        final_calculate_hours = final_calculate_hours + min;
 
                         Log.i("hour", final_calculate_hours + "");
 
