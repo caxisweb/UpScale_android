@@ -2101,7 +2101,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                     if (Float.parseFloat(code_amount) < (Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) {
 
                         discount_amount = String.valueOf(Double.parseDouble(code_amount) * book_price.size());
-                        total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount);
+                        tex_amount = ((Integer.parseInt(str_price) * total_hour * Integer.parseInt(str_repet_no) - Float.parseFloat(discount_amount)) * vat_per) / 100;
+                        total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount) + tex_amount;
                         //tv_finalprice.setText(final_price);
                         btn_bookroom.setText(total_price + " "+Home_freg.curancy_code+" " + vat_per + " " + getResources().getString(R.string.paynow));
 
@@ -2112,7 +2113,8 @@ public class Booking_MettingRoom_list_details extends AppCompatActivity implemen
                         code_amount = String.valueOf((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no));
 
                         discount_amount = code_amount;
-                        total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount);
+                        tex_amount = ((Integer.parseInt(str_price) * total_hour * Integer.parseInt(str_repet_no) - Float.parseFloat(discount_amount)) * vat_per) / 100;
+                        total_price = ((Integer.parseInt(str_price) * total_hour) * Integer.parseInt(str_repet_no)) - Float.parseFloat(discount_amount) + tex_amount;
                         btn_bookroom.setText(total_price + " "+Home_freg.curancy_code+" " + vat_per + " " + getResources().getString(R.string.paynow));
                         //tv_finalprice.setText(final_price);
                         tv_dis_amount.setText("You get " + discount_amount + " "+Home_freg.curancy_code+" " + getResources().getString(R.string.discount_amount));
